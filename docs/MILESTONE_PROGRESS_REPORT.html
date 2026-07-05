@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Milestone Progress Report</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        color: #1f2933;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .cover {
+        border-bottom: 3px solid #176b7c;
+        margin-bottom: 22px;
+        padding-bottom: 18px;
+      }
+
+      .eyebrow {
+        color: #176b7c;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        color: #102a43;
+        font-size: 28px;
+        line-height: 1.15;
+        margin: 8px 0 8px;
+      }
+
+      h2 {
+        color: #102a43;
+        font-size: 17px;
+        margin: 24px 0 10px;
+      }
+
+      p {
+        margin: 0 0 10px;
+      }
+
+      .details {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 16px;
+      }
+
+      .detail {
+        background: #f5f8fa;
+        border: 1px solid #d9e2ec;
+        border-radius: 6px;
+        padding: 10px 12px;
+      }
+
+      .detail span {
+        color: #627d98;
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .detail strong {
+        color: #102a43;
+        display: block;
+        font-size: 13px;
+        margin-top: 3px;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-top: 12px;
+        width: 100%;
+      }
+
+      th {
+        background: #176b7c;
+        color: #ffffff;
+        font-size: 11px;
+        padding: 10px;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      td {
+        border: 1px solid #d9e2ec;
+        padding: 10px;
+        vertical-align: top;
+      }
+
+      tr:nth-child(even) td {
+        background: #f8fafc;
+      }
+
+      .status {
+        border-radius: 999px;
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 9px;
+        text-transform: uppercase;
+      }
+
+      .complete {
+        background: #e3f8ec;
+        color: #166534;
+      }
+
+      .pending {
+        background: #fff7d6;
+        color: #92400e;
+      }
+
+      .summary-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 12px;
+      }
+
+      .summary-card {
+        background: #f5f8fa;
+        border: 1px solid #d9e2ec;
+        border-radius: 6px;
+        padding: 12px;
+        text-align: center;
+      }
+
+      .summary-card strong {
+        color: #176b7c;
+        display: block;
+        font-size: 24px;
+      }
+
+      .summary-card span {
+        color: #52616f;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .note {
+        background: #eef7f9;
+        border-left: 4px solid #176b7c;
+        margin-top: 18px;
+        padding: 12px;
+      }
+
+      .signature {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 42px;
+      }
+
+      .line {
+        border-top: 1px solid #9fb3c8;
+        padding-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cover">
+      <div class="eyebrow">Milestones Progress</div>
+      <h1>Milestone Progress Report</h1>
+      <p>
+        This report summarizes the milestone progress for the project
+        <strong>MERN Stack Employee Management System</strong>.
+      </p>
+
+      <div class="details">
+        <div class="detail">
+          <span>Student Name</span>
+          <strong>Bhanu Sharma</strong>
+        </div>
+        <div class="detail">
+          <span>Enrollment Number</span>
+          <strong>O24MCA112292</strong>
+        </div>
+        <div class="detail">
+          <span>Course</span>
+          <strong>MCA Full Stack Development</strong>
+        </div>
+        <div class="detail">
+          <span>University</span>
+          <strong>Chandigarh University</strong>
+        </div>
+        <div class="detail">
+          <span>Guide / Mentor</span>
+          <strong>Alok Srivastva</strong>
+        </div>
+        <div class="detail">
+          <span>Academic Year</span>
+          <strong>2024-2026</strong>
+        </div>
+      </div>
+    </section>
+
+    <h2>Progress Summary</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <strong>5</strong>
+        <span>Completed</span>
+      </div>
+      <div class="summary-card">
+        <strong>1</strong>
+        <span>Pending</span>
+      </div>
+      <div class="summary-card">
+        <strong>83%</strong>
+        <span>Overall Progress</span>
+      </div>
+    </div>
+
+    <h2>Milestone Status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 24%;">Milestone</th>
+          <th style="width: 16%;">Progress</th>
+          <th style="width: 20%;">Actions / Status</th>
+          <th>Work Completed / Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Design Database Schema</strong></td>
+          <td><span class="status complete">Complete</span></td>
+          <td>Marked as Complete</td>
+          <td>
+            MongoDB schema designed using Mongoose models for users, employees,
+            and activity logs. Employee records include name, email, phone,
+            department, job title, status, creator, and timestamps.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Develop RESTful APIs</strong></td>
+          <td><span class="status complete">Complete</span></td>
+          <td>Marked as Complete</td>
+          <td>
+            Express APIs developed for authentication, employee CRUD, bulk CSV
+            import, activity logs, and admin user role management.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Create Front-End Interface</strong></td>
+          <td><span class="status complete">Complete</span></td>
+          <td>Marked as Complete</td>
+          <td>
+            React interface completed with dashboard, employee list, employee
+            details, add/edit employee, CSV import, departments, activity,
+            profile, and admin users pages.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Implement Authentication</strong></td>
+          <td><span class="status complete">Complete</span></td>
+          <td>Marked as Complete</td>
+          <td>
+            JWT authentication implemented with protected routes, login,
+            registration, profile update, and role-based admin access.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Conduct Testing</strong></td>
+          <td><span class="status complete">Complete</span></td>
+          <td>Marked as Complete</td>
+          <td>
+            Build verification, npm audits, API checks, and Playwright smoke
+            test completed. The Playwright test covers login, employee CRUD,
+            search, details reload, departments, and CSV import validation.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Deploy Application</strong></td>
+          <td><span class="status pending">Pending</span></td>
+          <td>Ready for Deployment</td>
+          <td>
+            Deployment guide prepared for MongoDB Atlas, Render backend, and
+            Vercel or Netlify frontend. Final deployed URLs should be added
+            after cloud deployment is completed.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Current Status:</strong>
+      The application is complete for local execution and GitHub submission.
+      Cloud deployment is the remaining milestone and can be completed using
+      the deployment guide included in the project documentation.
+    </div>
+
+    <h2>Repository And Local Verification</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>GitHub Repository</strong></td>
+          <td>https://github.com/nextlvlpro/mern-employe-app</td>
+        </tr>
+        <tr>
+          <td><strong>Frontend URL</strong></td>
+          <td>http://localhost:5173</td>
+        </tr>
+        <tr>
+          <td><strong>Backend Health URL</strong></td>
+          <td>http://localhost:5000/api/health</td>
+        </tr>
+        <tr>
+          <td><strong>Testing Command</strong></td>
+          <td>npm run test:e2e</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="signature">
+      <div class="line">
+        Student Signature<br />
+        Bhanu Sharma
+      </div>
+      <div class="line">
+        Guide / Mentor<br />
+        Alok Srivastva
+      </div>
+    </div>
+  </body>
+</html>
