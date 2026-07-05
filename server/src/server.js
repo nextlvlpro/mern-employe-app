@@ -4,6 +4,8 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
 import { errorHandler, notFound } from './middleware/error.js';
 import activityRoutes from './routes/activityRoutes.js';
@@ -15,6 +17,9 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
 const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174')
   .split(',')
   .map((origin) => origin.trim())
@@ -48,6 +53,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/activity', activityRoutes);
 app.use('/api/users', userRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);

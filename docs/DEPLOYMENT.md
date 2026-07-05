@@ -9,10 +9,9 @@
 
 ## Render Blueprint Deployment
 
-The repository includes `render.yaml`, which creates:
+The repository includes `render.yaml`, which creates one Render Web Service:
 
-- `bluepeak-hr-api`: Node/Express backend web service.
-- `bluepeak-hr-client`: React/Vite static frontend site.
+- `bluepeak-hr`: Node/Express backend that also serves the built React frontend.
 
 1. Open Render Dashboard.
 2. Click **New +**.
@@ -25,10 +24,11 @@ The repository includes `render.yaml`, which creates:
 7. Let Render generate `JWT_SECRET`.
 8. Deploy the Blueprint.
 9. Verify backend health:
-   - `https://bluepeak-hr-api.onrender.com/api/health`
-10. Open the frontend static site URL and test login/register.
+   - `https://bluepeak-hr.onrender.com/api/health`
+10. Open the same service URL and test login/register:
+   - `https://bluepeak-hr.onrender.com`
 
-The Blueprint wires frontend and backend URLs automatically using Render service environment variables.
+In production, React uses the same origin API path `/api`, so no separate frontend deployment or production CORS setup is required.
 
 ## Final Submission Checklist
 
