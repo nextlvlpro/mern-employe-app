@@ -151,24 +151,24 @@
       </div>
       <div class="status-box">
         <span>Progress</span>
-        <strong><span class="pill pending">Ready / Pending Deployment</span></strong>
+        <strong><span class="pill complete">Complete</span></strong>
       </div>
       <div class="status-box">
         <span>Actions / Status</span>
-        <strong>Ready for Deployment</strong>
+        <strong>Marked as Complete</strong>
       </div>
     </div>
 
     <h2>Objective</h2>
-    <p>Prepare the MERN application for cloud deployment using MongoDB Atlas, Render, and Vercel or Netlify.</p>
+    <p>Deploy the MERN application using MongoDB Atlas and Render.</p>
 
     <h2>Work Completed</h2>
     <ul>
-      <li>Prepared MongoDB Atlas connection instructions.</li>
-      <li>Prepared Render backend deployment configuration using render.yaml.</li>
-      <li>Prepared Vercel and Netlify frontend refresh fallback files.</li>
+      <li>Configured MongoDB Atlas as the production database.</li>
+      <li>Prepared Render deployment configuration using render.yaml.</li>
+      <li>Configured the Express backend to serve the built React frontend in production.</li>
       <li>Added deployment documentation with required environment variables and build commands.</li>
-      <li>Kept local and production environment values separate using .env.example files.</li>
+      <li>Verified the deployed application and health endpoint on Render.</li>
     </ul>
 
     <h2>Evidence / Files</h2>
@@ -176,15 +176,14 @@
       <tbody>
         <tr><td>docs/DEPLOYMENT.md</td></tr>
         <tr><td>render.yaml</td></tr>
-        <tr><td>client/vercel.json</td></tr>
-        <tr><td>client/public/_redirects</td></tr>
+        <tr><td>server/src/server.js</td></tr>
         <tr><td>server/.env.example</td></tr>
         <tr><td>client/.env.example</td></tr>
       </tbody>
     </table>
 
     <h2>Outcome</h2>
-    <div class="note">The deployment milestone is ready but pending final cloud deployment. Final deployed URLs should be added after Render and Vercel/Netlify deployment are completed.</div>
+    <div class="note">The deployment milestone is complete. The application is deployed on Render at https://bluepeak-hr.onrender.com with MongoDB Atlas used for production data.</div>
 
     <h2>Repository</h2>
     <table>

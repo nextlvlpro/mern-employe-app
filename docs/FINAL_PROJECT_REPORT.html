@@ -48,10 +48,37 @@
       .toc a { color: #102a43; text-decoration: none; }
       .toc-row { border-bottom: 1px dotted #9fb3c8; display: flex; justify-content: space-between; padding: 5px 0; }
       .note { background: #eef7f9; border-left: 4px solid #176b7c; padding: 12px; }
-      .signature { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; margin-top: 46px; }
-      .line { border-top: 1px solid #9fb3c8; padding-top: 8px; }
       .chapter { page-break-before: always; }
       code { background: #f1f5f9; border-radius: 4px; padding: 1px 4px; }
+      pre {
+        background: #0f172a;
+        border-radius: 6px;
+        color: #e2e8f0;
+        font-size: 9.5px;
+        line-height: 1.45;
+        margin: 10px 0 16px;
+        overflow-wrap: anywhere;
+        padding: 12px;
+        white-space: pre-wrap;
+      }
+      .screenshot {
+        border: 1px solid #d9e2ec;
+        border-radius: 8px;
+        margin: 10px 0 18px;
+        padding: 8px;
+        page-break-inside: avoid;
+      }
+      .screenshot img {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+      }
+      .caption {
+        color: #627d98;
+        font-size: 11px;
+        margin-top: 6px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -77,20 +104,13 @@
     <p>This is to certify that the project report titled <strong>MERN Stack Employee Management System</strong> has been prepared and submitted by <strong>Bhanu Sharma</strong>, Enrollment No. <strong>O24MCA112292</strong>, in partial fulfillment of the requirements for the award of the degree of Master of Computer Application.</p>
     <p>The project work has been carried out under the guidance of <strong>Alok Srivastva</strong> during the academic year <strong>2024-2026</strong>.</p>
     <div class="note">Copy of the certificate received from Qollabb or the concerned authority may be pasted here if required by the submission portal.</div>
-    <div class="signature">
-      <div class="line">Guide / Mentor Signature<br />Alok Srivastva</div>
-      <div class="line">Student Signature<br />Bhanu Sharma</div>
-    </div>
   </section>
     <section class="page">
     <h2>Declaration</h2>
     <p>I, <strong>Bhanu Sharma</strong>, hereby solemnly declare that the project report titled <strong>MERN Stack Employee Management System</strong> submitted in partial fulfillment of the requirements for the award of the degree of Master of Computer Application is my original work.</p>
     <p>This project has been carried out by me during the academic year <strong>2024-2026</strong> under the supervision of <strong>Alok Srivastva</strong>. The work has not been submitted previously to any other university, institution, or examination body for the award of any degree, diploma, or certification.</p>
     <p>All sources of information used in this report have been duly acknowledged and referenced in accordance with academic ethics and plagiarism norms.</p>
-    <div class="signature">
-      <div class="line">Place: Chandigarh<br />Date: 05 July 2026</div>
-      <div class="line">Student Signature<br />Bhanu Sharma<br />O24MCA112292</div>
-    </div>
+    <p><strong>Place:</strong> Chandigarh<br /><strong>Date:</strong> 05 July 2026</p>
   </section>
     <section class="page">
     <h2>Acknowledgement</h2>
@@ -101,7 +121,7 @@
     <h2>Abstract / Executive Summary</h2>
     <p>The MERN Stack Employee Management System is a web-based application designed to help companies manage employee information efficiently. The system provides secure user authentication, role-based access control, and CRUD operations for employee records such as name, contact details, department, job title, and employment status.</p>
     <p>The backend is developed using Node.js and Express.js with MongoDB as the database. The frontend is developed using React. JWT authentication protects private routes and ensures that only authorized users can access employee data. Admin users can manage user roles, while employee data access is controlled according to user role.</p>
-    <p>The system includes dashboard summaries, employee search, filtering, sorting, pagination, CSV import with validation, CSV export, department summaries, profile management, activity logs, and Playwright testing. The project demonstrates database design, system analysis, REST API development, frontend integration, authentication, testing, and deployment readiness.</p>
+    <p>The system includes dashboard summaries, employee search, filtering, sorting, pagination, CSV import with validation, CSV export, department summaries, profile management, activity logs, role-based user views, screenshots, deployment on Render, and Playwright testing. The project demonstrates database design, system analysis, REST API development, frontend integration, authentication, testing, and cloud deployment.</p>
   </section>
     <section class="page">
     <h2>Table of Contents</h2>
@@ -128,7 +148,7 @@
 <p>The MERN Stack Employee Management System is a web application developed to solve this problem using MongoDB, Express.js, React, and Node.js. The project provides a secure interface for managing employee records and includes authentication, role-based authorization, search, filtering, CSV import/export, activity tracking, and a dashboard for summary information.</p>
 <p>The application uses a company-style interface named BluePeak HR / PeopleDesk so that the project looks and behaves like a real workplace system. Instead of keeping all functionality on a single page, the application is divided into separate pages for dashboard, employees, employee details, add employee, edit employee, departments, CSV import, profile, users, and activity logs.</p>
 <p>The main purpose of the project is to demonstrate a complete full-stack workflow: database design, backend API development, frontend implementation, authentication, authorization, testing, documentation, and deployment readiness.</p>
-    <h3>Objectives</h3><ul><li>To design a MongoDB database schema for storing user, employee, and activity log information.</li><li>To develop RESTful APIs using Node.js and Express.js.</li><li>To create a user-friendly React frontend for interacting with backend services.</li><li>To implement JWT authentication and role-based access control.</li><li>To provide employee CRUD, search, filtering, pagination, CSV import, and CSV export.</li><li>To verify the application using build checks, audits, and Playwright browser testing.</li><li>To prepare the application for cloud deployment using MongoDB Atlas, Render, and Vercel or Netlify.</li></ul>
+    <h3>Objectives</h3><ul><li>To design a MongoDB database schema for storing user, employee, and activity log information.</li><li>To develop RESTful APIs using Node.js and Express.js.</li><li>To create a user-friendly React frontend for interacting with backend services.</li><li>To implement JWT authentication and role-based access control.</li><li>To provide employee CRUD, search, filtering, pagination, CSV import, and CSV export.</li><li>To verify the application using build checks, audits, and Playwright browser testing.</li><li>To deploy the application using MongoDB Atlas and Render.</li></ul>
     
     
     <h3>Background Of The Study</h3>
@@ -155,7 +175,7 @@
 <h3>Scope Of The Project</h3>
       <p>In relation to chapter 1: Introduction, the topic of employee operations is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project scope includes creating, viewing, updating, deleting, searching, filtering, sorting, importing, and exporting employee records. These operations cover the basic data lifecycle. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of scope of the project, employee operations also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 1: Introduction, the topic of user operations is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The scope includes registration, login, profile update, and admin user role management. These features make the application more complete than an open public form. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 1: Introduction, the topic of user operations is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The scope includes registration, login, profile update, admin user role management, department-head staff creation, and read-only department directory access for normal users. These features make the application more complete than an open public form. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of scope of the project, user operations also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 1: Introduction, the topic of reporting support is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project includes milestone reports, a project report, API test cases, deployment notes, and a submission checklist so that the implementation can be evaluated clearly. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of scope of the project, reporting support also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
@@ -185,9 +205,9 @@
 <h3>User Study</h3>
       <p>In relation to chapter 2: System Study, the topic of administrator needs is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Administrators need a complete view of employee records, user accounts, role permissions, and recent activity. The system provides dedicated admin features for this purpose. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of user study, administrator needs also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 2: System Study, the topic of regular user needs is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Regular users need simple access to employee records that they are authorized to manage. They should not see administrative controls that are outside their responsibility. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 2: System Study, the topic of regular user needs is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Regular users need simple read-only access to department records that they are authorized to view. They should not see administrative controls that are outside their responsibility. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of user study, regular user needs also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 2: System Study, the topic of evaluation needs is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. For academic review, the system must clearly show implemented modules, database usage, frontend pages, API endpoints, testing, and deployment readiness. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 2: System Study, the topic of evaluation needs is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. For academic review, the system must clearly show implemented modules, database usage, frontend pages, API endpoints, testing, screenshots, and deployment. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of user study, evaluation needs also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Operational Issues In Existing Approach</h3>
       <p>In relation to chapter 2: System Study, the topic of duplicate information is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Duplicate employee records can appear when data is copied between files. Duplicate emails are especially problematic because email is often used as a unique contact identifier. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -201,12 +221,12 @@
     <p>From the perspective of feasibility study, technical feasibility also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 2: System Study, the topic of operational feasibility is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The interface is designed around common workflows such as login, viewing dashboard summaries, searching employees, adding employees, importing CSV records, and managing roles. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of feasibility study, operational feasibility also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 2: System Study, the topic of economic feasibility is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project can be developed and demonstrated using free or low-cost tools such as MongoDB Community/Atlas, Node.js, React, GitHub, Render, and Vercel or Netlify. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 2: System Study, the topic of economic feasibility is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project can be developed and demonstrated using free or low-cost tools such as MongoDB Community/Atlas, Node.js, React, GitHub, and Render. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of feasibility study, economic feasibility also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Proposed System Study</h3>
       <p>In relation to chapter 2: System Study, the topic of centralized data is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The proposed system stores employee records in MongoDB instead of scattered files. This improves consistency and enables structured queries. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of proposed system study, centralized data also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 2: System Study, the topic of secure access is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. JWT authentication and protected backend routes ensure that only logged-in users can access the application data. Admin-only routes provide extra control. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 2: System Study, the topic of secure access is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. JWT authentication and protected backend routes ensure that only logged-in users can access the application data. Role and department rules provide extra control. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of proposed system study, secure access also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 2: System Study, the topic of improved workflows is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Separate pages for dashboard, employees, departments, import, activity, profile, and users make the application easier to navigate and demonstrate. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of proposed system study, improved workflows also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
@@ -214,9 +234,9 @@
 <section class="page chapter">
     <h2>Chapter 3: System Analysis</h2>
     <p>System analysis identifies the functional and non-functional requirements of the proposed application. The project is designed for users who need to manage employee records securely through a browser-based interface.</p>
-<p>The system has two major roles: admin and user. Admin users can manage all employee records and user roles. Normal users can manage records created by them. This role-based design improves privacy and prevents unauthorized access.</p>
+<p>The system has three major roles: admin, department head, and user. Admin users can manage all employee and user records. Department heads can manage employees and staff users only inside their own department. Normal users can view department-related information in read-only mode. This role-based design improves privacy and prevents unauthorized access.</p>
 <p>The system also validates input data at both frontend and backend levels. CSV import validates required columns, email format, phone format, status values, and duplicate emails before importing records.</p>
-    <h3>Functional Requirements</h3><ul><li>User registration and login.</li><li>JWT-based protected routes.</li><li>Employee create, read, update, and delete operations.</li><li>Employee details page.</li><li>Employee search, filter, sort, and pagination.</li><li>Bulk employee import using CSV with validation.</li><li>Employee export to CSV.</li><li>Department-wise employee summary.</li><li>User profile management.</li><li>Admin user role management.</li><li>Activity log tracking.</li></ul>
+    <h3>Functional Requirements</h3><ul><li>User registration and login.</li><li>JWT-based protected routes.</li><li>Employee create, read, update, and delete operations.</li><li>Employee details page.</li><li>Employee search, filter, sort, and pagination.</li><li>Bulk employee import using CSV with validation.</li><li>Employee export to CSV.</li><li>Department-wise employee summary.</li><li>User profile management.</li><li>Admin and department-head user management.</li><li>Activity log tracking.</li></ul>
     <h3>Non-Functional Requirements</h3><ul><li>The interface should be responsive and easy to use.</li><li>Passwords should be stored securely using hashing.</li><li>Environment variables should be used for secrets.</li><li>The application should be deployable on cloud platforms.</li><li>The codebase should be divided into readable modules.</li><li>The system should handle reloads and invalid routes gracefully.</li></ul>
     
     <h3>Requirement Analysis</h3>
@@ -227,16 +247,18 @@
 <p>In relation to chapter 3: System Analysis, the topic of output requirements is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The system outputs dashboard summaries, employee tables, filtered search results, department summaries, activity logs, CSV exports, and validation messages. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of requirement analysis, output requirements also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Actor Analysis</h3>
-      <p>In relation to chapter 3: System Analysis, the topic of admin actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The admin actor can access employee records, manage user roles, view activity, and perform bulk operations. This role represents a trusted administrative user. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+      <p>In relation to chapter 3: System Analysis, the topic of admin actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The admin actor can access all employee records, manage user roles, view activity, and perform bulk operations. This role represents a trusted administrative user. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of actor analysis, admin actor also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 3: System Analysis, the topic of regular user actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The regular user can use the application for permitted employee management tasks but does not receive admin-only user management controls. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 3: System Analysis, the topic of department head actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The department head actor can manage employees and staff user accounts only within their own department. This role represents a middle level manager. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+    <p>From the perspective of actor analysis, department head actor also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
+<p>In relation to chapter 3: System Analysis, the topic of regular user actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The regular user can view department information in read-only mode but does not receive create, edit, delete, import, export, or role management controls. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of actor analysis, regular user actor also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 3: System Analysis, the topic of system actor is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The system itself validates data, hashes passwords, issues tokens, checks authorization, records activity, and returns structured responses to the frontend. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of actor analysis, system actor also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Data Analysis</h3>
       <p>In relation to chapter 3: System Analysis, the topic of user data is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. User data includes identity, email, password hash, role, and timestamps. Passwords are never stored as plain text. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of data analysis, user data also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 3: System Analysis, the topic of employee data is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Employee data includes personal contact and work-related details. The createdBy field connects employee records to the user who created them. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 3: System Analysis, the topic of employee data is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Employee data includes personal contact and work-related details. The createdBy field connects employee records to the user who created them, while the department field supports scoped access. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of data analysis, employee data also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 3: System Analysis, the topic of activity data is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Activity data records action type, message, entity type, related entity, user, and timestamps. This gives visibility into important system operations. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of data analysis, activity data also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
@@ -250,7 +272,7 @@
 <h3>Acceptance Criteria</h3>
       <p>In relation to chapter 3: System Analysis, the topic of authentication acceptance is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. A user should be able to register, log in, remain authenticated on reload, update profile details, and log out safely. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of acceptance criteria, authentication acceptance also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 3: System Analysis, the topic of employee module acceptance is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. A user should be able to add, search, filter, sort, paginate, view, edit, delete, import, and export employee records. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 3: System Analysis, the topic of employee module acceptance is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Authorized users should be able to add, search, filter, sort, paginate, view, edit, delete, import, and export employee records. Regular users should receive a read-only department view. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of acceptance criteria, employee module acceptance also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 3: System Analysis, the topic of testing acceptance is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project should pass production build checks, dependency audits, and Playwright smoke testing for major workflows. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of acceptance criteria, testing acceptance also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
@@ -260,7 +282,7 @@
     <p>The system follows a client-server architecture. The React frontend communicates with the Express backend using HTTP requests. The backend connects to MongoDB through Mongoose models. JWT tokens are used to authenticate users and protect private routes.</p>
 <p>The frontend is divided into pages, components, services, context, and utilities. The backend is divided into routes, controllers, models, middleware, configuration, utilities, and data scripts. This separation improves maintainability and readability.</p>
     
-    <h3>Important API Groups</h3><ul><li>Authentication APIs: register, login, get current user, update profile.</li><li>Employee APIs: list, create, details, update, delete, bulk import.</li><li>User APIs: admin user list and role update.</li><li>Activity APIs: recent activity logs.</li></ul>
+    <h3>Important API Groups</h3><ul><li>Authentication APIs: register, login, get current user, update profile.</li><li>Employee APIs: list, create, details, update, delete, bulk import.</li><li>User APIs: department-scoped user list, user creation, role update, and department update.</li><li>Activity APIs: recent activity logs.</li></ul>
     <h3>Database Collections</h3><table><thead><tr><th>Collection</th><th>Purpose</th><th>Important Fields</th></tr></thead><tbody><tr><td>users</td><td>Stores application user accounts</td><td>name, email, password, role, timestamps</td></tr><tr><td>employees</td><td>Stores employee records</td><td>name, email, phone, department, jobTitle, status, createdBy, timestamps</td></tr><tr><td>activitylogs</td><td>Stores system activity history</td><td>action, message, entityType, entityId, user, timestamps</td></tr></tbody></table>
     <h3>Architecture Design</h3>
       <p>In relation to chapter 4: System Design, the topic of client-server architecture is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The React frontend works as the client and the Express application works as the server. The client sends HTTP requests to backend APIs and receives JSON responses. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -281,7 +303,7 @@
     <p>From the perspective of api design details, authentication endpoints also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 4: System Design, the topic of employee endpoints is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Employee endpoints follow REST principles for list, create, read, update, and delete operations. A separate bulk endpoint handles CSV import. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of api design details, employee endpoints also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 4: System Design, the topic of administrative endpoints is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Admin endpoints allow role management for users. They are protected by both authentication and authorization middleware. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 4: System Design, the topic of administrative endpoints is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. User-management endpoints allow admin role management and department-head staff creation. They are protected by authentication, authorization middleware, and department checks. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of api design details, administrative endpoints also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Frontend Design Details</h3>
       <p>In relation to chapter 4: System Design, the topic of routing design is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. React Router provides separate URLs for major modules. This improves navigation, bookmarking, reload behavior, and project demonstration. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -295,7 +317,7 @@
     <p>From the perspective of security design, password hashing also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 4: System Design, the topic of token protection is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. JWT tokens are required for private API routes. The backend verifies the token and attaches the current user to the request. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of security design, token protection also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 4: System Design, the topic of role authorization is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Admin-only operations are protected using authorization middleware. The frontend also hides admin links for non-admin users. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 4: System Design, the topic of role authorization is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Admin and department-level operations are protected using authorization middleware and controller checks. The frontend also adapts navigation and actions for each role. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of security design, role authorization also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
   </section>
 <section class="page chapter">
@@ -304,7 +326,7 @@
 <p>The frontend is implemented using React and Vite. React Router provides navigation between pages. Axios is used for API communication. Authentication state is handled through a React context that stores the logged-in user and JWT token.</p>
 <p>The employee module includes listing, searching, sorting, filtering, pagination, detail view, add form, edit form, delete operation, CSV export, and CSV import. The CSV import page validates data before sending it to the backend and shows row-level errors.</p>
 <p>The activity module records important actions such as employee creation, employee update, employee deletion, CSV import, and user role changes. This helps the system look and behave like a real administrative tool.</p>
-    <h3>Implemented Pages</h3><ul><li>Login and register pages.</li><li>Dashboard page with statistics, status overview, departments, recent employees, and activity.</li><li>Employees page with search, filters, sorting, pagination, export, and actions.</li><li>Employee details page.</li><li>Add employee and edit employee pages.</li><li>CSV import page with validation and sample CSV download.</li><li>Departments page.</li><li>Profile page.</li><li>Admin users page.</li><li>Activity log page.</li></ul>
+    <h3>Implemented Pages</h3><ul><li>Login and register pages.</li><li>Dashboard page with statistics, status overview, departments, recent employees, and activity.</li><li>Employees page with search, filters, sorting, pagination, export, and actions.</li><li>Employee details page.</li><li>Add employee and edit employee pages.</li><li>CSV import page with validation and sample CSV download.</li><li>Departments page.</li><li>Profile page.</li><li>Users page with admin, department-head, and read-only user views.</li><li>Activity log page.</li></ul>
     
     
     <h3>Backend Implementation</h3>
@@ -390,16 +412,16 @@
     <h2>Chapter 7: Results And Discussion</h2>
     <p>The project successfully implements a full-stack employee management system using the MERN stack. The system provides secure login, employee record management, search, filtering, pagination, CSV import/export, department summary, user profile, admin user management, and activity tracking.</p>
 <p>The application is structured in a way that makes it suitable for academic demonstration and future extension. The user interface is not a single-page demo screen; instead, it is divided into meaningful modules with separate URLs.</p>
-<p>The final result is a working local application with GitHub source code, documentation, milestone reports, testing support, and deployment instructions.</p>
-    <h3>Major Outcomes</h3><ul><li>Centralized employee record management.</li><li>Secure authentication and authorization.</li><li>Improved usability with separate pages and a collapsible sidebar.</li><li>Bulk CSV import with validation.</li><li>Activity logs for administrative tracking.</li><li>Testing and documentation support for project submission.</li></ul>
+<p>The final result is a working deployed application with GitHub source code, documentation, milestone reports, testing support, screenshots, and Render deployment configuration.</p>
+    <h3>Major Outcomes</h3><ul><li>Centralized employee record management.</li><li>Secure authentication and authorization.</li><li>Improved usability with separate pages and a collapsible sidebar.</li><li>Bulk CSV import with validation.</li><li>Activity logs for administrative tracking.</li><li>Testing, documentation, screenshots, and deployment support for project submission.</li></ul>
     
     
     <h3>Functional Results</h3>
-      <p>In relation to chapter 7: Results And Discussion, the topic of employee management result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The application successfully manages employee records through form-based and CSV-based workflows. Users can perform all basic CRUD operations. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+      <p>In relation to chapter 7: Results And Discussion, the topic of employee management result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The application successfully manages employee records through form-based and CSV-based workflows. Admins and department heads can perform CRUD operations according to their role. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of functional results, employee management result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 7: Results And Discussion, the topic of dashboard result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The dashboard provides immediate summary information, including employee counts, active employees, department count, status overview, recent employees, and recent activity. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of functional results, dashboard result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 7: Results And Discussion, the topic of administration result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Admin users can view registered users and change roles, while the system prevents an admin from removing their own admin access. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 7: Results And Discussion, the topic of administration result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Admin users can view registered users and change roles, while department heads can add staff users only in their own department. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of functional results, administration result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Usability Results</h3>
       <p>In relation to chapter 7: Results And Discussion, the topic of navigation result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The application uses a collapsible sticky sidebar and separate pages, which makes navigation easier than a crowded single-screen interface. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -411,7 +433,7 @@
 <h3>Security Results</h3>
       <p>In relation to chapter 7: Results And Discussion, the topic of authentication result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. JWT authentication protects private routes and backend APIs. Users must log in before accessing employee data. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of security results, authentication result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 7: Results And Discussion, the topic of authorization result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Role-based authorization separates regular user features from admin-only user management features. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 7: Results And Discussion, the topic of authorization result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Role-based authorization separates admin, department-head, and regular-user workflows. Regular users cannot create, edit, delete, import, or export employee records. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of security results, authorization result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 7: Results And Discussion, the topic of validation result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. Backend validation protects employee creation and CSV import even if frontend validation is bypassed. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of security results, validation result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
@@ -423,8 +445,8 @@
 <p>In relation to chapter 7: Results And Discussion, the topic of testing result is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The Playwright smoke test and npm audit commands make verification repeatable for future changes. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of documentation results, testing result also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Limitations</h3>
-      <p>In relation to chapter 7: Results And Discussion, the topic of deployment pending is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project is ready for deployment, but final cloud URLs still need to be added after Render and Vercel or Netlify deployment. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
-    <p>From the perspective of limitations, deployment pending also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
+      <p>In relation to chapter 7: Results And Discussion, the topic of deployment completed is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project has been deployed on Render as a single web service where the Express backend serves the built React frontend. MongoDB Atlas is used for the production database connection. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+    <p>From the perspective of limitations, deployment completed also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 7: Results And Discussion, the topic of advanced hr modules is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The current version does not include attendance, payroll, leave approval, or document upload modules. These can be added later. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of limitations, advanced hr modules also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 7: Results And Discussion, the topic of advanced reporting is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The current reporting is basic. Future versions can add charts, date filters, and printable reports. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -432,7 +454,7 @@
   </section>
 <section class="page chapter">
     <h2>Chapter 8: Conclusion And Future Scope</h2>
-    <p>The MERN Stack Employee Management System meets the major objectives of the project. It demonstrates database design, RESTful API development, frontend implementation, authentication, authorization, testing, and deployment readiness. The system can be used by a company to manage employee information in a structured and secure way.</p>
+    <p>The MERN Stack Employee Management System meets the major objectives of the project. It demonstrates database design, RESTful API development, frontend implementation, authentication, authorization, testing, and cloud deployment. The system can be used by a company to manage employee information in a structured and secure way.</p>
 <p>The project helped demonstrate full-stack development skills using modern web technologies. It also shows how frontend and backend modules can work together through APIs and how security can be added using JWT authentication.</p>
     <h3>Future Scope</h3><ul><li>Add attendance management.</li><li>Add salary and payroll module.</li><li>Add employee profile image upload.</li><li>Add password reset through email.</li><li>Add advanced reports and charts.</li><li>Add audit log filters and export.</li><li>Add Docker support for deployment.</li><li>Deploy the final application on cloud infrastructure.</li></ul>
     
@@ -442,7 +464,7 @@
     <p>From the perspective of conclusion, objective completion also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <p>In relation to chapter 8: Conclusion And Future Scope, the topic of learning outcome is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The implementation demonstrates practical full-stack development skills across database design, API development, frontend routing, authentication, validation, and testing. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of conclusion, learning outcome also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
-<p>In relation to chapter 8: Conclusion And Future Scope, the topic of submission readiness is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project includes code, GitHub commits, milestone reports, final report, testing documentation, and deployment instructions. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
+<p>In relation to chapter 8: Conclusion And Future Scope, the topic of submission readiness is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. The project includes code, GitHub commits, milestone reports, final report, testing documentation, screenshots, and deployment instructions. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
     <p>From the perspective of conclusion, submission readiness also supports maintainability and evaluation. A project reviewer can identify how the requirement is handled by checking the database models, backend controllers, React pages, service files, and documentation. This makes the report traceable to the codebase. It also makes future improvement easier because every important feature has a clear place in the system. The same approach can be extended later for attendance, payroll, leave management, reporting, notifications, and other HR modules without changing the basic architecture.</p>
 <h3>Technical Conclusion</h3>
       <p>In relation to chapter 8: Conclusion And Future Scope, the topic of mern suitability is important because it connects the academic discussion with the actual implementation of the MERN Stack Employee Management System. MongoDB, Express.js, React, and Node.js worked well together because data could move through the system as JSON. In this project, this point is not treated only as theory; it is reflected in the way the application stores records, protects routes, validates input, and presents information through separate pages. This helps demonstrate that the system was designed around practical organizational needs rather than only around a basic CRUD checklist.</p>
@@ -502,31 +524,255 @@
     <h2>Chapter 10: Appendices</h2>
     <h3>Appendix A: Source Code Repository</h3>
     <p>The complete source code is maintained in the GitHub repository: <strong>https://github.com/nextlvlpro/mern-employe-app</strong></p>
-    <h3>Appendix B: Important Local URLs</h3>
+    <h3>Appendix B: Deployment URL</h3>
+    <table>
+      <tbody>
+        <tr><td>Live Application</td><td>https://bluepeak-hr.onrender.com</td></tr>
+        <tr><td>Health Check</td><td>https://bluepeak-hr.onrender.com/api/health</td></tr>
+      </tbody>
+    </table>
+    <h3>Appendix C: Important Local URLs</h3>
     <table>
       <tbody>
         <tr><td>Frontend</td><td>http://localhost:5173</td></tr>
         <tr><td>Backend Health</td><td>http://localhost:5000/api/health</td></tr>
       </tbody>
     </table>
-    <h3>Appendix C: Important Commands</h3>
+    <h3>Appendix D: Important Commands</h3>
     <table>
       <tbody>
         <tr><td>Install dependencies</td><td><code>npm run install-all</code></td></tr>
         <tr><td>Start development servers</td><td><code>npm run dev</code></td></tr>
         <tr><td>Stop development servers</td><td><code>npm run stop:dev</code></td></tr>
         <tr><td>Run Playwright smoke test</td><td><code>npm run test:e2e</code></td></tr>
+        <tr><td>Capture screenshots</td><td><code>node scripts/capture-ui-screenshots.js</code></td></tr>
       </tbody>
     </table>
-    <h3>Appendix D: Screenshots To Attach</h3>
-    <ul>
-      <li>Login page and dashboard.</li>
-      <li>Employee list with search, filters, and pagination.</li>
-      <li>Add employee, edit employee, and employee details pages.</li>
-      <li>CSV import page with valid preview and validation errors.</li>
-      <li>Departments, activity, profile, and admin users pages.</li>
-      <li>MongoDB collections and GitHub repository.</li>
-    </ul>
+    <h3>Appendix E: UI Screenshots</h3>
+    <div class="screenshot">
+    <h4>Login Page</h4>
+    <img src="screenshots/01-login-page.png" alt="Login Page" />
+    <div class="caption">Demo login screen with admin, department head, and staff credentials.</div>
+  </div>
+<div class="screenshot">
+    <h4>Admin Dashboard</h4>
+    <img src="screenshots/02-admin-dashboard.png" alt="Admin Dashboard" />
+    <div class="caption">Dashboard summary shown after admin login.</div>
+  </div>
+<div class="screenshot">
+    <h4>Employee List</h4>
+    <img src="screenshots/03-admin-employees.png" alt="Employee List" />
+    <div class="caption">Employee records page with search, filters, pagination, and management actions.</div>
+  </div>
+<div class="screenshot">
+    <h4>Add Employee</h4>
+    <img src="screenshots/04-add-employee.png" alt="Add Employee" />
+    <div class="caption">Separate add employee page with form-based input.</div>
+  </div>
+<div class="screenshot">
+    <h4>CSV Import</h4>
+    <img src="screenshots/05-import-csv.png" alt="CSV Import" />
+    <div class="caption">CSV import page for bulk employee upload.</div>
+  </div>
+<div class="screenshot">
+    <h4>Admin Users</h4>
+    <img src="screenshots/06-admin-users.png" alt="Admin Users" />
+    <div class="caption">Admin user management screen with role and department controls.</div>
+  </div>
+<div class="screenshot">
+    <h4>Department Head Users</h4>
+    <img src="screenshots/07-department-head-users.png" alt="Department Head Users" />
+    <div class="caption">Department head view where new staff users are limited to the same department.</div>
+  </div>
+<div class="screenshot">
+    <h4>Staff Read-Only View</h4>
+    <img src="screenshots/08-staff-read-only-employees.png" alt="Staff Read-Only View" />
+    <div class="caption">Regular staff view with read-only department employee records.</div>
+  </div>
+    <h3>Appendix F: Code Snippets</h3>
+    <h4>Employee Schema</h4>
+    <p><strong>File:</strong> <code>server/src/models/Employee.js</code></p>
+    <pre><code>  1  import mongoose from &#039;mongoose&#039;;
+  2  
+  3  const employeeSchema = new mongoose.Schema(
+  4    {
+  5      name: {
+  6        type: String,
+  7        required: [true, &#039;Employee name is required&#039;],
+  8        trim: true,
+  9        maxlength: 100
+ 10      },
+ 11      email: {
+ 12        type: String,
+ 13        required: [true, &#039;Employee email is required&#039;],
+ 14        lowercase: true,
+ 15        trim: true
+ 16      },
+ 17      phone: {
+ 18        type: String,
+ 19        required: [true, &#039;Phone number is required&#039;],
+ 20        trim: true,
+ 21        maxlength: 20
+ 22      },
+ 23      department: {
+ 24        type: String,
+ 25        required: [true, &#039;Department is required&#039;],
+ 26        trim: true,
+ 27        maxlength: 80
+ 28      },
+ 29      jobTitle: {
+ 30        type: String,
+ 31        required: [true, &#039;Job title is required&#039;],
+ 32        trim: true,
+ 33        maxlength: 80
+ 34      },
+ 35      status: {
+ 36        type: String,
+ 37        enum: [&#039;Active&#039;, &#039;On Leave&#039;, &#039;Inactive&#039;],
+ 38        default: &#039;Active&#039;
+ 39      },
+ 40      createdBy: {
+ 41        type: mongoose.Schema.Types.ObjectId,
+ 42        ref: &#039;User&#039;,
+ 43        required: true
+ 44      }
+ 45    },
+ 46    { timestamps: true }
+ 47  );
+ 48  </code></pre>
+<h4>Department-Based Employee Authorization</h4>
+    <p><strong>File:</strong> <code>server/src/controllers/employeeController.js</code></p>
+    <pre><code>  4  const scopedEmployeeQuery = (req, extra = {}) =&gt; {
+  5    if (req.user.role === &#039;admin&#039;) {
+  6      return extra;
+  7    }
+  8  
+  9    return { ...extra, department: req.user.department || &#039;__none__&#039; };
+ 10  };
+ 11  
+ 12  const canManageEmployees = (user) =&gt; {
+ 13    return [&#039;admin&#039;, &#039;department_head&#039;].includes(user.role);
+ 14  };
+ 15  
+ 16  const enforceEmployeeWriteAccess = (req, employeeInput) =&gt; {
+ 17    if (!canManageEmployees(req.user)) {
+ 18      return &#039;Only admins and department heads can manage employees&#039;;
+ 19    }
+ 20  
+ 21    if (req.user.role === &#039;department_head&#039;) {
+ 22      if (employeeInput.department &amp;&amp; employeeInput.department !== req.user.department) {
+ 23        return &#039;Department heads can manage only their own department&#039;;
+ 24      }
+ 25  
+ 26      employeeInput.department = req.user.department;
+ 27    }
+ 28  
+ 29    return &#039;&#039;;
+ 30  };
+ 31  </code></pre>
+<h4>User Creation With Role Rules</h4>
+    <p><strong>File:</strong> <code>server/src/controllers/userController.js</code></p>
+    <pre><code> 14    }
+ 15  };
+ 16  
+ 17  export const createUser = async (req, res, next) =&gt; {
+ 18    try {
+ 19      if (![&#039;admin&#039;, &#039;department_head&#039;].includes(req.user.role)) {
+ 20        return res.status(403).json({ message: &#039;Only admins and department heads can add users&#039; });
+ 21      }
+ 22  
+ 23      const { name, email, password } = req.body;
+ 24      let { role = &#039;user&#039;, department = &#039;General&#039; } = req.body;
+ 25      department = String(department || &#039;General&#039;).trim();
+ 26  
+ 27      if (!name || !email || !password) {
+ 28        return res.status(400).json({ message: &#039;Name, email, and password are required&#039; });
+ 29      }
+ 30  
+ 31      if (![&#039;admin&#039;, &#039;department_head&#039;, &#039;user&#039;].includes(role)) {
+ 32        return res.status(400).json({ message: &#039;Invalid role&#039; });
+ 33      }
+ 34  
+ 35      if (req.user.role === &#039;department_head&#039;) {
+ 36        role = &#039;user&#039;;
+ 37        department = req.user.department;
+ 38      }
+ 39  
+ 40      if (!department) {
+ 41        return res.status(400).json({ message: &#039;Department is required&#039; });
+ 42      }
+ 43  
+ 44      const existingUser = await User.findOne({ email });
+ 45      if (existingUser) {
+ 46        return res.status(409).json({ message: &#039;Email is already registered&#039; });
+ 47      }
+ 48  
+ 49      const createdUser = await User.create({ name, email, password, role, department });
+ 50  
+ 51      await logActivity({
+ 52        action: &#039;user_role_updated&#039;,
+ 53        message: `${req.user.name} added ${createdUser.name} as ${role}`,
+ 54        entityType: &#039;User&#039;,
+ 55        entityId: createdUser._id,
+ 56        user: req.user._id
+ 57      });
+ 58  
+ 59      return res.status(201).json({
+ 60        id: createdUser._id,
+ 61        name: createdUser.name,
+ 62        email: createdUser.email,
+ 63        role: createdUser.role,
+ 64        department: createdUser.department
+ 65      });
+ 66    } catch (error) {</code></pre>
+<h4>Protected Routes In React</h4>
+    <p><strong>File:</strong> <code>client/src/App.jsx</code></p>
+    <pre><code> 18  
+ 19  function ProtectedRoute({ children }) {
+ 20    const { user, loading } = useAuth();
+ 21  
+ 22    if (loading) {
+ 23      return &lt;main className=&quot;center-screen&quot;&gt;Loading...&lt;/main&gt;;
+ 24    }
+ 25  
+ 26    if (!user) {
+ 27      return &lt;Navigate to=&quot;/login&quot; replace /&gt;;
+ 28    }
+ 29  
+ 30    return children;
+ 31  }
+ 32  
+ 33  function PublicRoute({ children }) {
+ 34    const { user } = useAuth();
+ 35  
+ 36    if (user) {
+ 37      return &lt;Navigate to=&quot;/dashboard&quot; replace /&gt;;
+ 38    }
+ 39  
+ 40    return children;
+ 41  }
+ 42  
+ 43  export default function App() {
+ 44    return (
+ 45      &lt;ErrorBoundary&gt;</code></pre>
+<h4>User Service API Calls</h4>
+    <p><strong>File:</strong> <code>client/src/services/userService.js</code></p>
+    <pre><code>  1  import { api } from &#039;../api/client.js&#039;;
+  2  
+  3  export async function getUsers() {
+  4    const response = await api.get(&#039;/users&#039;);
+  5    return response.data;
+  6  }
+  7  
+  8  export async function createUser(user) {
+  9    const response = await api.post(&#039;/users&#039;, user);
+ 10    return response.data;
+ 11  }
+ 12  
+ 13  export async function updateUserRole(id, role, department) {
+ 14    const response = await api.patch(`/users/${id}/role`, { role, department });
+ 15    return response.data;
+ 16  }</code></pre>
   </section>
   </body>
 </html>

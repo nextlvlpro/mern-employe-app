@@ -24,7 +24,7 @@ const milestones = [
     action: 'Marked as Complete',
     objective: 'Design the MongoDB database structure required to store users, employees, and activity logs for the employee management system.',
     work: [
-      'Created a User schema for account details, email, password hash, role, and timestamps.',
+      'Created a User schema for account details, email, password hash, role, department, and timestamps.',
       'Created an Employee schema for name, email, phone, department, job title, status, createdBy, and timestamps.',
       'Created an ActivityLog schema to track important actions such as employee creation, updates, deletion, imports, and role changes.',
       'Used Mongoose models to keep validation and database structure consistent across the backend.'
@@ -48,8 +48,8 @@ const milestones = [
       'Implemented authentication APIs for register, login, current user, and profile update.',
       'Implemented employee CRUD APIs for create, list, detail, update, and delete operations.',
       'Implemented bulk employee import API with validation for CSV records.',
-      'Implemented activity log API and admin user role management API.',
-      'Added error handling, protected routes, and role-based middleware.'
+      'Implemented activity log API and user management API.',
+      'Added error handling, protected routes, role-based middleware, and department-based access checks.'
     ],
     evidence: [
       'server/src/routes/authRoutes.js',
@@ -73,7 +73,7 @@ const milestones = [
       'Created separate pages for dashboard, employees, add employee, edit employee, employee details, departments, CSV import, activity, profile, and users.',
       'Added collapsible sticky sidebar navigation and responsive layouts.',
       'Added employee search, filters, sorting, pagination, CSV export, and CSV import preview screens.',
-      'Added deployment route fallbacks for Vercel and Netlify refresh support.'
+      'Added deployment support so the backend can serve the built React frontend on Render.'
     ],
     evidence: [
       'client/src/App.jsx',
@@ -96,7 +96,7 @@ const milestones = [
       'Implemented user registration and login with JWT token generation.',
       'Stored passwords securely using bcrypt hashing.',
       'Added route protection middleware for private APIs.',
-      'Added admin/user role handling and admin-only user management.',
+      'Added admin, department head, and user role handling with department-based permissions.',
       'Added protected frontend routes and persistent login handling with reload failsafes.'
     ],
     evidence: [
@@ -135,26 +135,25 @@ const milestones = [
     number: '06',
     file: '06-deploy-application',
     title: 'Deploy Application',
-    progress: 'Ready / Pending Deployment',
-    statusClass: 'pending',
-    action: 'Ready for Deployment',
-    objective: 'Prepare the MERN application for cloud deployment using MongoDB Atlas, Render, and Vercel or Netlify.',
+    progress: 'Complete',
+    statusClass: 'complete',
+    action: 'Marked as Complete',
+    objective: 'Deploy the MERN application using MongoDB Atlas and Render.',
     work: [
-      'Prepared MongoDB Atlas connection instructions.',
-      'Prepared Render backend deployment configuration using render.yaml.',
-      'Prepared Vercel and Netlify frontend refresh fallback files.',
+      'Configured MongoDB Atlas as the production database.',
+      'Prepared Render deployment configuration using render.yaml.',
+      'Configured the Express backend to serve the built React frontend in production.',
       'Added deployment documentation with required environment variables and build commands.',
-      'Kept local and production environment values separate using .env.example files.'
+      'Verified the deployed application and health endpoint on Render.'
     ],
     evidence: [
       'docs/DEPLOYMENT.md',
       'render.yaml',
-      'client/vercel.json',
-      'client/public/_redirects',
+      'server/src/server.js',
       'server/.env.example',
       'client/.env.example'
     ],
-    outcome: 'The deployment milestone is ready but pending final cloud deployment. Final deployed URLs should be added after Render and Vercel/Netlify deployment are completed.'
+    outcome: 'The deployment milestone is complete. The application is deployed on Render at https://bluepeak-hr.onrender.com with MongoDB Atlas used for production data.'
   }
 ];
 

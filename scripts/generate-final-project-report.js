@@ -12,7 +12,8 @@ const student = {
   mentor: 'Alok Srivastva',
   academicYear: '2024-2026',
   date: '05 July 2026',
-  repo: 'https://github.com/nextlvlpro/mern-employe-app'
+  repo: 'https://github.com/nextlvlpro/mern-employe-app',
+  deploymentUrl: 'https://bluepeak-hr.onrender.com'
 };
 
 const chapters = [
@@ -32,7 +33,7 @@ const chapters = [
       'To implement JWT authentication and role-based access control.',
       'To provide employee CRUD, search, filtering, pagination, CSV import, and CSV export.',
       'To verify the application using build checks, audits, and Playwright browser testing.',
-      'To prepare the application for cloud deployment using MongoDB Atlas, Render, and Vercel or Netlify.'
+      'To deploy the application using MongoDB Atlas and Render.'
     ]
   },
   {
@@ -56,7 +57,7 @@ const chapters = [
     title: 'Chapter 3: System Analysis',
     body: [
       'System analysis identifies the functional and non-functional requirements of the proposed application. The project is designed for users who need to manage employee records securely through a browser-based interface.',
-      'The system has two major roles: admin and user. Admin users can manage all employee records and user roles. Normal users can manage records created by them. This role-based design improves privacy and prevents unauthorized access.',
+      'The system has three major roles: admin, department head, and user. Admin users can manage all employee and user records. Department heads can manage employees and staff users only inside their own department. Normal users can view department-related information in read-only mode. This role-based design improves privacy and prevents unauthorized access.',
       'The system also validates input data at both frontend and backend levels. CSV import validates required columns, email format, phone format, status values, and duplicate emails before importing records.'
     ],
     bulletsTitle: 'Functional Requirements',
@@ -70,7 +71,7 @@ const chapters = [
       'Employee export to CSV.',
       'Department-wise employee summary.',
       'User profile management.',
-      'Admin user role management.',
+      'Admin and department-head user management.',
       'Activity log tracking.'
     ],
     extraTitle: 'Non-Functional Requirements',
@@ -100,7 +101,7 @@ const chapters = [
     extraBullets: [
       'Authentication APIs: register, login, get current user, update profile.',
       'Employee APIs: list, create, details, update, delete, bulk import.',
-      'User APIs: admin user list and role update.',
+      'User APIs: department-scoped user list, user creation, role update, and department update.',
       'Activity APIs: recent activity logs.'
     ]
   },
@@ -122,7 +123,7 @@ const chapters = [
       'CSV import page with validation and sample CSV download.',
       'Departments page.',
       'Profile page.',
-      'Admin users page.',
+      'Users page with admin, department-head, and read-only user views.',
       'Activity log page.'
     ]
   },
@@ -149,7 +150,7 @@ const chapters = [
     body: [
       'The project successfully implements a full-stack employee management system using the MERN stack. The system provides secure login, employee record management, search, filtering, pagination, CSV import/export, department summary, user profile, admin user management, and activity tracking.',
       'The application is structured in a way that makes it suitable for academic demonstration and future extension. The user interface is not a single-page demo screen; instead, it is divided into meaningful modules with separate URLs.',
-      'The final result is a working local application with GitHub source code, documentation, milestone reports, testing support, and deployment instructions.'
+      'The final result is a working deployed application with GitHub source code, documentation, milestone reports, testing support, screenshots, and Render deployment configuration.'
     ],
     bulletsTitle: 'Major Outcomes',
     bullets: [
@@ -158,13 +159,13 @@ const chapters = [
       'Improved usability with separate pages and a collapsible sidebar.',
       'Bulk CSV import with validation.',
       'Activity logs for administrative tracking.',
-      'Testing and documentation support for project submission.'
+      'Testing, documentation, screenshots, and deployment support for project submission.'
     ]
   },
   {
     title: 'Chapter 8: Conclusion And Future Scope',
     body: [
-      'The MERN Stack Employee Management System meets the major objectives of the project. It demonstrates database design, RESTful API development, frontend implementation, authentication, authorization, testing, and deployment readiness. The system can be used by a company to manage employee information in a structured and secure way.',
+      'The MERN Stack Employee Management System meets the major objectives of the project. It demonstrates database design, RESTful API development, frontend implementation, authentication, authorization, testing, and cloud deployment. The system can be used by a company to manage employee information in a structured and secure way.',
       'The project helped demonstrate full-stack development skills using modern web technologies. It also shows how frontend and backend modules can work together through APIs and how security can be added using JWT authentication.'
     ],
     bulletsTitle: 'Future Scope',
@@ -204,6 +205,50 @@ const references = [
   'GitHub Docs, https://docs.github.com/'
 ];
 
+const screenshots = [
+  ['Login Page', 'screenshots/01-login-page.png', 'Demo login screen with admin, department head, and staff credentials.'],
+  ['Admin Dashboard', 'screenshots/02-admin-dashboard.png', 'Dashboard summary shown after admin login.'],
+  ['Employee List', 'screenshots/03-admin-employees.png', 'Employee records page with search, filters, pagination, and management actions.'],
+  ['Add Employee', 'screenshots/04-add-employee.png', 'Separate add employee page with form-based input.'],
+  ['CSV Import', 'screenshots/05-import-csv.png', 'CSV import page for bulk employee upload.'],
+  ['Admin Users', 'screenshots/06-admin-users.png', 'Admin user management screen with role and department controls.'],
+  ['Department Head Users', 'screenshots/07-department-head-users.png', 'Department head view where new staff users are limited to the same department.'],
+  ['Staff Read-Only View', 'screenshots/08-staff-read-only-employees.png', 'Regular staff view with read-only department employee records.']
+];
+
+const codeSnippets = [
+  {
+    title: 'Employee Schema',
+    file: 'server/src/models/Employee.js',
+    start: 1,
+    end: 48
+  },
+  {
+    title: 'Department-Based Employee Authorization',
+    file: 'server/src/controllers/employeeController.js',
+    start: 4,
+    end: 31
+  },
+  {
+    title: 'User Creation With Role Rules',
+    file: 'server/src/controllers/userController.js',
+    start: 14,
+    end: 66
+  },
+  {
+    title: 'Protected Routes In React',
+    file: 'client/src/App.jsx',
+    start: 18,
+    end: 45
+  },
+  {
+    title: 'User Service API Calls',
+    file: 'client/src/services/userService.js',
+    start: 1,
+    end: 16
+  }
+];
+
 const chapterExpansionPlans = {
   'Chapter 1: Introduction': [
     section('Background Of The Study', [
@@ -223,7 +268,7 @@ const chapterExpansionPlans = {
     ]),
     section('Scope Of The Project', [
       point('Employee operations', 'The project scope includes creating, viewing, updating, deleting, searching, filtering, sorting, importing, and exporting employee records. These operations cover the basic data lifecycle.'),
-      point('User operations', 'The scope includes registration, login, profile update, and admin user role management. These features make the application more complete than an open public form.'),
+      point('User operations', 'The scope includes registration, login, profile update, admin user role management, department-head staff creation, and read-only department directory access for normal users. These features make the application more complete than an open public form.'),
       point('Reporting support', 'The project includes milestone reports, a project report, API test cases, deployment notes, and a submission checklist so that the implementation can be evaluated clearly.')
     ]),
     section('Expected Benefits', [
@@ -240,8 +285,8 @@ const chapterExpansionPlans = {
     ]),
     section('User Study', [
       point('Administrator needs', 'Administrators need a complete view of employee records, user accounts, role permissions, and recent activity. The system provides dedicated admin features for this purpose.'),
-      point('Regular user needs', 'Regular users need simple access to employee records that they are authorized to manage. They should not see administrative controls that are outside their responsibility.'),
-      point('Evaluation needs', 'For academic review, the system must clearly show implemented modules, database usage, frontend pages, API endpoints, testing, and deployment readiness.')
+      point('Regular user needs', 'Regular users need simple read-only access to department records that they are authorized to view. They should not see administrative controls that are outside their responsibility.'),
+      point('Evaluation needs', 'For academic review, the system must clearly show implemented modules, database usage, frontend pages, API endpoints, testing, screenshots, and deployment.')
     ]),
     section('Operational Issues In Existing Approach', [
       point('Duplicate information', 'Duplicate employee records can appear when data is copied between files. Duplicate emails are especially problematic because email is often used as a unique contact identifier.'),
@@ -251,11 +296,11 @@ const chapterExpansionPlans = {
     section('Feasibility Study', [
       point('Technical feasibility', 'The MERN stack is technically suitable because it supports JSON-based communication across frontend, backend, and database layers. It also works well with cloud deployment platforms.'),
       point('Operational feasibility', 'The interface is designed around common workflows such as login, viewing dashboard summaries, searching employees, adding employees, importing CSV records, and managing roles.'),
-      point('Economic feasibility', 'The project can be developed and demonstrated using free or low-cost tools such as MongoDB Community/Atlas, Node.js, React, GitHub, Render, and Vercel or Netlify.')
+      point('Economic feasibility', 'The project can be developed and demonstrated using free or low-cost tools such as MongoDB Community/Atlas, Node.js, React, GitHub, and Render.')
     ]),
     section('Proposed System Study', [
       point('Centralized data', 'The proposed system stores employee records in MongoDB instead of scattered files. This improves consistency and enables structured queries.'),
-      point('Secure access', 'JWT authentication and protected backend routes ensure that only logged-in users can access the application data. Admin-only routes provide extra control.'),
+      point('Secure access', 'JWT authentication and protected backend routes ensure that only logged-in users can access the application data. Role and department rules provide extra control.'),
       point('Improved workflows', 'Separate pages for dashboard, employees, departments, import, activity, profile, and users make the application easier to navigate and demonstrate.')
     ])
   ],
@@ -266,13 +311,14 @@ const chapterExpansionPlans = {
       point('Output requirements', 'The system outputs dashboard summaries, employee tables, filtered search results, department summaries, activity logs, CSV exports, and validation messages.')
     ]),
     section('Actor Analysis', [
-      point('Admin actor', 'The admin actor can access employee records, manage user roles, view activity, and perform bulk operations. This role represents a trusted administrative user.'),
-      point('Regular user actor', 'The regular user can use the application for permitted employee management tasks but does not receive admin-only user management controls.'),
+      point('Admin actor', 'The admin actor can access all employee records, manage user roles, view activity, and perform bulk operations. This role represents a trusted administrative user.'),
+      point('Department head actor', 'The department head actor can manage employees and staff user accounts only within their own department. This role represents a middle level manager.'),
+      point('Regular user actor', 'The regular user can view department information in read-only mode but does not receive create, edit, delete, import, export, or role management controls.'),
       point('System actor', 'The system itself validates data, hashes passwords, issues tokens, checks authorization, records activity, and returns structured responses to the frontend.')
     ]),
     section('Data Analysis', [
       point('User data', 'User data includes identity, email, password hash, role, and timestamps. Passwords are never stored as plain text.'),
-      point('Employee data', 'Employee data includes personal contact and work-related details. The createdBy field connects employee records to the user who created them.'),
+      point('Employee data', 'Employee data includes personal contact and work-related details. The createdBy field connects employee records to the user who created them, while the department field supports scoped access.'),
       point('Activity data', 'Activity data records action type, message, entity type, related entity, user, and timestamps. This gives visibility into important system operations.')
     ]),
     section('Risk Analysis', [
@@ -282,7 +328,7 @@ const chapterExpansionPlans = {
     ]),
     section('Acceptance Criteria', [
       point('Authentication acceptance', 'A user should be able to register, log in, remain authenticated on reload, update profile details, and log out safely.'),
-      point('Employee module acceptance', 'A user should be able to add, search, filter, sort, paginate, view, edit, delete, import, and export employee records.'),
+      point('Employee module acceptance', 'Authorized users should be able to add, search, filter, sort, paginate, view, edit, delete, import, and export employee records. Regular users should receive a read-only department view.'),
       point('Testing acceptance', 'The project should pass production build checks, dependency audits, and Playwright smoke testing for major workflows.')
     ])
   ],
@@ -300,7 +346,7 @@ const chapterExpansionPlans = {
     section('API Design Details', [
       point('Authentication endpoints', 'Authentication endpoints handle registration, login, current user retrieval, and profile update. They return JWT-based user sessions.'),
       point('Employee endpoints', 'Employee endpoints follow REST principles for list, create, read, update, and delete operations. A separate bulk endpoint handles CSV import.'),
-      point('Administrative endpoints', 'Admin endpoints allow role management for users. They are protected by both authentication and authorization middleware.')
+      point('Administrative endpoints', 'User-management endpoints allow admin role management and department-head staff creation. They are protected by authentication, authorization middleware, and department checks.')
     ]),
     section('Frontend Design Details', [
       point('Routing design', 'React Router provides separate URLs for major modules. This improves navigation, bookmarking, reload behavior, and project demonstration.'),
@@ -310,7 +356,7 @@ const chapterExpansionPlans = {
     section('Security Design', [
       point('Password hashing', 'Passwords are hashed using bcryptjs before they are stored. This prevents plain-text password exposure in the database.'),
       point('Token protection', 'JWT tokens are required for private API routes. The backend verifies the token and attaches the current user to the request.'),
-      point('Role authorization', 'Admin-only operations are protected using authorization middleware. The frontend also hides admin links for non-admin users.')
+      point('Role authorization', 'Admin and department-level operations are protected using authorization middleware and controller checks. The frontend also adapts navigation and actions for each role.')
     ])
   ],
   'Chapter 5: System Implementation': [
@@ -369,9 +415,9 @@ const chapterExpansionPlans = {
   ],
   'Chapter 7: Results And Discussion': [
     section('Functional Results', [
-      point('Employee management result', 'The application successfully manages employee records through form-based and CSV-based workflows. Users can perform all basic CRUD operations.'),
+      point('Employee management result', 'The application successfully manages employee records through form-based and CSV-based workflows. Admins and department heads can perform CRUD operations according to their role.'),
       point('Dashboard result', 'The dashboard provides immediate summary information, including employee counts, active employees, department count, status overview, recent employees, and recent activity.'),
-      point('Administration result', 'Admin users can view registered users and change roles, while the system prevents an admin from removing their own admin access.')
+      point('Administration result', 'Admin users can view registered users and change roles, while department heads can add staff users only in their own department.')
     ]),
     section('Usability Results', [
       point('Navigation result', 'The application uses a collapsible sticky sidebar and separate pages, which makes navigation easier than a crowded single-screen interface.'),
@@ -380,7 +426,7 @@ const chapterExpansionPlans = {
     ]),
     section('Security Results', [
       point('Authentication result', 'JWT authentication protects private routes and backend APIs. Users must log in before accessing employee data.'),
-      point('Authorization result', 'Role-based authorization separates regular user features from admin-only user management features.'),
+      point('Authorization result', 'Role-based authorization separates admin, department-head, and regular-user workflows. Regular users cannot create, edit, delete, import, or export employee records.'),
       point('Validation result', 'Backend validation protects employee creation and CSV import even if frontend validation is bypassed.')
     ]),
     section('Documentation Results', [
@@ -389,7 +435,7 @@ const chapterExpansionPlans = {
       point('Testing result', 'The Playwright smoke test and npm audit commands make verification repeatable for future changes.')
     ]),
     section('Limitations', [
-      point('Deployment pending', 'The project is ready for deployment, but final cloud URLs still need to be added after Render and Vercel or Netlify deployment.'),
+      point('Deployment completed', 'The project has been deployed on Render as a single web service where the Express backend serves the built React frontend. MongoDB Atlas is used for the production database connection.'),
       point('Advanced HR modules', 'The current version does not include attendance, payroll, leave approval, or document upload modules. These can be added later.'),
       point('Advanced reporting', 'The current reporting is basic. Future versions can add charts, date filters, and printable reports.')
     ])
@@ -398,7 +444,7 @@ const chapterExpansionPlans = {
     section('Conclusion', [
       point('Objective completion', 'The project completes the main objective of building a MERN stack employee management system with secure CRUD operations and a usable frontend.'),
       point('Learning outcome', 'The implementation demonstrates practical full-stack development skills across database design, API development, frontend routing, authentication, validation, and testing.'),
-      point('Submission readiness', 'The project includes code, GitHub commits, milestone reports, final report, testing documentation, and deployment instructions.')
+      point('Submission readiness', 'The project includes code, GitHub commits, milestone reports, final report, testing documentation, screenshots, and deployment instructions.')
     ]),
     section('Technical Conclusion', [
       point('MERN suitability', 'MongoDB, Express.js, React, and Node.js worked well together because data could move through the system as JSON.'),
@@ -481,10 +527,37 @@ const html = `<!doctype html>
       .toc a { color: #102a43; text-decoration: none; }
       .toc-row { border-bottom: 1px dotted #9fb3c8; display: flex; justify-content: space-between; padding: 5px 0; }
       .note { background: #eef7f9; border-left: 4px solid #176b7c; padding: 12px; }
-      .signature { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; margin-top: 46px; }
-      .line { border-top: 1px solid #9fb3c8; padding-top: 8px; }
       .chapter { page-break-before: always; }
       code { background: #f1f5f9; border-radius: 4px; padding: 1px 4px; }
+      pre {
+        background: #0f172a;
+        border-radius: 6px;
+        color: #e2e8f0;
+        font-size: 9.5px;
+        line-height: 1.45;
+        margin: 10px 0 16px;
+        overflow-wrap: anywhere;
+        padding: 12px;
+        white-space: pre-wrap;
+      }
+      .screenshot {
+        border: 1px solid #d9e2ec;
+        border-radius: 8px;
+        margin: 10px 0 18px;
+        padding: 8px;
+        page-break-inside: avoid;
+      }
+      .screenshot img {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+      }
+      .caption {
+        color: #627d98;
+        font-size: 11px;
+        margin-top: 6px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -529,10 +602,6 @@ function certificatePage() {
     <p>This is to certify that the project report titled <strong>${escapeHtml(student.projectTitle)}</strong> has been prepared and submitted by <strong>${escapeHtml(student.name)}</strong>, Enrollment No. <strong>${escapeHtml(student.enrollment)}</strong>, in partial fulfillment of the requirements for the award of the degree of Master of Computer Application.</p>
     <p>The project work has been carried out under the guidance of <strong>${escapeHtml(student.mentor)}</strong> during the academic year <strong>${escapeHtml(student.academicYear)}</strong>.</p>
     <div class="note">Copy of the certificate received from Qollabb or the concerned authority may be pasted here if required by the submission portal.</div>
-    <div class="signature">
-      <div class="line">Guide / Mentor Signature<br />${escapeHtml(student.mentor)}</div>
-      <div class="line">Student Signature<br />${escapeHtml(student.name)}</div>
-    </div>
   </section>`;
 }
 
@@ -542,10 +611,7 @@ function declarationPage() {
     <p>I, <strong>${escapeHtml(student.name)}</strong>, hereby solemnly declare that the project report titled <strong>${escapeHtml(student.projectTitle)}</strong> submitted in partial fulfillment of the requirements for the award of the degree of Master of Computer Application is my original work.</p>
     <p>This project has been carried out by me during the academic year <strong>${escapeHtml(student.academicYear)}</strong> under the supervision of <strong>${escapeHtml(student.mentor)}</strong>. The work has not been submitted previously to any other university, institution, or examination body for the award of any degree, diploma, or certification.</p>
     <p>All sources of information used in this report have been duly acknowledged and referenced in accordance with academic ethics and plagiarism norms.</p>
-    <div class="signature">
-      <div class="line">Place: Chandigarh<br />Date: ${escapeHtml(student.date)}</div>
-      <div class="line">Student Signature<br />${escapeHtml(student.name)}<br />${escapeHtml(student.enrollment)}</div>
-    </div>
+    <p><strong>Place:</strong> Chandigarh<br /><strong>Date:</strong> ${escapeHtml(student.date)}</p>
   </section>`;
 }
 
@@ -562,7 +628,7 @@ function abstractPage() {
     <h2>Abstract / Executive Summary</h2>
     <p>The MERN Stack Employee Management System is a web-based application designed to help companies manage employee information efficiently. The system provides secure user authentication, role-based access control, and CRUD operations for employee records such as name, contact details, department, job title, and employment status.</p>
     <p>The backend is developed using Node.js and Express.js with MongoDB as the database. The frontend is developed using React. JWT authentication protects private routes and ensures that only authorized users can access employee data. Admin users can manage user roles, while employee data access is controlled according to user role.</p>
-    <p>The system includes dashboard summaries, employee search, filtering, sorting, pagination, CSV import with validation, CSV export, department summaries, profile management, activity logs, and Playwright testing. The project demonstrates database design, system analysis, REST API development, frontend integration, authentication, testing, and deployment readiness.</p>
+    <p>The system includes dashboard summaries, employee search, filtering, sorting, pagination, CSV import with validation, CSV export, department summaries, profile management, activity logs, role-based user views, screenshots, deployment on Render, and Playwright testing. The project demonstrates database design, system analysis, REST API development, frontend integration, authentication, testing, and cloud deployment.</p>
   </section>`;
 }
 
@@ -637,32 +703,63 @@ function appendixPage() {
     <h2>Chapter 10: Appendices</h2>
     <h3>Appendix A: Source Code Repository</h3>
     <p>The complete source code is maintained in the GitHub repository: <strong>${escapeHtml(student.repo)}</strong></p>
-    <h3>Appendix B: Important Local URLs</h3>
+    <h3>Appendix B: Deployment URL</h3>
+    <table>
+      <tbody>
+        <tr><td>Live Application</td><td>${escapeHtml(student.deploymentUrl)}</td></tr>
+        <tr><td>Health Check</td><td>${escapeHtml(`${student.deploymentUrl}/api/health`)}</td></tr>
+      </tbody>
+    </table>
+    <h3>Appendix C: Important Local URLs</h3>
     <table>
       <tbody>
         <tr><td>Frontend</td><td>http://localhost:5173</td></tr>
         <tr><td>Backend Health</td><td>http://localhost:5000/api/health</td></tr>
       </tbody>
     </table>
-    <h3>Appendix C: Important Commands</h3>
+    <h3>Appendix D: Important Commands</h3>
     <table>
       <tbody>
         <tr><td>Install dependencies</td><td><code>npm run install-all</code></td></tr>
         <tr><td>Start development servers</td><td><code>npm run dev</code></td></tr>
         <tr><td>Stop development servers</td><td><code>npm run stop:dev</code></td></tr>
         <tr><td>Run Playwright smoke test</td><td><code>npm run test:e2e</code></td></tr>
+        <tr><td>Capture screenshots</td><td><code>node scripts/capture-ui-screenshots.js</code></td></tr>
       </tbody>
     </table>
-    <h3>Appendix D: Screenshots To Attach</h3>
-    <ul>
-      <li>Login page and dashboard.</li>
-      <li>Employee list with search, filters, and pagination.</li>
-      <li>Add employee, edit employee, and employee details pages.</li>
-      <li>CSV import page with valid preview and validation errors.</li>
-      <li>Departments, activity, profile, and admin users pages.</li>
-      <li>MongoDB collections and GitHub repository.</li>
-    </ul>
+    <h3>Appendix E: UI Screenshots</h3>
+    ${screenshots.map(screenshotHtml).join('\n')}
+    <h3>Appendix F: Code Snippets</h3>
+    ${codeSnippets.map(codeSnippetHtml).join('\n')}
   </section>`;
+}
+
+function screenshotHtml([title, imagePath, caption]) {
+  const fullPath = path.join(__dirname, '..', 'docs', imagePath);
+  if (!fs.existsSync(fullPath)) {
+    return `<div class="note"><strong>${escapeHtml(title)}:</strong> Screenshot will be attached after running the screenshot capture script.</div>`;
+  }
+
+  return `<div class="screenshot">
+    <h4>${escapeHtml(title)}</h4>
+    <img src="${escapeHtml(imagePath.replaceAll('\\', '/'))}" alt="${escapeHtml(title)}" />
+    <div class="caption">${escapeHtml(caption)}</div>
+  </div>`;
+}
+
+function codeSnippetHtml(snippet) {
+  return `<h4>${escapeHtml(snippet.title)}</h4>
+    <p><strong>File:</strong> <code>${escapeHtml(snippet.file)}</code></p>
+    <pre><code>${escapeHtml(readSnippet(snippet.file, snippet.start, snippet.end))}</code></pre>`;
+}
+
+function readSnippet(filePath, start, end) {
+  const fullPath = path.join(__dirname, '..', filePath);
+  const lines = fs.readFileSync(fullPath, 'utf8').split(/\r?\n/);
+  return lines
+    .slice(start - 1, end)
+    .map((line, index) => `${String(start + index).padStart(3, ' ')}  ${line}`)
+    .join('\n');
 }
 
 function detail(label, value) {
