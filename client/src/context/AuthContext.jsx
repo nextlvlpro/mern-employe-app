@@ -3,11 +3,19 @@ import { api } from '../api/client.js';
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
+function getSavedUser() {
+  try {
     const savedUser = localStorage.getItem('ems_user');
     return savedUser ? JSON.parse(savedUser) : null;
-  });
+  } catch {
+    localStorage.removeItem('ems_user');
+    localStorage.removeItem('ems_token');
+    return null;
+  }
+}
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(getSavedUser);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

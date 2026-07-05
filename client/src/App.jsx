@@ -1,43 +1,74 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import AppLayout from './components/AppLayout.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { useAuth } from './context/AuthContext.jsx';
-import AuthPage from './pages/AuthPage.jsx';
+import AddEmployeePage from './pages/AddEmployeePage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import EditEmployeePage from './pages/EditEmployeePage.jsx';
+import EmployeesPage from './pages/EmployeesPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 
-const ProtectedRoute = ({ children }) => {
+function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <main className="center-screen">Loading session...</main>;
+    return <main className="center-screen">Loading...</main>;
   }
 
-  return user ? children : <Navigate to="/auth" replace />;
-};
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
-const PublicRoute = ({ children }) => {
+  return children;
+}
+
+function PublicRoute({ children }) {
   const { user } = useAuth();
-  return user ? <Navigate to="/" replace /> : children;
-};
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
+}
 
 export default function App() {
   return (
-    <Routes>
-      <Route
-        path="/auth"
-        element={(
-          <PublicRoute>
-            <AuthPage />
-          </PublicRoute>
-        )}
-      />
-      <Route
-        path="/"
-        element={(
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        )}
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route
+          path="/login"
+          element={(
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          )}
+        />
+        <Route
+          path="/register"
+          element={(
+            <PublicRoute>
+              <RegisterPage />
+            </PublicRoute>
+          )}
+        />
+        <Route
+          element={(
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          )}
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/employees" element={<EmployeesPage />} />
+          <Route path="/employees/new" element={<AddEmployeePage />} />
+          <Route path="/employees/:id/edit" element={<EditEmployeePage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </ErrorBoundary>
   );
 }

@@ -1,6 +1,6 @@
-# MERN Stack Employee Management System
+# BluePeak HR - Employee Management System
 
-Academic MERN project for employee information management with authentication, authorization, and CRUD operations.
+Academic employee management project built with the MERN stack. The running app uses a fictional company brand, **BluePeak HR**, so the interface looks like a normal workplace system instead of a project template.
 
 ## Student Details
 
@@ -17,7 +17,8 @@ Academic MERN project for employee information management with authentication, a
 - Role-based authorization for admin and user accounts
 - Employee create, read, update, and delete operations
 - Search/filter employees by name, email, department, and job title
-- Responsive React dashboard
+- Separate pages for dashboard, employee list, add employee, and edit employee
+- Refresh-safe frontend routes for Netlify and Vercel deployment
 - MongoDB database with Mongoose models
 
 ## Tech Stack
@@ -49,6 +50,15 @@ Default local URLs:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:5000`
 
+Main app routes:
+
+- `/login`
+- `/register`
+- `/dashboard`
+- `/employees`
+- `/employees/new`
+- `/employees/:id/edit`
+
 ## API Overview
 
 Auth:
@@ -73,7 +83,3 @@ Employees:
 4. Deploy `client/` on Vercel or Netlify.
 5. Set `VITE_API_URL` to the deployed backend URL.
 6. Update this README with final deployed links.
-
-## Git Hygiene
-
-The folders `project_guidelines/` and `planning/` are intentionally ignored and should not be committed.
