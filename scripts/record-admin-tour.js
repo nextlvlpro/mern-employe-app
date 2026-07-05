@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const ffmpegPath = require('ffmpeg-static');
 
 const appUrl = (process.env.APP_URL || 'https://bluepeak-hr.onrender.com/').replace(/\/$/, '');
 const outputDir = path.join(__dirname, '..', 'docs', 'tour');
-const videoFile = path.join(outputDir, 'bluepeak-admin-tour.webm');
-const subtitleFile = path.join(outputDir, 'bluepeak-admin-tour.vtt');
+const videoFile = path.join(outputDir, 'bluepeak-admin-tour.mp4');
+const tempVideoFile = path.join(outputDir, 'bluepeak-admin-tour.webm');
 const playerFile = path.join(outputDir, 'bluepeak-admin-tour.html');
 
 const captions = [];
@@ -128,31 +129,43 @@ async function main() {
   await browser.close();
 
   const tempVideoPath = await video.path();
-  fs.copyFileSync(tempVideoPath, videoFile);
-  fs.writeFileSync(subtitleFile, buildVtt(captions));
+  fs.copyFileSync(tempVideoPath, tempVideoFile);
+  await convertWebmToMp4(tempVideoFile, videoFile);
+  fs.rmSync(tempVideoFile, { force: true });
   fs.writeFileSync(playerFile, buildPlayerHtml());
 
   console.log(`Tour video saved to ${videoFile}`);
-  console.log(`Subtitles saved to ${subtitleFile}`);
 }
 
-function buildVtt(items) {
-  return `WEBVTT\n\n${items.map((item, index) => {
-    return `${index + 1}\n${formatTime(item.start)} --> ${formatTime(item.end)}\n${item.text}\n`;
-  }).join('\n')}`;
-}
+function convertWebmToMp4(inputFile, outputFile) {
+  const { spawn } = require('child_process');
 
-function formatTime(seconds) {
-  const safeSeconds = Math.max(seconds, 0);
-  const hours = Math.floor(safeSeconds / 3600);
-  const minutes = Math.floor((safeSeconds % 3600) / 60);
-  const wholeSeconds = Math.floor(safeSeconds % 60);
-  const milliseconds = Math.floor((safeSeconds - Math.floor(safeSeconds)) * 1000);
-  return `${pad(hours)}:${pad(minutes)}:${pad(wholeSeconds)}.${String(milliseconds).padStart(3, '0')}`;
-}
+  return new Promise((resolve, reject) => {
+    const process = spawn(ffmpegPath, [
+      '-y',
+      '-i',
+      inputFile,
+      '-c:v',
+      'libx264',
+      '-preset',
+      'veryfast',
+      '-pix_fmt',
+      'yuv420p',
+      '-movflags',
+      '+faststart',
+      outputFile
+    ]);
 
-function pad(value) {
-  return String(value).padStart(2, '0');
+    process.on('error', reject);
+    process.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+
+      reject(new Error(`ffmpeg exited with code ${code}`));
+    });
+  });
 }
 
 function buildPlayerHtml() {
@@ -173,9 +186,9 @@ function buildPlayerHtml() {
     <main>
       <h1>BluePeak HR Admin Tour</h1>
       <video controls>
-        <source src="bluepeak-admin-tour.webm" type="video/webm" />
+        <source src="bluepeak-admin-tour.mp4" type="video/mp4" />
       </video>
-      <p>Captions are already visible in the video. Subtitle file: <a href="bluepeak-admin-tour.vtt">bluepeak-admin-tour.vtt</a></p>
+      <p>Captions are already visible in the video.</p>
     </main>
   </body>
 </html>`;

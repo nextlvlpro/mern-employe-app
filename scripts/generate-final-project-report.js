@@ -734,12 +734,11 @@ function appendixPage() {
     <h3>Appendix G: Website Tour Video</h3>
     <table>
       <tbody>
-        <tr><td>Admin Tour Video</td><td><code>docs/tour/bluepeak-admin-tour.webm</code></td></tr>
-        <tr><td>Subtitle File</td><td><code>docs/tour/bluepeak-admin-tour.vtt</code></td></tr>
+        <tr><td>Admin Tour Video</td><td><code>docs/tour/bluepeak-admin-tour.mp4</code></td></tr>
         <tr><td>Video Player Page</td><td><code>docs/tour/bluepeak-admin-tour.html</code></td></tr>
       </tbody>
     </table>
-    <p>The website tour was recorded from the deployed Render application using the admin demo account. Captions are shown inside the video and are also provided as a subtitle file.</p>
+    <p>The website tour was recorded from the deployed Render application using the admin demo account. Captions are shown inside the MP4 video.</p>
   </section>`;
 }
 
