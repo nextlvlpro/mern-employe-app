@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>MERN Stack Employee Management System - Project Report</title>
+    <style>
+      @page { size: A4; margin: 20mm; }
+      * { box-sizing: border-box; }
+      body {
+        color: #1f2933;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        margin: 0;
+      }
+      h1, h2, h3 { color: #102a43; line-height: 1.25; }
+      h1 { font-size: 28px; margin: 10px 0; }
+      h2 { font-size: 20px; margin: 0 0 14px; }
+      h3 { font-size: 15px; margin: 18px 0 8px; }
+      p { margin: 0 0 10px; text-align: justify; }
+      ul { margin: 8px 0 0 18px; padding: 0; }
+      li { margin-bottom: 6px; }
+      table { border-collapse: collapse; margin: 10px 0 16px; width: 100%; }
+      th { background: #176b7c; color: white; padding: 9px; text-align: left; }
+      td { border: 1px solid #d9e2ec; padding: 8px 9px; vertical-align: top; }
+      tr:nth-child(even) td { background: #f8fafc; }
+      .page { page-break-after: always; min-height: 245mm; }
+      .page:last-child { page-break-after: auto; }
+      .center { text-align: center; }
+      .muted { color: #627d98; }
+      .title-page {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 245mm;
+        text-align: center;
+      }
+      .title-box {
+        border: 2px solid #176b7c;
+        padding: 34px;
+        width: 100%;
+      }
+      .label { color: #627d98; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+      .details { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; margin-top: 18px; }
+      .detail { background: #f5f8fa; border: 1px solid #d9e2ec; border-radius: 6px; padding: 10px; }
+      .detail strong, .detail span { display: block; }
+      .toc a { color: #102a43; text-decoration: none; }
+      .toc-row { border-bottom: 1px dotted #9fb3c8; display: flex; justify-content: space-between; padding: 5px 0; }
+      .note { background: #eef7f9; border-left: 4px solid #176b7c; padding: 12px; }
+      .signature { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; margin-top: 46px; }
+      .line { border-top: 1px solid #9fb3c8; padding-top: 8px; }
+      .chapter { page-break-before: always; }
+      code { background: #f1f5f9; border-radius: 4px; padding: 1px 4px; }
+    </style>
+  </head>
+  <body>
+    <section class="page title-page">
+    <div class="title-box">
+      <div class="label">Project Report</div>
+      <h1>MERN Stack Employee Management System</h1>
+      <p class="center">Submitted in partial fulfillment of the requirements for the award of the degree of</p>
+      <h2 class="center">Master of Computer Application</h2>
+      <p class="center">Full Stack Development</p>
+      <div class="details">
+        <div class="detail"><span class="label">Student Name</span><strong>Bhanu Sharma</strong></div>
+        <div class="detail"><span class="label">Enrollment No.</span><strong>O24MCA112292</strong></div>
+        <div class="detail"><span class="label">Guide / Mentor</span><strong>Alok Srivastva</strong></div>
+        <div class="detail"><span class="label">Academic Year</span><strong>2024-2026</strong></div>
+        <div class="detail"><span class="label">University</span><strong>Chandigarh University</strong></div>
+        <div class="detail"><span class="label">Repository</span><strong>https://github.com/nextlvlpro/mern-employe-app</strong></div>
+      </div>
+    </div>
+  </section>
+    <section class="page">
+    <h2>Certificate</h2>
+    <p>This is to certify that the project report titled <strong>MERN Stack Employee Management System</strong> has been prepared and submitted by <strong>Bhanu Sharma</strong>, Enrollment No. <strong>O24MCA112292</strong>, in partial fulfillment of the requirements for the award of the degree of Master of Computer Application.</p>
+    <p>The project work has been carried out under the guidance of <strong>Alok Srivastva</strong> during the academic year <strong>2024-2026</strong>.</p>
+    <div class="note">Copy of the certificate received from Qollabb or the concerned authority may be pasted here if required by the submission portal.</div>
+    <div class="signature">
+      <div class="line">Guide / Mentor Signature<br />Alok Srivastva</div>
+      <div class="line">Student Signature<br />Bhanu Sharma</div>
+    </div>
+  </section>
+    <section class="page">
+    <h2>Declaration</h2>
+    <p>I, <strong>Bhanu Sharma</strong>, hereby solemnly declare that the project report titled <strong>MERN Stack Employee Management System</strong> submitted in partial fulfillment of the requirements for the award of the degree of Master of Computer Application is my original work.</p>
+    <p>This project has been carried out by me during the academic year <strong>2024-2026</strong> under the supervision of <strong>Alok Srivastva</strong>. The work has not been submitted previously to any other university, institution, or examination body for the award of any degree, diploma, or certification.</p>
+    <p>All sources of information used in this report have been duly acknowledged and referenced in accordance with academic ethics and plagiarism norms.</p>
+    <div class="signature">
+      <div class="line">Place: Chandigarh<br />Date: 05 July 2026</div>
+      <div class="line">Student Signature<br />Bhanu Sharma<br />O24MCA112292</div>
+    </div>
+  </section>
+    <section class="page">
+    <h2>Acknowledgement</h2>
+    <p>I would like to express my sincere gratitude to my guide and mentor, <strong>Alok Srivastva</strong>, for valuable guidance and support throughout this project. I also thank the faculty members of <strong>Chandigarh University</strong> for their encouragement and academic support.</p>
+    <p>I am thankful to all individuals who helped me complete this project successfully. Their support, feedback, and motivation helped me improve the quality of the application and documentation.</p>
+  </section>
+    <section class="page">
+    <h2>Abstract / Executive Summary</h2>
+    <p>The MERN Stack Employee Management System is a web-based application designed to help companies manage employee information efficiently. The system provides secure user authentication, role-based access control, and CRUD operations for employee records such as name, contact details, department, job title, and employment status.</p>
+    <p>The backend is developed using Node.js and Express.js with MongoDB as the database. The frontend is developed using React. JWT authentication protects private routes and ensures that only authorized users can access employee data. Admin users can manage user roles, while employee data access is controlled according to user role.</p>
+    <p>The system includes dashboard summaries, employee search, filtering, sorting, pagination, CSV import with validation, CSV export, department summaries, profile management, activity logs, and Playwright testing. The project demonstrates database design, system analysis, REST API development, frontend integration, authentication, testing, and deployment readiness.</p>
+  </section>
+    <section class="page">
+    <h2>Table of Contents</h2>
+    <div class="toc">
+      <div class="toc-row"><span>Certificate</span><span>1</span></div>
+<div class="toc-row"><span>Declaration</span><span>2</span></div>
+<div class="toc-row"><span>Acknowledgement</span><span>3</span></div>
+<div class="toc-row"><span>Abstract / Executive Summary</span><span>4</span></div>
+<div class="toc-row"><span>Chapter 1: Introduction</span><span>5</span></div>
+<div class="toc-row"><span>Chapter 2: System Study</span><span>6</span></div>
+<div class="toc-row"><span>Chapter 3: System Analysis</span><span>7</span></div>
+<div class="toc-row"><span>Chapter 4: System Design</span><span>8</span></div>
+<div class="toc-row"><span>Chapter 5: System Implementation</span><span>9</span></div>
+<div class="toc-row"><span>Chapter 6: Testing</span><span>10</span></div>
+<div class="toc-row"><span>Chapter 7: Results And Discussion</span><span>11</span></div>
+<div class="toc-row"><span>Chapter 8: Conclusion And Future Scope</span><span>12</span></div>
+<div class="toc-row"><span>Chapter 9: References</span><span>13</span></div>
+<div class="toc-row"><span>Chapter 10: Appendices</span><span>14</span></div>
+    </div>
+  </section>
+    <section class="page chapter">
+    <h2>Chapter 1: Introduction</h2>
+    <p>Employee data management is an important operational requirement for every organization. Companies need to maintain accurate employee information such as personal contact details, department, job title, employment status, and account-level access. If this data is stored only in spreadsheets or paper records, it becomes difficult to search, update, secure, and audit.</p>
+<p>The MERN Stack Employee Management System is a web application developed to solve this problem using MongoDB, Express.js, React, and Node.js. The project provides a secure interface for managing employee records and includes authentication, role-based authorization, search, filtering, CSV import/export, activity tracking, and a dashboard for summary information.</p>
+<p>The application uses a company-style interface named BluePeak HR / PeopleDesk so that the project looks and behaves like a real workplace system. Instead of keeping all functionality on a single page, the application is divided into separate pages for dashboard, employees, employee details, add employee, edit employee, departments, CSV import, profile, users, and activity logs.</p>
+<p>The main purpose of the project is to demonstrate a complete full-stack workflow: database design, backend API development, frontend implementation, authentication, authorization, testing, documentation, and deployment readiness.</p>
+    <h3>Objectives</h3><ul><li>To design a MongoDB database schema for storing user, employee, and activity log information.</li><li>To develop RESTful APIs using Node.js and Express.js.</li><li>To create a user-friendly React frontend for interacting with backend services.</li><li>To implement JWT authentication and role-based access control.</li><li>To provide employee CRUD, search, filtering, pagination, CSV import, and CSV export.</li><li>To verify the application using build checks, audits, and Playwright browser testing.</li><li>To prepare the application for cloud deployment using MongoDB Atlas, Render, and Vercel or Netlify.</li></ul>
+    
+    
+  </section>
+<section class="page chapter">
+    <h2>Chapter 2: System Study</h2>
+    <p>The existing manual method of employee record management usually depends on spreadsheets, documents, or scattered files. Such a method may work for a small number of records, but it becomes inefficient when employee data grows. Searching records, maintaining updated information, and controlling access become difficult.</p>
+<p>A web-based employee management system improves the situation by centralizing the data in a database and providing a secure interface to authorized users. The proposed system supports structured employee records, quick search, department-wise view, role control, and activity logs.</p>
+<p>The system also includes bulk import through CSV files. This is useful when a company already has employee data in spreadsheet format and wants to move it into the application without entering each employee manually.</p>
+    <h3>Limitations Of Existing System</h3><ul><li>Manual record keeping is time-consuming.</li><li>Spreadsheet data can be duplicated or accidentally changed.</li><li>Searching and filtering employee records is limited.</li><li>Access control is weak in file-based systems.</li><li>There is no activity history for tracking changes.</li><li>Bulk operations and reporting are difficult.</li></ul>
+    
+    
+  </section>
+<section class="page chapter">
+    <h2>Chapter 3: System Analysis</h2>
+    <p>System analysis identifies the functional and non-functional requirements of the proposed application. The project is designed for users who need to manage employee records securely through a browser-based interface.</p>
+<p>The system has two major roles: admin and user. Admin users can manage all employee records and user roles. Normal users can manage records created by them. This role-based design improves privacy and prevents unauthorized access.</p>
+<p>The system also validates input data at both frontend and backend levels. CSV import validates required columns, email format, phone format, status values, and duplicate emails before importing records.</p>
+    <h3>Functional Requirements</h3><ul><li>User registration and login.</li><li>JWT-based protected routes.</li><li>Employee create, read, update, and delete operations.</li><li>Employee details page.</li><li>Employee search, filter, sort, and pagination.</li><li>Bulk employee import using CSV with validation.</li><li>Employee export to CSV.</li><li>Department-wise employee summary.</li><li>User profile management.</li><li>Admin user role management.</li><li>Activity log tracking.</li></ul>
+    <h3>Non-Functional Requirements</h3><ul><li>The interface should be responsive and easy to use.</li><li>Passwords should be stored securely using hashing.</li><li>Environment variables should be used for secrets.</li><li>The application should be deployable on cloud platforms.</li><li>The codebase should be divided into readable modules.</li><li>The system should handle reloads and invalid routes gracefully.</li></ul>
+    
+  </section>
+<section class="page chapter">
+    <h2>Chapter 4: System Design</h2>
+    <p>The system follows a client-server architecture. The React frontend communicates with the Express backend using HTTP requests. The backend connects to MongoDB through Mongoose models. JWT tokens are used to authenticate users and protect private routes.</p>
+<p>The frontend is divided into pages, components, services, context, and utilities. The backend is divided into routes, controllers, models, middleware, configuration, utilities, and data scripts. This separation improves maintainability and readability.</p>
+    
+    <h3>Important API Groups</h3><ul><li>Authentication APIs: register, login, get current user, update profile.</li><li>Employee APIs: list, create, details, update, delete, bulk import.</li><li>User APIs: admin user list and role update.</li><li>Activity APIs: recent activity logs.</li></ul>
+    <h3>Database Collections</h3><table><thead><tr><th>Collection</th><th>Purpose</th><th>Important Fields</th></tr></thead><tbody><tr><td>users</td><td>Stores application user accounts</td><td>name, email, password, role, timestamps</td></tr><tr><td>employees</td><td>Stores employee records</td><td>name, email, phone, department, jobTitle, status, createdBy, timestamps</td></tr><tr><td>activitylogs</td><td>Stores system activity history</td><td>action, message, entityType, entityId, user, timestamps</td></tr></tbody></table>
+  </section>
+<section class="page chapter">
+    <h2>Chapter 5: System Implementation</h2>
+    <p>The backend is implemented using Node.js and Express.js. MongoDB is connected through Mongoose. Passwords are hashed using bcryptjs, and JWT tokens are generated during registration and login. Middleware is used for authentication and role authorization.</p>
+<p>The frontend is implemented using React and Vite. React Router provides navigation between pages. Axios is used for API communication. Authentication state is handled through a React context that stores the logged-in user and JWT token.</p>
+<p>The employee module includes listing, searching, sorting, filtering, pagination, detail view, add form, edit form, delete operation, CSV export, and CSV import. The CSV import page validates data before sending it to the backend and shows row-level errors.</p>
+<p>The activity module records important actions such as employee creation, employee update, employee deletion, CSV import, and user role changes. This helps the system look and behave like a real administrative tool.</p>
+    <h3>Implemented Pages</h3><ul><li>Login and register pages.</li><li>Dashboard page with statistics, status overview, departments, recent employees, and activity.</li><li>Employees page with search, filters, sorting, pagination, export, and actions.</li><li>Employee details page.</li><li>Add employee and edit employee pages.</li><li>CSV import page with validation and sample CSV download.</li><li>Departments page.</li><li>Profile page.</li><li>Admin users page.</li><li>Activity log page.</li></ul>
+    
+    
+  </section>
+<section class="page chapter">
+    <h2>Chapter 6: Testing</h2>
+    <p>Testing was performed to verify that the application works correctly. The frontend production build was tested using Vite. Backend JavaScript files were checked for syntax errors. Client and server dependencies were audited using npm audit.</p>
+<p>A Playwright smoke test was added to verify the main browser workflows. The test covers login, dashboard load, employees page, add employee, search, employee detail page reload, departments page, CSV import validation, edit page, delete operation, and cleanup of test records.</p>
+    
+    
+    <h3>Testing Summary</h3><table><thead><tr><th>Test Area</th><th>Test Method</th><th>Result</th></tr></thead><tbody><tr><td>Frontend Build</td><td>npm run build in client</td><td>Passed</td></tr><tr><td>Dependency Audit</td><td>npm audit for client and server</td><td>0 vulnerabilities</td></tr><tr><td>Authentication</td><td>Playwright login flow</td><td>Passed</td></tr><tr><td>Employee CRUD</td><td>Playwright add/edit/delete flow</td><td>Passed</td></tr><tr><td>Search And Details</td><td>Playwright search and details reload</td><td>Passed</td></tr><tr><td>CSV Import</td><td>Valid and invalid row validation</td><td>Passed</td></tr><tr><td>Backend APIs</td><td>Manual API health and login checks</td><td>Passed</td></tr></tbody></table>
+  </section>
+<section class="page chapter">
+    <h2>Chapter 7: Results And Discussion</h2>
+    <p>The project successfully implements a full-stack employee management system using the MERN stack. The system provides secure login, employee record management, search, filtering, pagination, CSV import/export, department summary, user profile, admin user management, and activity tracking.</p>
+<p>The application is structured in a way that makes it suitable for academic demonstration and future extension. The user interface is not a single-page demo screen; instead, it is divided into meaningful modules with separate URLs.</p>
+<p>The final result is a working local application with GitHub source code, documentation, milestone reports, testing support, and deployment instructions.</p>
+    <h3>Major Outcomes</h3><ul><li>Centralized employee record management.</li><li>Secure authentication and authorization.</li><li>Improved usability with separate pages and a collapsible sidebar.</li><li>Bulk CSV import with validation.</li><li>Activity logs for administrative tracking.</li><li>Testing and documentation support for project submission.</li></ul>
+    
+    
+  </section>
+<section class="page chapter">
+    <h2>Chapter 8: Conclusion And Future Scope</h2>
+    <p>The MERN Stack Employee Management System meets the major objectives of the project. It demonstrates database design, RESTful API development, frontend implementation, authentication, authorization, testing, and deployment readiness. The system can be used by a company to manage employee information in a structured and secure way.</p>
+<p>The project helped demonstrate full-stack development skills using modern web technologies. It also shows how frontend and backend modules can work together through APIs and how security can be added using JWT authentication.</p>
+    <h3>Future Scope</h3><ul><li>Add attendance management.</li><li>Add salary and payroll module.</li><li>Add employee profile image upload.</li><li>Add password reset through email.</li><li>Add advanced reports and charts.</li><li>Add audit log filters and export.</li><li>Add Docker support for deployment.</li><li>Deploy the final application on cloud infrastructure.</li></ul>
+    
+    
+  </section>
+    <section class="page chapter">
+    <h2>Chapter 9: References</h2>
+    <ol>
+      <li>MongoDB Documentation, https://www.mongodb.com/docs/</li>
+<li>MongoDB Atlas Documentation, https://www.mongodb.com/docs/atlas/</li>
+<li>Mongoose Documentation, https://mongoosejs.com/docs/</li>
+<li>Express.js Documentation, https://expressjs.com/</li>
+<li>Node.js Documentation, https://nodejs.org/docs/</li>
+<li>React Documentation, https://react.dev/</li>
+<li>React Router Documentation, https://reactrouter.com/</li>
+<li>Vite Documentation, https://vite.dev/</li>
+<li>JSON Web Token Introduction, https://jwt.io/introduction</li>
+<li>bcryptjs Package Documentation, https://www.npmjs.com/package/bcryptjs</li>
+<li>Axios Documentation, https://axios-http.com/</li>
+<li>Playwright Documentation, https://playwright.dev/</li>
+<li>Render Documentation, https://render.com/docs</li>
+<li>Vercel Documentation, https://vercel.com/docs</li>
+<li>Netlify Documentation, https://docs.netlify.com/</li>
+<li>MDN Web Docs - JavaScript, https://developer.mozilla.org/en-US/docs/Web/JavaScript</li>
+<li>MDN Web Docs - Fetch and HTTP Concepts, https://developer.mozilla.org/</li>
+<li>OWASP Authentication Cheat Sheet, https://cheatsheetseries.owasp.org/</li>
+<li>npm Documentation, https://docs.npmjs.com/</li>
+<li>GitHub Docs, https://docs.github.com/</li>
+    </ol>
+  </section>
+    <section class="page chapter">
+    <h2>Chapter 10: Appendices</h2>
+    <h3>Appendix A: Source Code Repository</h3>
+    <p>The complete source code is maintained in the GitHub repository: <strong>https://github.com/nextlvlpro/mern-employe-app</strong></p>
+    <h3>Appendix B: Important Local URLs</h3>
+    <table>
+      <tbody>
+        <tr><td>Frontend</td><td>http://localhost:5173</td></tr>
+        <tr><td>Backend Health</td><td>http://localhost:5000/api/health</td></tr>
+      </tbody>
+    </table>
+    <h3>Appendix C: Important Commands</h3>
+    <table>
+      <tbody>
+        <tr><td>Install dependencies</td><td><code>npm run install-all</code></td></tr>
+        <tr><td>Start development servers</td><td><code>npm run dev</code></td></tr>
+        <tr><td>Stop development servers</td><td><code>npm run stop:dev</code></td></tr>
+        <tr><td>Run Playwright smoke test</td><td><code>npm run test:e2e</code></td></tr>
+      </tbody>
+    </table>
+    <h3>Appendix D: Screenshots To Attach</h3>
+    <ul>
+      <li>Login page and dashboard.</li>
+      <li>Employee list with search, filters, and pagination.</li>
+      <li>Add employee, edit employee, and employee details pages.</li>
+      <li>CSV import page with valid preview and validation errors.</li>
+      <li>Departments, activity, profile, and admin users pages.</li>
+      <li>MongoDB collections and GitHub repository.</li>
+    </ul>
+  </section>
+  </body>
+</html>
