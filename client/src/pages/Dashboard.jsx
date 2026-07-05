@@ -2,16 +2,19 @@ import { BriefcaseBusiness, Building2, Clock, UserPlus, Users } from 'lucide-rea
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getEmployees } from '../services/employeeService.js';
+import { getActivityLogs } from '../services/activityService.js';
 import { getDepartmentSummary, getStatusSummary } from '../utils/employeeUtils.js';
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
+  const [activityLogs, setActivityLogs] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
     getEmployees()
       .then(setEmployees)
       .catch(() => setError('Unable to load dashboard data'));
+    getActivityLogs(5).then(setActivityLogs).catch(() => {});
   }, []);
 
   const statusSummary = getStatusSummary(employees);
@@ -90,6 +93,25 @@ export default function Dashboard() {
             </Link>
           ))}
           {!employees.length && <p className="empty-state">No employees added yet.</p>}
+        </div>
+      </section>
+
+      <section className="list-panel">
+        <div className="section-heading">
+          <h3>Recent Activity</h3>
+          <Link className="ghost-button" to="/activity">View all</Link>
+        </div>
+
+        <div className="activity-list compact-activity">
+          {activityLogs.map((log) => (
+            <article className="activity-row" key={log._id}>
+              <div>
+                <strong>{log.message}</strong>
+                <span>{new Date(log.createdAt).toLocaleString()}</span>
+              </div>
+            </article>
+          ))}
+          {!activityLogs.length && <p className="empty-state">No recent activity yet.</p>}
         </div>
       </section>
     </section>

@@ -1,4 +1,4 @@
-import { Building2, FileSpreadsheet, LayoutDashboard, LogOut, Menu, Network, User, UserPlus, Users } from 'lucide-react';
+import { Activity, Building2, FileSpreadsheet, LayoutDashboard, LogOut, Menu, Network, User, UserPlus, Users } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -46,6 +46,9 @@ export default function AppLayout() {
           </NavLink>
           <NavLink to="/profile" title="Profile">
             <User size={18} /> <span>Profile</span>
+          </NavLink>
+          <NavLink to="/activity" title="Activity">
+            <Activity size={18} /> <span>Activity</span>
           </NavLink>
           {user?.role === 'admin' && (
             <NavLink to="/users" title="Users">

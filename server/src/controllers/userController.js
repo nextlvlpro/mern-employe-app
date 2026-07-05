@@ -1,4 +1,5 @@
 import { User } from '../models/User.js';
+import { logActivity } from '../utils/activityLogger.js';
 
 export const getUsers = async (req, res, next) => {
   try {
@@ -32,6 +33,14 @@ export const updateUserRole = async (req, res, next) => {
 
     user.role = role;
     await user.save();
+
+    await logActivity({
+      action: 'user_role_updated',
+      message: `${req.user.name} changed ${user.name} to ${role}`,
+      entityType: 'User',
+      entityId: user._id,
+      user: req.user._id
+    });
 
     return res.json({
       id: user._id,

@@ -1,4 +1,5 @@
 import { Employee } from '../models/Employee.js';
+import { logActivity } from '../utils/activityLogger.js';
 
 const ownedEmployeeQuery = (req, extra = {}) => {
   if (req.user.role === 'admin') {
@@ -127,6 +128,14 @@ export const createEmployee = async (req, res, next) => {
       createdBy: req.user._id
     });
 
+    await logActivity({
+      action: 'employee_created',
+      message: `${req.user.name} added ${employee.name}`,
+      entityType: 'Employee',
+      entityId: employee._id,
+      user: req.user._id
+    });
+
     return res.status(201).json(employee);
   } catch (error) {
     return next(error);
@@ -183,6 +192,15 @@ export const bulkCreateEmployees = async (req, res, next) => {
       ? await Employee.insertMany(validEmployees, { ordered: false })
       : [];
 
+    if (createdEmployees.length) {
+      await logActivity({
+        action: 'employees_imported',
+        message: `${req.user.name} imported ${createdEmployees.length} employees`,
+        entityType: 'Import',
+        user: req.user._id
+      });
+    }
+
     return res.status(201).json({
       created: createdEmployees.length,
       skipped: rowErrors.length,
@@ -209,6 +227,14 @@ export const updateEmployee = async (req, res, next) => {
     });
 
     const updatedEmployee = await employee.save();
+    await logActivity({
+      action: 'employee_updated',
+      message: `${req.user.name} updated ${updatedEmployee.name}`,
+      entityType: 'Employee',
+      entityId: updatedEmployee._id,
+      user: req.user._id
+    });
+
     return res.json(updatedEmployee);
   } catch (error) {
     return next(error);
@@ -223,7 +249,16 @@ export const deleteEmployee = async (req, res, next) => {
       return res.status(404).json({ message: 'Employee not found' });
     }
 
+    const deletedName = employee.name;
     await employee.deleteOne();
+    await logActivity({
+      action: 'employee_deleted',
+      message: `${req.user.name} deleted ${deletedName}`,
+      entityType: 'Employee',
+      entityId: employee._id,
+      user: req.user._id
+    });
+
     return res.json({ message: 'Employee deleted successfully' });
   } catch (error) {
     return next(error);

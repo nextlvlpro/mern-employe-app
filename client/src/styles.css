@@ -818,6 +818,47 @@ td span {
   margin: 8px 0 0;
 }
 
+.activity-list {
+  display: grid;
+  gap: 10px;
+}
+
+.activity-row {
+  align-items: center;
+  border: 1px solid #e5eaee;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  padding: 13px;
+}
+
+.activity-row strong,
+.activity-row span {
+  display: block;
+}
+
+.activity-row span {
+  color: #667483;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.activity-icon {
+  align-items: center;
+  background: #eef6f8;
+  border-radius: 8px;
+  color: #176b7c;
+  display: flex;
+  flex: 0 0 auto;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.compact-activity .activity-row {
+  align-items: flex-start;
+}
+
 .mini-counts {
   display: flex;
   flex-wrap: wrap;

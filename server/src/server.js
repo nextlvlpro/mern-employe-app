@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { connectDB } from './config/db.js';
 import { errorHandler, notFound } from './middleware/error.js';
+import activityRoutes from './routes/activityRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import employeeRoutes from './routes/employeeRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -45,6 +46,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/activity', activityRoutes);
 app.use('/api/users', userRoutes);
 
 app.use(notFound);

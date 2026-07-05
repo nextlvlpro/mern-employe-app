@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './components/AppLayout.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { useAuth } from './context/AuthContext.jsx';
+import ActivityPage from './pages/ActivityPage.jsx';
 import AddEmployeePage from './pages/AddEmployeePage.jsx';
 import DepartmentsPage from './pages/DepartmentsPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
@@ -76,6 +77,7 @@ export default function App() {
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/users" element={<UsersPage />} />
+          <Route path="/activity" element={<ActivityPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
