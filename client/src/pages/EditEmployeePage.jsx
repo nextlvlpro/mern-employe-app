@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import EmployeeForm from '../components/EmployeeForm.jsx';
+import LoadingState from '../components/LoadingState.jsx';
 import { getEmployee, updateEmployee } from '../services/employeeService.js';
 
 export default function EditEmployeePage() {
@@ -34,7 +35,7 @@ export default function EditEmployeePage() {
       </div>
 
       {error && <p className="error-message">{error}</p>}
-      {!error && !employee && <p className="empty-state">Loading employee...</p>}
+      {!error && !employee && <LoadingState message="Loading employee..." />}
       {employee && <EmployeeForm initialValues={employee} onSubmit={saveEmployee} submitLabel="Update Employee" />}
     </section>
   );

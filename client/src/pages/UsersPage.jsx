@@ -1,11 +1,13 @@
 import { Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import LoadingState from '../components/LoadingState.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { getUsers, updateUserRole } from '../services/userService.js';
 
 export default function UsersPage() {
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
@@ -15,10 +17,13 @@ export default function UsersPage() {
 
   async function loadUsers() {
     try {
+      setLoading(true);
       const data = await getUsers();
       setUsers(data);
     } catch (apiError) {
       setError(apiError.response?.data?.message || 'Unable to load users');
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -56,6 +61,8 @@ export default function UsersPage() {
       {error && <p className="error-message">{error}</p>}
 
       <section className="list-panel">
+        {loading && <LoadingState message="Loading users..." />}
+        {!loading && (
         <div className="table-wrap">
           <table>
             <thead>
@@ -95,6 +102,7 @@ export default function UsersPage() {
             </tbody>
           </table>
         </div>
+        )}
       </section>
     </section>
   );

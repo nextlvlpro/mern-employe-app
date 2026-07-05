@@ -1,15 +1,18 @@
 import { Activity } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import LoadingState from '../components/LoadingState.jsx';
 import { getActivityLogs } from '../services/activityService.js';
 
 export default function ActivityPage() {
   const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     getActivityLogs()
       .then(setLogs)
-      .catch(() => setError('Unable to load activity logs'));
+      .catch(() => setError('Unable to load activity logs'))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -25,7 +28,8 @@ export default function ActivityPage() {
 
       <section className="list-panel">
         <div className="activity-list">
-          {logs.map((log) => (
+          {loading && <LoadingState message="Loading activity..." />}
+          {!loading && logs.map((log) => (
             <article className="activity-row" key={log._id}>
               <div className="activity-icon">
                 <Activity size={17} />
@@ -36,7 +40,7 @@ export default function ActivityPage() {
               </div>
             </article>
           ))}
-          {!logs.length && <p className="empty-state">No activity recorded yet.</p>}
+          {!loading && !logs.length && <p className="empty-state">No activity recorded yet.</p>}
         </div>
       </section>
     </section>

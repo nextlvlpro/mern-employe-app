@@ -1,6 +1,7 @@
 import { BriefcaseBusiness, Building2, Clock, UserPlus, Users } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoadingState from '../components/LoadingState.jsx';
 import { getEmployees } from '../services/employeeService.js';
 import { getActivityLogs } from '../services/activityService.js';
 import { getDepartmentSummary, getStatusSummary } from '../utils/employeeUtils.js';
@@ -8,13 +9,19 @@ import { getDepartmentSummary, getStatusSummary } from '../utils/employeeUtils.j
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
   const [activityLogs, setActivityLogs] = useState([]);
+  const [loadingEmployees, setLoadingEmployees] = useState(true);
+  const [loadingActivity, setLoadingActivity] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     getEmployees()
       .then(setEmployees)
-      .catch(() => setError('Unable to load dashboard data'));
-    getActivityLogs(5).then(setActivityLogs).catch(() => {});
+      .catch(() => setError('Unable to load dashboard data'))
+      .finally(() => setLoadingEmployees(false));
+    getActivityLogs(5)
+      .then(setActivityLogs)
+      .catch(() => {})
+      .finally(() => setLoadingActivity(false));
   }, []);
 
   const statusSummary = getStatusSummary(employees);
@@ -60,7 +67,8 @@ export default function Dashboard() {
             <Link className="ghost-button" to="/departments">View all</Link>
           </div>
           <div className="simple-list">
-            {departments.slice(0, 5).map((department) => (
+            {loadingEmployees && <LoadingState message="Loading departments..." />}
+            {!loadingEmployees && departments.slice(0, 5).map((department) => (
               <div className="simple-list-row" key={department.name}>
                 <div>
                   <strong>{department.name}</strong>
@@ -69,7 +77,7 @@ export default function Dashboard() {
                 <strong>{department.total}</strong>
               </div>
             ))}
-            {!departments.length && <p className="empty-state">No departments found.</p>}
+            {!loadingEmployees && !departments.length && <p className="empty-state">No departments found.</p>}
           </div>
         </section>
       </div>
@@ -81,7 +89,8 @@ export default function Dashboard() {
         </div>
 
         <div className="simple-list">
-          {latestEmployees.map((employee) => (
+          {loadingEmployees && <LoadingState message="Loading employees..." />}
+          {!loadingEmployees && latestEmployees.map((employee) => (
             <Link className="simple-list-row" to={`/employees/${employee._id}`} key={employee._id}>
               <div>
                 <strong>{employee.name}</strong>
@@ -92,7 +101,7 @@ export default function Dashboard() {
               </span>
             </Link>
           ))}
-          {!employees.length && <p className="empty-state">No employees added yet.</p>}
+          {!loadingEmployees && !employees.length && <p className="empty-state">No employees added yet.</p>}
         </div>
       </section>
 
@@ -103,7 +112,8 @@ export default function Dashboard() {
         </div>
 
         <div className="activity-list compact-activity">
-          {activityLogs.map((log) => (
+          {loadingActivity && <LoadingState message="Loading activity..." />}
+          {!loadingActivity && activityLogs.map((log) => (
             <article className="activity-row" key={log._id}>
               <div>
                 <strong>{log.message}</strong>
@@ -111,7 +121,7 @@ export default function Dashboard() {
               </div>
             </article>
           ))}
-          {!activityLogs.length && <p className="empty-state">No recent activity yet.</p>}
+          {!loadingActivity && !activityLogs.length && <p className="empty-state">No recent activity yet.</p>}
         </div>
       </section>
     </section>

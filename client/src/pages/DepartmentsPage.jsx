@@ -1,18 +1,21 @@
 import { Search, Users } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoadingState from '../components/LoadingState.jsx';
 import { getEmployees } from '../services/employeeService.js';
 import { getDepartmentSummary } from '../utils/employeeUtils.js';
 
 export default function DepartmentsPage() {
   const [employees, setEmployees] = useState([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     getEmployees()
       .then(setEmployees)
-      .catch(() => setError('Unable to load departments'));
+      .catch(() => setError('Unable to load departments'))
+      .finally(() => setLoading(false));
   }, []);
 
   const departments = useMemo(() => {
@@ -41,7 +44,8 @@ export default function DepartmentsPage() {
         </div>
 
         <div className="department-grid">
-          {departments.map((department) => (
+          {loading && <LoadingState message="Loading departments..." />}
+          {!loading && departments.map((department) => (
             <article className="department-card" key={department.name}>
               <div className="department-title">
                 <Users size={20} />
@@ -59,7 +63,7 @@ export default function DepartmentsPage() {
               </Link>
             </article>
           ))}
-          {!departments.length && <p className="empty-state">No departments found.</p>}
+          {!loading && !departments.length && <p className="empty-state">No departments found.</p>}
         </div>
       </section>
     </section>

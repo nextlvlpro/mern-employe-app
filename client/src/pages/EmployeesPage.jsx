@@ -2,6 +2,7 @@ import { Download, FileSpreadsheet, RotateCcw, Search, UserPlus } from 'lucide-r
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import EmployeeTable from '../components/EmployeeTable.jsx';
+import LoadingState from '../components/LoadingState.jsx';
 import { deleteEmployee, getEmployees, getEmployeesPage } from '../services/employeeService.js';
 import { downloadEmployeesCsv } from '../utils/employeeUtils.js';
 
@@ -19,6 +20,7 @@ export default function EmployeesPage() {
     limit: Number(searchParams.get('limit')) || 10
   });
   const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, pages: 1 });
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [message, setMessage] = useState(location.state?.message || '');
 
@@ -38,9 +40,11 @@ export default function EmployeesPage() {
 
   async function loadEmployees(nextFilters) {
     setError('');
+    setLoading(true);
     const result = await getEmployeesPage(nextFilters);
     setEmployees(result.data);
     setPagination(result.pagination);
+    setLoading(false);
   }
 
   async function filterEmployees(event) {
@@ -52,6 +56,7 @@ export default function EmployeesPage() {
       setSearchParams(cleanFilters(nextFilters));
       await loadEmployees(nextFilters);
     } catch {
+      setLoading(false);
       setError('Unable to search employees');
     }
   }
@@ -60,14 +65,24 @@ export default function EmployeesPage() {
     const blankFilters = { search: '', status: '', department: '', sort: 'newest', page: 1, limit: 10 };
     setFilters(blankFilters);
     setSearchParams({});
-    await loadEmployees(blankFilters);
+    try {
+      await loadEmployees(blankFilters);
+    } catch {
+      setLoading(false);
+      setError('Unable to clear filters');
+    }
   }
 
   async function changePage(page) {
     const nextFilters = { ...filters, page };
     setFilters(nextFilters);
     setSearchParams(cleanFilters(nextFilters));
-    await loadEmployees(nextFilters);
+    try {
+      await loadEmployees(nextFilters);
+    } catch {
+      setLoading(false);
+      setError('Unable to change page');
+    }
   }
 
   async function removeEmployee(employee) {
@@ -139,13 +154,13 @@ export default function EmployeesPage() {
             <option value="10">10 rows</option>
             <option value="20">20 rows</option>
           </select>
-          <button className="secondary-button" type="submit">Search</button>
-          <button className="ghost-button" onClick={clearFilters} type="button">
+          <button className="secondary-button" disabled={loading} type="submit">Search</button>
+          <button className="ghost-button" disabled={loading} onClick={clearFilters} type="button">
             <RotateCcw size={16} /> Clear
           </button>
         </form>
 
-        <EmployeeTable employees={employees} onDelete={removeEmployee} />
+        {loading ? <LoadingState message="Loading employees..." /> : <EmployeeTable employees={employees} onDelete={removeEmployee} />}
         <div className="pagination-bar">
           <span>
             Showing page {pagination.page} of {pagination.pages} - {pagination.total} records
@@ -153,7 +168,7 @@ export default function EmployeesPage() {
           <div className="button-row">
             <button
               className="ghost-button"
-              disabled={pagination.page <= 1}
+              disabled={loading || pagination.page <= 1}
               onClick={() => changePage(pagination.page - 1)}
               type="button"
             >
@@ -161,7 +176,7 @@ export default function EmployeesPage() {
             </button>
             <button
               className="ghost-button"
-              disabled={pagination.page >= pagination.pages}
+              disabled={loading || pagination.page >= pagination.pages}
               onClick={() => changePage(pagination.page + 1)}
               type="button"
             >

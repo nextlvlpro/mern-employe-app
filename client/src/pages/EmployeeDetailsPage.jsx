@@ -1,6 +1,7 @@
 import { ArrowLeft, Edit3, Mail, Phone } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import LoadingState from '../components/LoadingState.jsx';
 import { getEmployee } from '../services/employeeService.js';
 
 export default function EmployeeDetailsPage() {
@@ -26,7 +27,7 @@ export default function EmployeeDetailsPage() {
   }
 
   if (!employee) {
-    return <p className="empty-state">Loading employee...</p>;
+    return <LoadingState message="Loading employee..." />;
   }
 
   return (
