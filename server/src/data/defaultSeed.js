@@ -5,12 +5,20 @@ import { User } from '../models/User.js';
 
 const seedKey = 'default_seed_completed';
 
-const demoAdmin = {
-  name: 'Bhanu Sharma',
-  email: 'admin@example.com',
-  password: 'password123',
-  role: 'admin'
-};
+const demoUsers = [
+  {
+    name: 'Bhanu Sharma',
+    email: 'admin@example.com',
+    password: 'password123',
+    role: 'admin'
+  },
+  {
+    name: 'Demo Staff',
+    email: 'user@example.com',
+    password: 'password123',
+    role: 'user'
+  }
+];
 
 const demoEmployees = [
   {
@@ -19,7 +27,8 @@ const demoEmployees = [
     phone: '9876543210',
     department: 'Engineering',
     jobTitle: 'Frontend Developer',
-    status: 'Active'
+    status: 'Active',
+    ownerEmail: 'admin@example.com'
   },
   {
     name: 'Priya Nair',
@@ -27,7 +36,8 @@ const demoEmployees = [
     phone: '9876543211',
     department: 'Human Resources',
     jobTitle: 'HR Executive',
-    status: 'Active'
+    status: 'Active',
+    ownerEmail: 'admin@example.com'
   },
   {
     name: 'Rahul Verma',
@@ -35,37 +45,49 @@ const demoEmployees = [
     phone: '9876543212',
     department: 'Finance',
     jobTitle: 'Accounts Manager',
-    status: 'On Leave'
+    status: 'On Leave',
+    ownerEmail: 'admin@example.com'
+  },
+  {
+    name: 'Nisha Kapoor',
+    email: 'nisha.kapoor@example.com',
+    phone: '9876543213',
+    department: 'Support',
+    jobTitle: 'Support Associate',
+    status: 'Active',
+    ownerEmail: 'user@example.com'
   }
 ];
 
 export async function seedDefaultData({ once = true } = {}) {
-  if (once) {
-    const completedSeed = await AppSetting.findOne({ key: seedKey });
-
-    if (completedSeed) {
-      console.log('Default seed already completed. Skipping startup seed.');
-      return { skipped: true, usersCreated: 0, employeesCreated: 0 };
-    }
-  }
-
   let usersCreated = 0;
   let employeesCreated = 0;
+  const usersByEmail = {};
 
-  let admin = await User.findOne({ email: demoAdmin.email });
+  for (const demoUser of demoUsers) {
+    let user = await User.findOne({ email: demoUser.email });
 
-  if (!admin) {
-    admin = await User.create(demoAdmin);
-    usersCreated += 1;
+    if (!user) {
+      user = await User.create(demoUser);
+      usersCreated += 1;
+    }
+
+    usersByEmail[demoUser.email] = user;
   }
 
   for (const employee of demoEmployees) {
     const existingEmployee = await Employee.findOne({ email: employee.email });
+    const owner = usersByEmail[employee.ownerEmail] || usersByEmail['admin@example.com'];
 
     if (!existingEmployee) {
       await Employee.create({
-        ...employee,
-        createdBy: admin._id
+        name: employee.name,
+        email: employee.email,
+        phone: employee.phone,
+        department: employee.department,
+        jobTitle: employee.jobTitle,
+        status: employee.status,
+        createdBy: owner._id
       });
       employeesCreated += 1;
     }
@@ -74,9 +96,9 @@ export async function seedDefaultData({ once = true } = {}) {
   if (employeesCreated || usersCreated) {
     await ActivityLog.create({
       action: 'employees_imported',
-      message: `System seeded ${employeesCreated} demo employees`,
+      message: `System seeded ${usersCreated} demo users and ${employeesCreated} demo employees`,
       entityType: 'Import',
-      user: admin._id
+      user: usersByEmail['admin@example.com']._id
     });
   }
 
@@ -84,14 +106,15 @@ export async function seedDefaultData({ once = true } = {}) {
     { key: seedKey },
     {
       value: {
-        completedAt: new Date().toISOString(),
+        lastCheckedAt: new Date().toISOString(),
         usersCreated,
-        employeesCreated
+        employeesCreated,
+        mode: once ? 'startup' : 'manual'
       }
     },
     { upsert: true, new: true }
   );
 
-  console.log(`Default seed completed. Users created: ${usersCreated}. Employees created: ${employeesCreated}.`);
+  console.log(`Default seed checked. Users created: ${usersCreated}. Employees created: ${employeesCreated}.`);
   return { skipped: false, usersCreated, employeesCreated };
 }

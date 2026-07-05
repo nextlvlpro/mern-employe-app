@@ -1,12 +1,13 @@
-import { Building2, Lock, UserPlus } from 'lucide-react';
+import { Building2, Info, Lock, UserPlus } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function LoginPage() {
   const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@example.com');
+  const [password, setPassword] = useState('password123');
+  const [showHint, setShowHint] = useState(false);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -35,7 +36,32 @@ export default function LoginPage() {
       </section>
 
       <section className="auth-card">
-        <h2>Sign in</h2>
+        <div className="auth-title-row">
+          <h2>Sign in</h2>
+          <button
+            className="hint-button"
+            onClick={() => setShowHint(!showHint)}
+            title="Demo login help"
+            type="button"
+          >
+            <Info size={18} />
+          </button>
+        </div>
+
+        {showHint && (
+          <div className="demo-hint">
+            <strong>Demo accounts</strong>
+            <p>Admin can manage users and see all employee records.</p>
+            <button type="button" onClick={() => { setEmail('admin@example.com'); setPassword('password123'); }}>
+              admin@example.com / password123
+            </button>
+            <p>Staff user has normal role access for comparison.</p>
+            <button type="button" onClick={() => { setEmail('user@example.com'); setPassword('password123'); }}>
+              user@example.com / password123
+            </button>
+          </div>
+        )}
+
         <form onSubmit={submitLogin}>
           <label>
             Email
