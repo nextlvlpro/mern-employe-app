@@ -9,10 +9,13 @@
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "stop:dev": "powershell -ExecutionPolicy Bypass -File scripts/stop-dev.ps1",
     "start": "npm start --prefix server",
-    "test:e2e": "node tests/playwright-smoke.js"
+    "test:e2e": "node tests/playwright-smoke.js",
+    "docs:ppt": "node scripts/generate-project-presentation.js",
+    "docs:tour": "node scripts/record-admin-tour.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "playwright": "^1.61.1"
+    "playwright": "^1.61.1",
+    "pptxgenjs": "^4.0.1"
   }
 }

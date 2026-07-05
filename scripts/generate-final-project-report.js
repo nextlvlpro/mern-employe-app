@@ -13,7 +13,8 @@ const student = {
   academicYear: '2024-2026',
   date: '05 July 2026',
   repo: 'https://github.com/nextlvlpro/mern-employe-app',
-  deploymentUrl: 'https://bluepeak-hr.onrender.com'
+  deploymentUrl: 'https://bluepeak-hr.onrender.com',
+  healthUrl: 'https://bluepeak-hr.onrender.com/api/health'
 };
 
 const chapters = [
@@ -705,7 +706,7 @@ function appendixPage() {
     <table>
       <tbody>
         <tr><td>Live Application</td><td>${escapeHtml(student.deploymentUrl)}</td></tr>
-        <tr><td>Health Check</td><td>${escapeHtml(`${student.deploymentUrl}/api/health`)}</td></tr>
+        <tr><td>Health Check</td><td>${escapeHtml(student.healthUrl)}</td></tr>
       </tbody>
     </table>
     <h3>Appendix C: Important Local URLs</h3>
@@ -723,12 +724,22 @@ function appendixPage() {
         <tr><td>Stop development servers</td><td><code>npm run stop:dev</code></td></tr>
         <tr><td>Run Playwright smoke test</td><td><code>npm run test:e2e</code></td></tr>
         <tr><td>Capture screenshots</td><td><code>node scripts/capture-ui-screenshots.js</code></td></tr>
+        <tr><td>Record admin tour</td><td><code>node scripts/record-admin-tour.js</code></td></tr>
       </tbody>
     </table>
     <h3>Appendix E: UI Screenshots</h3>
     ${screenshots.map(screenshotHtml).join('\n')}
     <h3>Appendix F: Code Snippets</h3>
     ${codeSnippets.map(codeSnippetHtml).join('\n')}
+    <h3>Appendix G: Website Tour Video</h3>
+    <table>
+      <tbody>
+        <tr><td>Admin Tour Video</td><td><code>docs/tour/bluepeak-admin-tour.webm</code></td></tr>
+        <tr><td>Subtitle File</td><td><code>docs/tour/bluepeak-admin-tour.vtt</code></td></tr>
+        <tr><td>Video Player Page</td><td><code>docs/tour/bluepeak-admin-tour.html</code></td></tr>
+      </tbody>
+    </table>
+    <p>The website tour was recorded from the deployed Render application using the admin demo account. Captions are shown inside the video and are also provided as a subtitle file.</p>
   </section>`;
 }
 

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 
-const baseUrl = process.env.APP_URL || 'http://localhost:5173';
+const baseUrl = (process.env.APP_URL || 'http://localhost:5173').replace(/\/$/, '');
 const outputDir = path.join(__dirname, '..', 'docs', 'screenshots');
 
 const accounts = {

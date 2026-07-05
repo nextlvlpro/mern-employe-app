@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:01.363 --> 00:00:03.742
+BluePeak HR starts with a secure login page and demo role options.
+
+2
+00:00:03.742 --> 00:00:06.149
+Admin login is used to show the complete employee management workflow.
+
+3
+00:00:06.149 --> 00:00:11.978
+The dashboard gives a quick overview of employees, departments, status, and activity.
+
+4
+00:00:11.978 --> 00:00:14.349
+The Employees page supports search, filters, pagination, and record actions.
+
+5
+00:00:14.349 --> 00:00:18.231
+Search helps users find employee records by name, email, department, or job title.
+
+6
+00:00:18.231 --> 00:00:22.117
+The Add Employee page keeps employee creation separate from the list view.
+
+7
+00:00:22.117 --> 00:00:27.460
+CSV import allows multiple employees to be added with validation.
+
+8
+00:00:27.460 --> 00:00:32.329
+The Departments page summarizes employee counts department wise.
+
+9
+00:00:32.329 --> 00:00:37.639
+The Users page lets admin manage roles and department access.
+
+10
+00:00:37.639 --> 00:00:41.526
+The Activity page records important employee and account changes.
+
+11
+00:00:41.526 --> 00:00:43.850
+The Profile page lets the logged-in user update account details.
+
+12
+00:00:43.850 --> 00:00:45.850
+This completes the admin tour of the deployed MERN Employee Management System.
