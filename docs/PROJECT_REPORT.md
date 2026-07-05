@@ -36,7 +36,7 @@ The project is developed using the MERN stack. MongoDB stores employee and user 
 
 The existing manual or spreadsheet-based employee management process has several limitations. It is difficult to enforce access control, maintain updated records, and search employee information quickly. A web-based system improves availability and usability by allowing authorized users to access data from any supported browser.
 
-The proposed system includes a secure login/register module, employee CRUD module, dashboard summary, search and filter functionality, and role-based access control. It reduces manual effort and improves the reliability of employee information.
+The proposed system includes a secure login/register module, employee CRUD module, dashboard summary, search and filter functionality, CSV import/export, department summary, user profile management, activity logs, pagination, and role-based access control. It reduces manual effort and improves the reliability of employee information.
 
 ## Chapter 3: System Analysis
 
@@ -50,6 +50,10 @@ The proposed system includes a secure login/register module, employee CRUD modul
 - Users can search and filter employee records.
 - Admin users can access all records.
 - Normal users can access only their own created records.
+- Users can import employees in bulk using CSV validation.
+- Users can export employee records to CSV.
+- Admin users can manage user roles.
+- The system records important actions in an activity log.
 
 ### Non-Functional Requirements
 
@@ -98,15 +102,22 @@ Employee APIs:
 
 - `GET /api/employees`
 - `POST /api/employees`
+- `POST /api/employees/bulk`
 - `GET /api/employees/:id`
 - `PUT /api/employees/:id`
 - `DELETE /api/employees/:id`
+
+Additional APIs:
+
+- `GET /api/activity`
+- `GET /api/users`
+- `PATCH /api/users/:id/role`
 
 ## Chapter 5: System Implementation
 
 The backend is implemented with Node.js and Express.js. MongoDB connection is handled through Mongoose. User passwords are hashed with bcryptjs before saving. JWT tokens are generated during login and registration. Protected middleware validates tokens before allowing access to private routes.
 
-The frontend is implemented with React and Vite. React Router manages public and protected routes. Axios handles API communication. The dashboard provides employee statistics, employee creation and update forms, search filters, and delete actions.
+The frontend is implemented with React and Vite. React Router manages public and protected routes. Axios handles API communication. The dashboard provides employee statistics, recent activity, status summaries, and department summaries. Separate pages are provided for employee listing, employee details, employee creation, employee editing, CSV import, departments, profile, users, and activity logs.
 
 ## Chapter 6: Testing
 
