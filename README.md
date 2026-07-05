@@ -49,6 +49,14 @@ Run both apps:
 npm run dev
 ```
 
+This first runs `npm run stop:dev`, which releases common local project ports before starting the backend and frontend.
+
+Stop local dev servers manually:
+
+```bash
+npm run stop:dev
+```
+
 Default local URLs:
 
 - Frontend: `http://localhost:5173`
