@@ -1,4 +1,4 @@
-import { Building2, LayoutDashboard, LogOut, UserPlus, Users } from 'lucide-react';
+import { Building2, LayoutDashboard, LogOut, Network, UserPlus, Users } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -22,6 +22,9 @@ export default function AppLayout() {
           </NavLink>
           <NavLink to="/employees">
             <Users size={18} /> Employees
+          </NavLink>
+          <NavLink to="/departments">
+            <Network size={18} /> Departments
           </NavLink>
           <NavLink to="/employees/new">
             <UserPlus size={18} /> Add Employee

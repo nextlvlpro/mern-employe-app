@@ -8,9 +8,25 @@ const ownedEmployeeQuery = (req, extra = {}) => {
   return { ...extra, createdBy: req.user._id };
 };
 
+const getSortQuery = (sort = 'newest') => {
+  if (sort === 'name') {
+    return { name: 1 };
+  }
+
+  if (sort === 'department') {
+    return { department: 1, name: 1 };
+  }
+
+  if (sort === 'oldest') {
+    return { createdAt: 1 };
+  }
+
+  return { createdAt: -1 };
+};
+
 export const getEmployees = async (req, res, next) => {
   try {
-    const { search = '', status = '' } = req.query;
+    const { search = '', status = '', department = '', sort = 'newest' } = req.query;
     const filters = {};
 
     if (search.trim()) {
@@ -26,9 +42,13 @@ export const getEmployees = async (req, res, next) => {
       filters.status = status;
     }
 
+    if (department) {
+      filters.department = department;
+    }
+
     const employees = await Employee.find(ownedEmployeeQuery(req, filters))
       .populate('createdBy', 'name email role')
-      .sort({ createdAt: -1 });
+      .sort(getSortQuery(sort));
 
     return res.json(employees);
   } catch (error) {

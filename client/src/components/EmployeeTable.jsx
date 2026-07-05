@@ -1,4 +1,4 @@
-import { Edit3, Trash2 } from 'lucide-react';
+import { Edit3, Eye, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function EmployeeTable({ employees, onDelete }) {
@@ -19,7 +19,9 @@ export default function EmployeeTable({ employees, onDelete }) {
           {employees.map((employee) => (
             <tr key={employee._id}>
               <td>
-                <strong>{employee.name}</strong>
+                <Link className="name-link" to={`/employees/${employee._id}`}>
+                  <strong>{employee.name}</strong>
+                </Link>
                 <span>{employee.email}</span>
               </td>
               <td>{employee.department}</td>
@@ -32,6 +34,9 @@ export default function EmployeeTable({ employees, onDelete }) {
               <td>{employee.phone}</td>
               <td>
                 <div className="row-actions">
+                  <Link className="icon-button" to={`/employees/${employee._id}`} title="View employee">
+                    <Eye size={16} />
+                  </Link>
                   <Link className="icon-button" to={`/employees/${employee._id}/edit`} title="Edit employee">
                     <Edit3 size={16} />
                   </Link>

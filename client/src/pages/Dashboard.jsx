@@ -1,7 +1,8 @@
-import { BriefcaseBusiness, Building2, UserPlus, Users } from 'lucide-react';
+import { BriefcaseBusiness, Building2, Clock, UserPlus, Users } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getEmployees } from '../services/employeeService.js';
+import { getDepartmentSummary, getStatusSummary } from '../utils/employeeUtils.js';
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
@@ -13,12 +14,9 @@ export default function Dashboard() {
       .catch(() => setError('Unable to load dashboard data'));
   }, []);
 
-  const activeCount = employees.filter((employee) => employee.status === 'Active').length;
-
-  const departmentCount = useMemo(() => {
-    const departments = employees.map((employee) => employee.department);
-    return new Set(departments).size;
-  }, [employees]);
+  const statusSummary = getStatusSummary(employees);
+  const departments = useMemo(() => getDepartmentSummary(employees), [employees]);
+  const latestEmployees = employees.slice(0, 5);
 
   return (
     <section className="page-section">
@@ -35,27 +33,42 @@ export default function Dashboard() {
       {error && <p className="error-message">{error}</p>}
 
       <div className="stats-grid">
-        <article className="stat-card">
-          <Users size={22} />
-          <div>
-            <strong>{employees.length}</strong>
-            <span>Total employees</span>
+        <StatCard icon={<Users size={22} />} value={employees.length} label="Total employees" />
+        <StatCard icon={<BriefcaseBusiness size={22} />} value={statusSummary.active} label="Active employees" />
+        <StatCard icon={<Building2 size={22} />} value={departments.length} label="Departments" />
+        <StatCard icon={<Clock size={22} />} value={statusSummary.onLeave} label="On leave" />
+      </div>
+
+      <div className="dashboard-grid">
+        <section className="list-panel">
+          <div className="section-heading">
+            <h3>Status Overview</h3>
           </div>
-        </article>
-        <article className="stat-card">
-          <BriefcaseBusiness size={22} />
-          <div>
-            <strong>{activeCount}</strong>
-            <span>Active employees</span>
+          <div className="status-bars">
+            <StatusBar label="Active" value={statusSummary.active} total={employees.length} />
+            <StatusBar label="On Leave" value={statusSummary.onLeave} total={employees.length} />
+            <StatusBar label="Inactive" value={statusSummary.inactive} total={employees.length} />
           </div>
-        </article>
-        <article className="stat-card">
-          <Building2 size={22} />
-          <div>
-            <strong>{departmentCount}</strong>
-            <span>Departments</span>
+        </section>
+
+        <section className="list-panel">
+          <div className="section-heading">
+            <h3>Top Departments</h3>
+            <Link className="ghost-button" to="/departments">View all</Link>
           </div>
-        </article>
+          <div className="simple-list">
+            {departments.slice(0, 5).map((department) => (
+              <div className="simple-list-row" key={department.name}>
+                <div>
+                  <strong>{department.name}</strong>
+                  <span>{department.active} active employees</span>
+                </div>
+                <strong>{department.total}</strong>
+              </div>
+            ))}
+            {!departments.length && <p className="empty-state">No departments found.</p>}
+          </div>
+        </section>
       </div>
 
       <section className="list-panel">
@@ -65,20 +78,48 @@ export default function Dashboard() {
         </div>
 
         <div className="simple-list">
-          {employees.slice(0, 5).map((employee) => (
-            <div className="simple-list-row" key={employee._id}>
+          {latestEmployees.map((employee) => (
+            <Link className="simple-list-row" to={`/employees/${employee._id}`} key={employee._id}>
               <div>
                 <strong>{employee.name}</strong>
-                <span>{employee.jobTitle}</span>
+                <span>{employee.jobTitle} - {employee.department}</span>
               </div>
               <span className={`status-pill ${employee.status.toLowerCase().replaceAll(' ', '-')}`}>
                 {employee.status}
               </span>
-            </div>
+            </Link>
           ))}
           {!employees.length && <p className="empty-state">No employees added yet.</p>}
         </div>
       </section>
     </section>
+  );
+}
+
+function StatCard({ icon, value, label }) {
+  return (
+    <article className="stat-card">
+      {icon}
+      <div>
+        <strong>{value}</strong>
+        <span>{label}</span>
+      </div>
+    </article>
+  );
+}
+
+function StatusBar({ label, value, total }) {
+  const width = total ? Math.round((value / total) * 100) : 0;
+
+  return (
+    <div className="status-row">
+      <div>
+        <span>{label}</span>
+        <strong>{value}</strong>
+      </div>
+      <div className="bar-track">
+        <span style={{ width: `${width}%` }} />
+      </div>
+    </div>
   );
 }

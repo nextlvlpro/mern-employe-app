@@ -3,7 +3,9 @@ import AppLayout from './components/AppLayout.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import AddEmployeePage from './pages/AddEmployeePage.jsx';
+import DepartmentsPage from './pages/DepartmentsPage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import EmployeeDetailsPage from './pages/EmployeeDetailsPage.jsx';
 import EditEmployeePage from './pages/EditEmployeePage.jsx';
 import EmployeesPage from './pages/EmployeesPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
@@ -65,7 +67,9 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<EmployeesPage />} />
           <Route path="/employees/new" element={<AddEmployeePage />} />
+          <Route path="/employees/:id" element={<EmployeeDetailsPage />} />
           <Route path="/employees/:id/edit" element={<EditEmployeePage />} />
+          <Route path="/departments" element={<DepartmentsPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
