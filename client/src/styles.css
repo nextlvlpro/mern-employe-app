@@ -441,7 +441,7 @@ select:focus {
 }
 
 .employee-filter {
-  grid-template-columns: minmax(240px, 1fr) 170px 140px 160px auto auto;
+  grid-template-columns: minmax(240px, 1fr) 170px 140px 160px 120px auto auto;
 }
 
 .department-filter {
@@ -526,6 +526,19 @@ td span {
 .row-actions {
   display: flex;
   gap: 8px;
+}
+
+.pagination-bar {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.pagination-bar span {
+  color: #667483;
+  font-size: 14px;
 }
 
 .button-row {

@@ -70,7 +70,14 @@ const validateEmployeeInput = (employee) => {
 
 export const getEmployees = async (req, res, next) => {
   try {
-    const { search = '', status = '', department = '', sort = 'newest' } = req.query;
+    const {
+      search = '',
+      status = '',
+      department = '',
+      sort = 'newest',
+      page = '',
+      limit = ''
+    } = req.query;
     const filters = {};
 
     if (search.trim()) {
@@ -90,11 +97,35 @@ export const getEmployees = async (req, res, next) => {
       filters.department = department;
     }
 
-    const employees = await Employee.find(ownedEmployeeQuery(req, filters))
-      .populate('createdBy', 'name email role')
-      .sort(getSortQuery(sort));
+    const employeeQuery = ownedEmployeeQuery(req, filters);
+    const shouldPaginate = page || limit;
 
-    return res.json(employees);
+    if (!shouldPaginate) {
+      const employees = await Employee.find(employeeQuery)
+        .populate('createdBy', 'name email role')
+        .sort(getSortQuery(sort));
+
+      return res.json(employees);
+    }
+
+    const currentPage = Math.max(Number(page) || 1, 1);
+    const pageSize = Math.min(Math.max(Number(limit) || 10, 1), 50);
+    const total = await Employee.countDocuments(employeeQuery);
+    const employees = await Employee.find(employeeQuery)
+      .populate('createdBy', 'name email role')
+      .sort(getSortQuery(sort))
+      .skip((currentPage - 1) * pageSize)
+      .limit(pageSize);
+
+    return res.json({
+      data: employees,
+      pagination: {
+        page: currentPage,
+        limit: pageSize,
+        total,
+        pages: Math.max(Math.ceil(total / pageSize), 1)
+      }
+    });
   } catch (error) {
     return next(error);
   }

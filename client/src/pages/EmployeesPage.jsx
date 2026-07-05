@@ -2,7 +2,7 @@ import { Download, FileSpreadsheet, RotateCcw, Search, UserPlus } from 'lucide-r
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import EmployeeTable from '../components/EmployeeTable.jsx';
-import { deleteEmployee, getEmployees } from '../services/employeeService.js';
+import { deleteEmployee, getEmployees, getEmployeesPage } from '../services/employeeService.js';
 import { downloadEmployeesCsv } from '../utils/employeeUtils.js';
 
 export default function EmployeesPage() {
@@ -14,8 +14,11 @@ export default function EmployeesPage() {
     search: searchParams.get('search') || '',
     status: searchParams.get('status') || '',
     department: searchParams.get('department') || '',
-    sort: searchParams.get('sort') || 'newest'
+    sort: searchParams.get('sort') || 'newest',
+    page: Number(searchParams.get('page')) || 1,
+    limit: Number(searchParams.get('limit')) || 10
   });
+  const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, pages: 1 });
   const [error, setError] = useState('');
   const [message, setMessage] = useState(location.state?.message || '');
 
@@ -35,26 +38,36 @@ export default function EmployeesPage() {
 
   async function loadEmployees(nextFilters) {
     setError('');
-    const data = await getEmployees(nextFilters);
-    setEmployees(data);
+    const result = await getEmployeesPage(nextFilters);
+    setEmployees(result.data);
+    setPagination(result.pagination);
   }
 
   async function filterEmployees(event) {
     event.preventDefault();
 
     try {
-      setSearchParams(cleanFilters(filters));
-      await loadEmployees(filters);
+      const nextFilters = { ...filters, page: 1 };
+      setFilters(nextFilters);
+      setSearchParams(cleanFilters(nextFilters));
+      await loadEmployees(nextFilters);
     } catch {
       setError('Unable to search employees');
     }
   }
 
   async function clearFilters() {
-    const blankFilters = { search: '', status: '', department: '', sort: 'newest' };
+    const blankFilters = { search: '', status: '', department: '', sort: 'newest', page: 1, limit: 10 };
     setFilters(blankFilters);
     setSearchParams({});
     await loadEmployees(blankFilters);
+  }
+
+  async function changePage(page) {
+    const nextFilters = { ...filters, page };
+    setFilters(nextFilters);
+    setSearchParams(cleanFilters(nextFilters));
+    await loadEmployees(nextFilters);
   }
 
   async function removeEmployee(employee) {
@@ -121,6 +134,11 @@ export default function EmployeesPage() {
             <option value="name">Name A-Z</option>
             <option value="department">Department A-Z</option>
           </select>
+          <select name="limit" value={filters.limit} onChange={updateFilter}>
+            <option value="5">5 rows</option>
+            <option value="10">10 rows</option>
+            <option value="20">20 rows</option>
+          </select>
           <button className="secondary-button" type="submit">Search</button>
           <button className="ghost-button" onClick={clearFilters} type="button">
             <RotateCcw size={16} /> Clear
@@ -128,6 +146,29 @@ export default function EmployeesPage() {
         </form>
 
         <EmployeeTable employees={employees} onDelete={removeEmployee} />
+        <div className="pagination-bar">
+          <span>
+            Showing page {pagination.page} of {pagination.pages} - {pagination.total} records
+          </span>
+          <div className="button-row">
+            <button
+              className="ghost-button"
+              disabled={pagination.page <= 1}
+              onClick={() => changePage(pagination.page - 1)}
+              type="button"
+            >
+              Previous
+            </button>
+            <button
+              className="ghost-button"
+              disabled={pagination.page >= pagination.pages}
+              onClick={() => changePage(pagination.page + 1)}
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </section>
     </section>
   );

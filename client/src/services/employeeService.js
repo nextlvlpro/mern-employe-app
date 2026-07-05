@@ -5,6 +5,11 @@ export async function getEmployees(params = {}) {
   return response.data;
 }
 
+export async function getEmployeesPage(params = {}) {
+  const response = await api.get('/employees', { params });
+  return response.data;
+}
+
 export async function getEmployee(id) {
   const response = await api.get(`/employees/${id}`);
   return response.data;
