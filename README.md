@@ -21,6 +21,7 @@ Academic employee management project built with the MERN stack. The running app 
 - Employee details page with profile information
 - Department summary page
 - Search, department filter, status filter, sorting, and CSV export
+- Bulk employee import from CSV with validation
 - Refresh-safe frontend routes for Netlify and Vercel deployment
 - MongoDB database with Mongoose models
 
@@ -60,6 +61,7 @@ Main app routes:
 - `/dashboard`
 - `/employees`
 - `/employees/new`
+- `/employees/import`
 - `/employees/:id`
 - `/employees/:id/edit`
 - `/departments`

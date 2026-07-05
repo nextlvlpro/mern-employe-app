@@ -673,6 +673,99 @@ td span {
   color: #667483;
 }
 
+.import-panel {
+  background: white;
+  border: 1px solid #dce3e8;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(28, 42, 54, 0.06);
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.upload-box {
+  align-items: center;
+  border: 1px dashed #b8c7d1;
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 18px;
+}
+
+.upload-box svg {
+  color: #176b7c;
+}
+
+.upload-box strong,
+.upload-box span {
+  display: block;
+}
+
+.upload-box span {
+  color: #667483;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.file-button input {
+  display: none;
+}
+
+.import-summary {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 180px));
+}
+
+.import-summary article {
+  background: #f7f9fb;
+  border: 1px solid #e5eaee;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.import-summary strong,
+.import-summary span {
+  display: block;
+}
+
+.import-summary strong {
+  font-size: 26px;
+}
+
+.import-summary span {
+  color: #667483;
+}
+
+.error-list {
+  display: grid;
+  gap: 10px;
+}
+
+.error-row {
+  background: #fff7f7;
+  border: 1px solid #f0caca;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.error-row strong,
+.error-row span {
+  display: block;
+}
+
+.error-row span {
+  color: #667483;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.error-row p {
+  color: #a11f1f;
+  margin: 8px 0 0;
+}
+
 .mini-counts {
   display: flex;
   flex-wrap: wrap;
@@ -743,6 +836,8 @@ td span {
   .stats-grid,
   .dashboard-grid,
   .department-grid,
+  .upload-box,
+  .import-summary,
   .details-grid,
   .two-columns {
     grid-template-columns: 1fr;

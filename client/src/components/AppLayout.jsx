@@ -1,4 +1,4 @@
-import { Building2, LayoutDashboard, LogOut, Menu, Network, UserPlus, Users } from 'lucide-react';
+import { Building2, FileSpreadsheet, LayoutDashboard, LogOut, Menu, Network, UserPlus, Users } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -40,6 +40,9 @@ export default function AppLayout() {
           </NavLink>
           <NavLink to="/employees/new" title="Add Employee">
             <UserPlus size={18} /> <span>Add Employee</span>
+          </NavLink>
+          <NavLink to="/employees/import" title="Import CSV">
+            <FileSpreadsheet size={18} /> <span>Import CSV</span>
           </NavLink>
         </nav>
       </aside>

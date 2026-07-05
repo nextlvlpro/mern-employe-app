@@ -1,4 +1,4 @@
-import { Download, RotateCcw, Search, UserPlus } from 'lucide-react';
+import { Download, FileSpreadsheet, RotateCcw, Search, UserPlus } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import EmployeeTable from '../components/EmployeeTable.jsx';
@@ -82,6 +82,9 @@ export default function EmployeesPage() {
           <p>Search, update, export, and maintain employee records.</p>
         </div>
         <div className="button-row">
+          <Link className="ghost-button" to="/employees/import">
+            <FileSpreadsheet size={17} /> Import CSV
+          </Link>
           <button className="ghost-button" onClick={() => downloadEmployeesCsv(employees)} type="button">
             <Download size={17} /> Export CSV
           </button>

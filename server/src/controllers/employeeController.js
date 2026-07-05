@@ -24,6 +24,49 @@ const getSortQuery = (sort = 'newest') => {
   return { createdAt: -1 };
 };
 
+const allowedStatuses = ['Active', 'On Leave', 'Inactive'];
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^[0-9+\-\s()]{7,20}$/;
+
+const cleanEmployeeInput = (employee) => ({
+  name: String(employee.name || '').trim(),
+  email: String(employee.email || '').trim().toLowerCase(),
+  phone: String(employee.phone || '').trim(),
+  department: String(employee.department || '').trim(),
+  jobTitle: String(employee.jobTitle || '').trim(),
+  status: String(employee.status || 'Active').trim()
+});
+
+const validateEmployeeInput = (employee) => {
+  const errors = [];
+
+  if (!employee.name) {
+    errors.push('Name is required');
+  }
+
+  if (!emailPattern.test(employee.email)) {
+    errors.push('Valid email is required');
+  }
+
+  if (!phonePattern.test(employee.phone)) {
+    errors.push('Valid phone number is required');
+  }
+
+  if (!employee.department) {
+    errors.push('Department is required');
+  }
+
+  if (!employee.jobTitle) {
+    errors.push('Job title is required');
+  }
+
+  if (!allowedStatuses.includes(employee.status)) {
+    errors.push('Status must be Active, On Leave, or Inactive');
+  }
+
+  return errors;
+};
+
 export const getEmployees = async (req, res, next) => {
   try {
     const { search = '', status = '', department = '', sort = 'newest' } = req.query;
@@ -72,25 +115,79 @@ export const getEmployeeById = async (req, res, next) => {
 
 export const createEmployee = async (req, res, next) => {
   try {
-    const { name, email, phone, department, jobTitle, status } = req.body;
+    const employeeInput = cleanEmployeeInput(req.body);
+    const errors = validateEmployeeInput(employeeInput);
 
-    if (!name || !email || !phone || !department || !jobTitle) {
-      return res.status(400).json({
-        message: 'Name, email, phone, department, and job title are required'
-      });
+    if (errors.length) {
+      return res.status(400).json({ message: errors.join(', ') });
     }
 
     const employee = await Employee.create({
-      name,
-      email,
-      phone,
-      department,
-      jobTitle,
-      status,
+      ...employeeInput,
       createdBy: req.user._id
     });
 
     return res.status(201).json(employee);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const bulkCreateEmployees = async (req, res, next) => {
+  try {
+    const employees = Array.isArray(req.body.employees) ? req.body.employees : [];
+
+    if (!employees.length) {
+      return res.status(400).json({ message: 'Employees array is required' });
+    }
+
+    if (employees.length > 200) {
+      return res.status(400).json({ message: 'You can import up to 200 employees at a time' });
+    }
+
+    const existingEmployees = await Employee.find(ownedEmployeeQuery(req)).select('email');
+    const existingEmails = new Set(existingEmployees.map((employee) => employee.email.toLowerCase()));
+    const fileEmails = new Set();
+    const validEmployees = [];
+    const rowErrors = [];
+
+    employees.forEach((employee, index) => {
+      const rowNumber = index + 2;
+      const cleanedEmployee = cleanEmployeeInput(employee);
+      const errors = validateEmployeeInput(cleanedEmployee);
+
+      if (fileEmails.has(cleanedEmployee.email)) {
+        errors.push('Duplicate email in CSV');
+      }
+
+      if (existingEmails.has(cleanedEmployee.email)) {
+        errors.push('Employee email already exists');
+      }
+
+      if (cleanedEmployee.email) {
+        fileEmails.add(cleanedEmployee.email);
+      }
+
+      if (errors.length) {
+        rowErrors.push({ row: rowNumber, email: cleanedEmployee.email, errors });
+        return;
+      }
+
+      validEmployees.push({
+        ...cleanedEmployee,
+        createdBy: req.user._id
+      });
+    });
+
+    const createdEmployees = validEmployees.length
+      ? await Employee.insertMany(validEmployees, { ordered: false })
+      : [];
+
+    return res.status(201).json({
+      created: createdEmployees.length,
+      skipped: rowErrors.length,
+      errors: rowErrors
+    });
   } catch (error) {
     return next(error);
   }

@@ -54,6 +54,27 @@ async function runSmokeTest() {
     await page.getByPlaceholder('Search departments').fill('Quality');
     await page.getByText('Quality').waitFor();
 
+    const importName = `Playwright User ${Date.now()} CSV`;
+    const importEmail = `${importName.toLowerCase().replaceAll(' ', '.')}@example.com`;
+    const csvContent = [
+      'name,email,phone,department,jobTitle,status',
+      `${importName},${importEmail},9998887766,Support,Support Associate,Active`,
+      `Bad Row,bad-email,12,,Support Associate,Wrong`
+    ].join('\n');
+
+    await page.goto(`${appUrl}/employees/import`);
+    await page.getByRole('heading', { name: 'Import Employees' }).waitFor();
+    await page.setInputFiles('input[type="file"]', {
+      name: 'employees.csv',
+      mimeType: 'text/csv',
+      buffer: Buffer.from(csvContent)
+    });
+    await page.getByText('1', { exact: true }).first().waitFor();
+    await page.getByText('Valid email is required').waitFor();
+    await page.getByRole('button', { name: /import valid rows/i }).click();
+    await page.waitForURL(/employees$/);
+    await page.getByText(importName).waitFor();
+
     await page.goto(`${appUrl}/employees?search=${encodeURIComponent(employeeName)}`);
     await page.getByText(employeeName).waitFor();
     await testRow.getByTitle('Edit employee').click();

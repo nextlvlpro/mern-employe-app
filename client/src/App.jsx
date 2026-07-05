@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import EmployeeDetailsPage from './pages/EmployeeDetailsPage.jsx';
 import EditEmployeePage from './pages/EditEmployeePage.jsx';
 import EmployeesPage from './pages/EmployeesPage.jsx';
+import ImportEmployeesPage from './pages/ImportEmployeesPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<EmployeesPage />} />
           <Route path="/employees/new" element={<AddEmployeePage />} />
+          <Route path="/employees/import" element={<ImportEmployeesPage />} />
           <Route path="/employees/:id" element={<EmployeeDetailsPage />} />
           <Route path="/employees/:id/edit" element={<EditEmployeePage />} />
           <Route path="/departments" element={<DepartmentsPage />} />

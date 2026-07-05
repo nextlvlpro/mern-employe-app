@@ -15,6 +15,11 @@ export async function createEmployee(employee) {
   return response.data;
 }
 
+export async function bulkCreateEmployees(employees) {
+  const response = await api.post('/employees/bulk', { employees });
+  return response.data;
+}
+
 export async function updateEmployee(id, employee) {
   const response = await api.put(`/employees/${id}`, employee);
   return response.data;
