@@ -33,6 +33,8 @@ In production, React uses the same origin API path `/api`, so no separate fronte
 
 The startup seed is safe to keep enabled because it runs once per database and records completion in the `appsettings` collection. It does not delete production data.
 
+The client install uses `--include=dev` during Render build because Vite is a build-time dependency stored in `client/devDependencies`.
+
 ## Final Submission Checklist
 
 - GitHub repository link added to report.
