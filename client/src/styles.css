@@ -325,7 +325,9 @@ select:focus {
   display: inline-flex;
   gap: 8px;
   justify-content: center;
+  line-height: 1;
   min-height: 40px;
+  white-space: nowrap;
 }
 
 .primary-button {
@@ -359,6 +361,8 @@ select:focus {
   aspect-ratio: 1;
   background: #eaf1f3;
   color: #174f5e;
+  flex: 0 0 auto;
+  height: 40px;
   width: 40px;
 }
 
@@ -693,7 +697,7 @@ td span {
   padding: 18px;
 }
 
-.upload-box svg {
+.upload-box > svg {
   color: #176b7c;
 }
 
@@ -706,6 +710,17 @@ td span {
   color: #667483;
   font-size: 14px;
   margin-top: 4px;
+}
+
+.file-button {
+  cursor: pointer;
+  justify-self: end;
+  min-width: 144px;
+}
+
+.file-button svg {
+  color: currentColor;
+  flex: 0 0 auto;
 }
 
 .file-button input {
@@ -873,6 +888,10 @@ td span {
   .auth-card,
   .main-area {
     padding: 24px;
+  }
+
+  .file-button {
+    justify-self: start;
   }
 
   .topbar,
