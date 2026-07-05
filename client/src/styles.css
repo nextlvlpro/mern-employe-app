@@ -146,6 +146,11 @@ select:focus {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   min-height: 100vh;
+  transition: grid-template-columns 0.2s ease;
+}
+
+.layout.sidebar-collapsed {
+  grid-template-columns: 82px minmax(0, 1fr);
 }
 
 .sidebar {
@@ -157,11 +162,19 @@ select:focus {
   top: 0;
 }
 
+.sidebar-head {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 34px;
+}
+
 .company-logo {
   align-items: center;
   display: flex;
   gap: 12px;
-  margin-bottom: 34px;
+  min-width: 0;
 }
 
 .company-logo svg {
@@ -176,6 +189,45 @@ select:focus {
 .company-logo span {
   color: #aab8c3;
   font-size: 13px;
+}
+
+.sidebar-text {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar-toggle {
+  align-items: center;
+  background: #2f4352;
+  border: 0;
+  border-radius: 7px;
+  color: white;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.sidebar-collapsed .sidebar {
+  padding: 22px 15px;
+}
+
+.sidebar-collapsed .sidebar-head {
+  justify-content: center;
+}
+
+.sidebar-collapsed .company-logo {
+  display: none;
+}
+
+.sidebar-collapsed .nav-menu a {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar-collapsed .nav-menu a span {
+  display: none;
 }
 
 .nav-menu {
@@ -687,6 +739,7 @@ td span {
 @media (max-width: 960px) {
   .auth-layout,
   .layout,
+  .layout.sidebar-collapsed,
   .stats-grid,
   .dashboard-grid,
   .department-grid,
@@ -696,7 +749,21 @@ td span {
   }
 
   .sidebar {
+    height: auto;
     position: static;
+  }
+
+  .sidebar-collapsed .company-logo {
+    display: flex;
+  }
+
+  .sidebar-collapsed .nav-menu a {
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+
+  .sidebar-collapsed .nav-menu a span {
+    display: inline;
   }
 
   .nav-menu {

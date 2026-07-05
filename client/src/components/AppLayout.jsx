@@ -1,33 +1,45 @@
-import { Building2, LayoutDashboard, LogOut, Network, UserPlus, Users } from 'lucide-react';
+import { Building2, LayoutDashboard, LogOut, Menu, Network, UserPlus, Users } from 'lucide-react';
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function AppLayout() {
   const { user, logout } = useAuth();
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="layout">
+    <div className={collapsed ? 'layout sidebar-collapsed' : 'layout'}>
       <aside className="sidebar">
-        <div className="company-logo">
-          <Building2 size={24} />
-          <div>
-            <strong>BluePeak HR</strong>
-            <span>PeopleDesk</span>
+        <div className="sidebar-head">
+          <div className="company-logo">
+            <Building2 size={24} />
+            <div className="sidebar-text">
+              <strong>BluePeak HR</strong>
+              <span>PeopleDesk</span>
+            </div>
           </div>
+          <button
+            className="sidebar-toggle"
+            onClick={() => setCollapsed(!collapsed)}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            type="button"
+          >
+            <Menu size={18} />
+          </button>
         </div>
 
         <nav className="nav-menu">
-          <NavLink to="/dashboard">
-            <LayoutDashboard size={18} /> Dashboard
+          <NavLink to="/dashboard" title="Dashboard">
+            <LayoutDashboard size={18} /> <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/employees">
-            <Users size={18} /> Employees
+          <NavLink to="/employees" title="Employees">
+            <Users size={18} /> <span>Employees</span>
           </NavLink>
-          <NavLink to="/departments">
-            <Network size={18} /> Departments
+          <NavLink to="/departments" title="Departments">
+            <Network size={18} /> <span>Departments</span>
           </NavLink>
-          <NavLink to="/employees/new">
-            <UserPlus size={18} /> Add Employee
+          <NavLink to="/employees/new" title="Add Employee">
+            <UserPlus size={18} /> <span>Add Employee</span>
           </NavLink>
         </nav>
       </aside>
