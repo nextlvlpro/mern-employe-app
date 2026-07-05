@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import UsersPage from './pages/UsersPage.jsx';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -74,6 +75,7 @@ export default function App() {
           <Route path="/employees/:id/edit" element={<EditEmployeePage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/users" element={<UsersPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

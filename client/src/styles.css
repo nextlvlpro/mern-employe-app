@@ -627,6 +627,18 @@ td span {
   text-transform: uppercase;
 }
 
+.role-chip {
+  align-items: center;
+  background: #eef6f8;
+  border-radius: 999px;
+  color: #176b7c;
+  display: inline-flex;
+  font-weight: 800;
+  gap: 6px;
+  padding: 5px 10px;
+  width: fit-content;
+}
+
 .avatar-circle {
   align-items: center;
   background: #176b7c;

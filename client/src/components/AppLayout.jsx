@@ -47,6 +47,11 @@ export default function AppLayout() {
           <NavLink to="/profile" title="Profile">
             <User size={18} /> <span>Profile</span>
           </NavLink>
+          {user?.role === 'admin' && (
+            <NavLink to="/users" title="Users">
+              <Users size={18} /> <span>Users</span>
+            </NavLink>
+          )}
         </nav>
       </aside>
 
