@@ -165,6 +165,8 @@ function buildPlayerHtml() {
       body { background: #f5f7f9; font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 32px; }
       main { margin: 0 auto; max-width: 980px; }
       video { background: #111827; border-radius: 8px; width: 100%; }
+      a { color: #176b7c; font-weight: 700; }
+      p { color: #4b5563; }
     </style>
   </head>
   <body>
@@ -172,8 +174,8 @@ function buildPlayerHtml() {
       <h1>BluePeak HR Admin Tour</h1>
       <video controls>
         <source src="bluepeak-admin-tour.webm" type="video/webm" />
-        <track default kind="subtitles" label="English" src="bluepeak-admin-tour.vtt" srclang="en" />
       </video>
+      <p>Captions are already visible in the video. Subtitle file: <a href="bluepeak-admin-tour.vtt">bluepeak-admin-tour.vtt</a></p>
     </main>
   </body>
 </html>`;
