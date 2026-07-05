@@ -529,15 +529,21 @@ const html = `<!doctype html>
       .chapter { page-break-before: always; }
       code { background: #f1f5f9; border-radius: 4px; padding: 1px 4px; }
       pre {
-        background: #0f172a;
+        background: #f8fafc;
+        border: 1px solid #d9e2ec;
         border-radius: 6px;
-        color: #e2e8f0;
+        color: #102a43;
         font-size: 9.5px;
         line-height: 1.45;
         margin: 10px 0 16px;
         overflow-wrap: anywhere;
         padding: 12px;
         white-space: pre-wrap;
+      }
+      pre code {
+        background: transparent;
+        color: #102a43;
+        padding: 0;
       }
       .screenshot {
         border: 1px solid #d9e2ec;
