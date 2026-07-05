@@ -29,7 +29,7 @@ The repository includes `render.yaml`, which creates one Render Web Service:
 10. Open the same service URL and test login/register:
    - `https://bluepeak-hr.onrender.com`
 
-In production, React uses the same origin API path `/api`, so no separate frontend deployment or production CORS setup is required.
+In production, React uses the same origin API path `/api`, so no separate frontend hosting service or production CORS setup is required.
 
 The startup seed is safe to keep enabled because it runs once per database and records completion in the `appsettings` collection. It does not delete production data.
 

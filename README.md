@@ -14,7 +14,7 @@ Academic employee management project built with the MERN stack. The running app 
 ## Features
 
 - User registration and login with JWT authentication
-- Role-based authorization for admin and user accounts
+- Role-based authorization for admin, department head, and user accounts
 - Employee create, read, update, and delete operations
 - Search/filter employees by name, email, department, and job title
 - Separate pages for dashboard, employee list, add employee, and edit employee
@@ -23,10 +23,10 @@ Academic employee management project built with the MERN stack. The running app 
 - Search, department filter, status filter, sorting, and CSV export
 - Bulk employee import from CSV with validation
 - User profile management
-- Admin user role management
+- Admin user role management and department-head staff creation
 - Activity log tracking
 - Paginated employee records
-- Refresh-safe frontend routes for Netlify and Vercel deployment
+- Refresh-safe frontend routes through Express production fallback
 - MongoDB database with Mongoose models
 
 ## Tech Stack
@@ -35,7 +35,7 @@ Academic employee management project built with the MERN stack. The running app 
 - Backend: Node.js, Express.js
 - Database: MongoDB, Mongoose
 - Authentication: JWT, bcryptjs
-- Deployment target: Render + MongoDB Atlas + Vercel/Netlify
+- Deployment target: Render + MongoDB Atlas
 
 ## Local Setup
 
@@ -100,8 +100,9 @@ Employees:
 ## Deployment Notes
 
 1. Create a MongoDB Atlas cluster and copy the connection string.
-2. Deploy `server/` on Render as a Web Service.
-3. Set backend environment variables from `server/.env.example`.
-4. Deploy `client/` on Vercel or Netlify.
-5. Set `VITE_API_URL` to the deployed backend URL.
-6. Update this README with final deployed links.
+2. Create a Render Web Service from this GitHub repository.
+3. Use the build command from `render.yaml`.
+4. Set environment variables from `server/.env.example`.
+5. The Express backend serves the built React frontend in production.
+
+Live app: `https://bluepeak-hr.onrender.com`

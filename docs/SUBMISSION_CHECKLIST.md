@@ -28,7 +28,7 @@
 - GitHub repository home page
 - Latest commit history
 - Render backend service dashboard
-- Vercel or Netlify frontend deployment dashboard
+- Render web service dashboard
 - MongoDB Atlas cluster dashboard
 
 ## Final Checks
@@ -38,4 +38,4 @@
 - Open `http://localhost:5173`
 - Login with `admin@example.com` and `password123`
 - Run `npm run test:e2e`
-- Confirm `project_guidelines/`, `planning/`, `.env`, `node_modules/`, and `dist/` are not committed
+- Confirm `.env`, `node_modules/`, and `dist/` are not committed

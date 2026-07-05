@@ -23,7 +23,7 @@ const chapters = [
       'Employee data management is an important operational requirement for every organization. Companies need to maintain accurate employee information such as personal contact details, department, job title, employment status, and account-level access. If this data is stored only in spreadsheets or paper records, it becomes difficult to search, update, secure, and audit.',
       'The MERN Stack Employee Management System is a web application developed to solve this problem using MongoDB, Express.js, React, and Node.js. The project provides a secure interface for managing employee records and includes authentication, role-based authorization, search, filtering, CSV import/export, activity tracking, and a dashboard for summary information.',
       'The application uses a company-style interface named BluePeak HR / PeopleDesk so that the project looks and behaves like a real workplace system. Instead of keeping all functionality on a single page, the application is divided into separate pages for dashboard, employees, employee details, add employee, edit employee, departments, CSV import, profile, users, and activity logs.',
-      'The main purpose of the project is to demonstrate a complete full-stack workflow: database design, backend API development, frontend implementation, authentication, authorization, testing, documentation, and deployment readiness.'
+      'The main purpose of the project is to demonstrate a complete full-stack workflow: database design, backend API development, frontend implementation, authentication, authorization, testing, documentation, and cloud deployment.'
     ],
     bulletsTitle: 'Objectives',
     bullets: [
@@ -196,8 +196,6 @@ const references = [
   'Axios Documentation, https://axios-http.com/',
   'Playwright Documentation, https://playwright.dev/',
   'Render Documentation, https://render.com/docs',
-  'Vercel Documentation, https://vercel.com/docs',
-  'Netlify Documentation, https://docs.netlify.com/',
   'MDN Web Docs - JavaScript, https://developer.mozilla.org/en-US/docs/Web/JavaScript',
   'MDN Web Docs - Fetch and HTTP Concepts, https://developer.mozilla.org/',
   'OWASP Authentication Cheat Sheet, https://cheatsheetseries.owasp.org/',

@@ -24,7 +24,7 @@ I would like to express my sincere gratitude to my guide and mentor, Alok Srivas
 
 ## Abstract
 
-The MERN Stack Employee Management System is a web-based application designed to help companies manage employee information efficiently. The system provides secure user authentication, role-based access control, and CRUD operations for employee records such as name, contact details, department, job title, and employment status. The backend is developed using Node.js and Express.js with MongoDB as the database, while the frontend is developed using React. JWT authentication protects private routes and ensures that only authorized users can access employee data. Admin users can manage all employee records, while normal users can manage only their own created records. The project demonstrates database design, RESTful API development, frontend integration, authentication, testing, and cloud deployment planning. The application is suitable for small and medium organizations that need a simple digital solution for employee record management.
+The MERN Stack Employee Management System is a web-based application designed to help companies manage employee information efficiently. The system provides secure user authentication, role-based access control, and CRUD operations for employee records such as name, contact details, department, job title, and employment status. The backend is developed using Node.js and Express.js with MongoDB as the database, while the frontend is developed using React. JWT authentication protects private routes and ensures that only authorized users can access employee data. Admin users can manage all employee records, department heads can manage records and users only within their own department, and normal users receive read-only access to department information. The project demonstrates database design, RESTful API development, frontend integration, authentication, testing, and cloud deployment on Render. The application is suitable for small and medium organizations that need a simple digital solution for employee record management.
 
 ## Chapter 1: Introduction
 
@@ -43,16 +43,18 @@ The proposed system includes a secure login/register module, employee CRUD modul
 ### Functional Requirements
 
 - Users can register and log in securely.
-- Users can create employee records.
+- Admin users and department heads can create employee records.
 - Users can view employee records.
-- Users can update employee details.
-- Users can delete employee records.
+- Admin users and department heads can update employee details.
+- Admin users and department heads can delete employee records.
 - Users can search and filter employee records.
 - Admin users can access all records.
-- Normal users can access only their own created records.
-- Users can import employees in bulk using CSV validation.
-- Users can export employee records to CSV.
-- Admin users can manage user roles.
+- Department heads can manage only their own department.
+- Normal users can view only department-related records in read-only mode.
+- Admin users and department heads can import employees in bulk using CSV validation.
+- Admin users and department heads can export employee records to CSV.
+- Admin users can manage roles and departments.
+- Department heads can add normal users only in their own department.
 - The system records important actions in an activity log.
 
 ### Non-Functional Requirements
@@ -75,6 +77,7 @@ User collection:
 - email
 - password
 - role
+- department
 - createdAt
 - updatedAt
 
@@ -111,6 +114,7 @@ Additional APIs:
 
 - `GET /api/activity`
 - `GET /api/users`
+- `POST /api/users`
 - `PATCH /api/users/:id/role`
 
 ## Chapter 5: System Implementation
@@ -121,15 +125,15 @@ The frontend is implemented with React and Vite. React Router manages public and
 
 ## Chapter 6: Testing
 
-Testing includes authentication testing, route protection testing, employee CRUD testing, frontend workflow testing, and deployment verification. Important scenarios include invalid login, missing token, adding a valid employee, editing employee details, deleting records, and verifying normal user access restrictions.
+Testing includes authentication testing, route protection testing, employee CRUD testing, role-based access testing, frontend workflow testing, and deployment verification. Important scenarios include invalid login, missing token, adding a valid employee, editing employee details, deleting records, verifying department-head restrictions, and verifying normal user read-only restrictions.
 
 ## Chapter 7: Results And Discussion
 
-The system successfully provides a centralized employee management workflow. The dashboard allows users to view employee counts and manage records from a single interface. JWT authentication improves security, while role-based control protects data privacy. The application can be deployed using MongoDB Atlas, Render, and Vercel or Netlify.
+The system successfully provides a centralized employee management workflow. The dashboard allows users to view employee counts and navigate to the required modules. JWT authentication improves security, while role-based and department-based controls protect data privacy. The application is deployed using MongoDB Atlas and Render.
 
 ## Chapter 8: Conclusion And Future Scope
 
-The project demonstrates a complete MERN stack application with authentication, authorization, CRUD operations, and cloud deployment readiness. It meets the main requirements of an employee management system for basic company operations.
+The project demonstrates a complete MERN stack application with authentication, authorization, CRUD operations, testing, documentation, and cloud deployment. It meets the main requirements of an employee management system for basic company operations.
 
 Future improvements can include password reset, employee profile photos, attendance management, salary records, department reports, export to Excel/PDF, advanced admin dashboard, and audit logs.
 
@@ -148,4 +152,4 @@ Future improvements can include password reset, employee profile photos, attenda
 
 ## Chapter 10: Appendices
 
-Appendix material should include screenshots of the login page, dashboard, employee records page, add/edit form, MongoDB collection, deployed application, and GitHub repository. Source code is maintained in the GitHub repository.
+Appendix material includes screenshots of the login page, dashboard, employee records page, add form, CSV import, user management, deployed application, and GitHub repository. Source code is maintained in the GitHub repository.
