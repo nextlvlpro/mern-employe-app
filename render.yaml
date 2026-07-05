@@ -19,3 +19,5 @@ services:
         generateValue: true
       - key: ADMIN_INVITE_CODE
         sync: false
+      - key: SEED_ON_START
+        value: true

@@ -21,6 +21,7 @@ The repository includes `render.yaml`, which creates one Render Web Service:
 6. During setup, enter:
    - `MONGO_URI`: MongoDB Atlas connection string.
    - `ADMIN_INVITE_CODE`: admin registration code, for example `admin123`.
+   - `SEED_ON_START`: `true`
 7. Let Render generate `JWT_SECRET`.
 8. Deploy the Blueprint.
 9. Verify backend health:
@@ -29,6 +30,8 @@ The repository includes `render.yaml`, which creates one Render Web Service:
    - `https://bluepeak-hr.onrender.com`
 
 In production, React uses the same origin API path `/api`, so no separate frontend deployment or production CORS setup is required.
+
+The startup seed is safe to keep enabled because it runs once per database and records completion in the `appsettings` collection. It does not delete production data.
 
 ## Final Submission Checklist
 

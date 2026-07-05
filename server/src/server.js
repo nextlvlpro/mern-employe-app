@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
+import { seedDefaultData } from './data/defaultSeed.js';
 import { errorHandler, notFound } from './middleware/error.js';
 import activityRoutes from './routes/activityRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -20,7 +21,11 @@ const port = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistPath = path.resolve(__dirname, '../../client/dist');
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174')
+const allowedOrigins = [
+  process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174',
+  process.env.RENDER_EXTERNAL_URL
+]
+  .join(',')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -65,7 +70,11 @@ app.use(notFound);
 app.use(errorHandler);
 
 connectDB()
-  .then(() => {
+  .then(async () => {
+    if (process.env.SEED_ON_START === 'true') {
+      await seedDefaultData({ once: true });
+    }
+
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
