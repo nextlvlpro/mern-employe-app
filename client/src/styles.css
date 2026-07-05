@@ -151,7 +151,10 @@ select:focus {
 .sidebar {
   background: #1e2b36;
   color: white;
+  height: 100vh;
   padding: 22px;
+  position: sticky;
+  top: 0;
 }
 
 .company-logo {
