@@ -7,31 +7,28 @@
 3. Allow network access from Render or use `0.0.0.0/0` for demo deployment.
 4. Copy the connection string and replace username, password, and database name.
 
-## Backend On Render
+## Render Blueprint Deployment
 
-1. Create a new Web Service.
-2. Connect the GitHub repository.
-3. Set root directory to `server`.
-4. Build command: `npm install`
-5. Start command: `npm start`
-6. Add environment variables:
-   - `PORT`
-   - `MONGO_URI`
-   - `JWT_SECRET`
-   - `JWT_EXPIRES_IN`
-   - `CLIENT_URL`
-   - `ADMIN_INVITE_CODE`
-7. Deploy and verify `/api/health`.
+The repository includes `render.yaml`, which creates:
 
-## Frontend On Vercel Or Netlify
+- `bluepeak-hr-api`: Node/Express backend web service.
+- `bluepeak-hr-client`: React/Vite static frontend site.
 
-1. Create a new frontend project from the GitHub repository.
-2. Set root directory to `client`.
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-5. Add environment variable:
-   - `VITE_API_URL=https://your-render-service.onrender.com/api`
-6. Deploy and test login and employee CRUD.
+1. Open Render Dashboard.
+2. Click **New +**.
+3. Select **Blueprint**.
+4. Connect GitHub repository: `nextlvlpro/mern-employe-app`.
+5. Render will detect `render.yaml`.
+6. During setup, enter:
+   - `MONGO_URI`: MongoDB Atlas connection string.
+   - `ADMIN_INVITE_CODE`: admin registration code, for example `admin123`.
+7. Let Render generate `JWT_SECRET`.
+8. Deploy the Blueprint.
+9. Verify backend health:
+   - `https://bluepeak-hr-api.onrender.com/api/health`
+10. Open the frontend static site URL and test login/register.
+
+The Blueprint wires frontend and backend URLs automatically using Render service environment variables.
 
 ## Final Submission Checklist
 
