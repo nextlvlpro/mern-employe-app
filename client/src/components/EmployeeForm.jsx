@@ -1,5 +1,5 @@
 import { Save } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const blankEmployee = {
   name: '',
@@ -10,8 +10,16 @@ const blankEmployee = {
   status: 'Active'
 };
 
-export default function EmployeeForm({ initialValues, onSubmit, submitLabel }) {
-  const [employee, setEmployee] = useState(initialValues || blankEmployee);
+export default function EmployeeForm({ initialValues, onSubmit, submitLabel, lockedDepartment = '' }) {
+  const startingEmployee = useMemo(() => {
+    return {
+      ...blankEmployee,
+      ...(initialValues || {}),
+      department: lockedDepartment || initialValues?.department || ''
+    };
+  }, [initialValues, lockedDepartment]);
+
+  const [employee, setEmployee] = useState(startingEmployee);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -25,7 +33,10 @@ export default function EmployeeForm({ initialValues, onSubmit, submitLabel }) {
     setError('');
 
     try {
-      await onSubmit(employee);
+      await onSubmit({
+        ...employee,
+        department: lockedDepartment || employee.department
+      });
     } catch (apiError) {
       setError(apiError.response?.data?.message || 'Unable to save employee');
     } finally {
@@ -50,7 +61,13 @@ export default function EmployeeForm({ initialValues, onSubmit, submitLabel }) {
         </label>
         <label>
           Department
-          <input name="department" value={employee.department} onChange={updateField} required />
+          <input
+            disabled={Boolean(lockedDepartment)}
+            name="department"
+            value={lockedDepartment || employee.department}
+            onChange={updateField}
+            required
+          />
         </label>
         <label>
           Job title

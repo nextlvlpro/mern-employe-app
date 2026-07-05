@@ -5,8 +5,10 @@ import LoadingState from '../components/LoadingState.jsx';
 import { getEmployees } from '../services/employeeService.js';
 import { getActivityLogs } from '../services/activityService.js';
 import { getDepartmentSummary, getStatusSummary } from '../utils/employeeUtils.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Dashboard() {
+  const { user } = useAuth();
   const [employees, setEmployees] = useState([]);
   const [activityLogs, setActivityLogs] = useState([]);
   const [loadingEmployees, setLoadingEmployees] = useState(true);
@@ -27,6 +29,7 @@ export default function Dashboard() {
   const statusSummary = getStatusSummary(employees);
   const departments = useMemo(() => getDepartmentSummary(employees), [employees]);
   const latestEmployees = employees.slice(0, 5);
+  const canManage = ['admin', 'department_head'].includes(user?.role);
 
   return (
     <section className="page-section">
@@ -35,9 +38,11 @@ export default function Dashboard() {
           <h2>Dashboard</h2>
           <p>Quick view of company employee records.</p>
         </div>
-        <Link className="primary-button" to="/employees/new">
-          <UserPlus size={17} /> Add Employee
-        </Link>
+        {canManage && (
+          <Link className="primary-button" to="/employees/new">
+            <UserPlus size={17} /> Add Employee
+          </Link>
+        )}
       </div>
 
       {error && <p className="error-message">{error}</p>}

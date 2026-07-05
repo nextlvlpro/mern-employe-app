@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import EmployeeForm from '../components/EmployeeForm.jsx';
 import LoadingState from '../components/LoadingState.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import { getEmployee, updateEmployee } from '../services/employeeService.js';
 
 export default function EditEmployeePage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [employee, setEmployee] = useState(null);
   const [error, setError] = useState('');
+  const canManage = ['admin', 'department_head'].includes(user?.role);
+  const lockedDepartment = user?.role === 'department_head' ? user.department : '';
 
   useEffect(() => {
     getEmployee(id)
@@ -35,8 +39,16 @@ export default function EditEmployeePage() {
       </div>
 
       {error && <p className="error-message">{error}</p>}
-      {!error && !employee && <LoadingState message="Loading employee..." />}
-      {employee && <EmployeeForm initialValues={employee} onSubmit={saveEmployee} submitLabel="Update Employee" />}
+      {!canManage && <p className="error-message">Only admins and department heads can edit employees.</p>}
+      {canManage && !error && !employee && <LoadingState message="Loading employee..." />}
+      {canManage && employee && (
+        <EmployeeForm
+          initialValues={employee}
+          lockedDepartment={lockedDepartment}
+          onSubmit={saveEmployee}
+          submitLabel="Update Employee"
+        />
+      )}
     </section>
   );
 }

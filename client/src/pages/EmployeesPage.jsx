@@ -3,18 +3,23 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import EmployeeTable from '../components/EmployeeTable.jsx';
 import LoadingState from '../components/LoadingState.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import { deleteEmployee, getEmployees, getEmployeesPage } from '../services/employeeService.js';
 import { downloadEmployeesCsv } from '../utils/employeeUtils.js';
 
 export default function EmployeesPage() {
+  const { user } = useAuth();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const canManage = ['admin', 'department_head'].includes(user?.role);
+  const isAdmin = user?.role === 'admin';
+  const ownDepartment = user?.department || '';
   const [employees, setEmployees] = useState([]);
   const [allEmployees, setAllEmployees] = useState([]);
   const [filters, setFilters] = useState({
     search: searchParams.get('search') || '',
     status: searchParams.get('status') || '',
-    department: searchParams.get('department') || '',
+    department: isAdmin ? (searchParams.get('department') || '') : ownDepartment,
     sort: searchParams.get('sort') || 'newest',
     page: Number(searchParams.get('page')) || 1,
     limit: Number(searchParams.get('limit')) || 10
@@ -35,6 +40,10 @@ export default function EmployeesPage() {
   }, []);
 
   function updateFilter(event) {
+    if (event.target.name === 'department' && !isAdmin) {
+      return;
+    }
+
     setFilters({ ...filters, [event.target.name]: event.target.value });
   }
 
@@ -62,9 +71,16 @@ export default function EmployeesPage() {
   }
 
   async function clearFilters() {
-    const blankFilters = { search: '', status: '', department: '', sort: 'newest', page: 1, limit: 10 };
+    const blankFilters = {
+      search: '',
+      status: '',
+      department: isAdmin ? '' : ownDepartment,
+      sort: 'newest',
+      page: 1,
+      limit: 10
+    };
     setFilters(blankFilters);
-    setSearchParams({});
+    setSearchParams(cleanFilters(blankFilters));
     try {
       await loadEmployees(blankFilters);
     } catch {
@@ -109,21 +125,24 @@ export default function EmployeesPage() {
           <h2>Employees</h2>
           <p>Search, update, export, and maintain employee records.</p>
         </div>
-        <div className="button-row">
-          <Link className="ghost-button" to="/employees/import">
-            <FileSpreadsheet size={17} /> Import CSV
-          </Link>
-          <button className="ghost-button" onClick={() => downloadEmployeesCsv(employees)} type="button">
-            <Download size={17} /> Export CSV
-          </button>
-          <Link className="primary-button" to="/employees/new">
-            <UserPlus size={17} /> Add Employee
-          </Link>
-        </div>
+        {canManage && (
+          <div className="button-row">
+            <Link className="ghost-button" to="/employees/import">
+              <FileSpreadsheet size={17} /> Import CSV
+            </Link>
+            <button className="ghost-button" onClick={() => downloadEmployeesCsv(employees)} type="button">
+              <Download size={17} /> Export CSV
+            </button>
+            <Link className="primary-button" to="/employees/new">
+              <UserPlus size={17} /> Add Employee
+            </Link>
+          </div>
+        )}
       </div>
 
       {message && <p className="success-message">{message}</p>}
       {error && <p className="error-message">{error}</p>}
+      {!canManage && <p className="permission-note">Read-only view for {ownDepartment || 'your department'} employees.</p>}
 
       <section className="list-panel">
         <form className="filter-bar employee-filter" onSubmit={filterEmployees}>
@@ -131,12 +150,16 @@ export default function EmployeesPage() {
             <Search size={17} />
             <input name="search" value={filters.search} onChange={updateFilter} placeholder="Search name, email, department, job title" />
           </div>
-          <select name="department" value={filters.department} onChange={updateFilter}>
-            <option value="">All departments</option>
-            {departments.map((department) => (
-              <option key={department} value={department}>{department}</option>
-            ))}
-          </select>
+          {isAdmin ? (
+            <select name="department" value={filters.department} onChange={updateFilter}>
+              <option value="">All departments</option>
+              {departments.map((department) => (
+                <option key={department} value={department}>{department}</option>
+              ))}
+            </select>
+          ) : (
+            <input disabled name="department" value={ownDepartment || 'Your department'} onChange={updateFilter} />
+          )}
           <select name="status" value={filters.status} onChange={updateFilter}>
             <option value="">All status</option>
             <option value="Active">Active</option>
@@ -160,7 +183,11 @@ export default function EmployeesPage() {
           </button>
         </form>
 
-        {loading ? <LoadingState message="Loading employees..." /> : <EmployeeTable employees={employees} onDelete={removeEmployee} />}
+        {loading ? (
+          <LoadingState message="Loading employees..." />
+        ) : (
+          <EmployeeTable canManage={canManage} employees={employees} onDelete={removeEmployee} />
+        )}
         <div className="pagination-bar">
           <span>
             Showing page {pagination.page} of {pagination.pages} - {pagination.total} records

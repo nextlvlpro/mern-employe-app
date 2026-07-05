@@ -5,7 +5,12 @@ export async function getUsers() {
   return response.data;
 }
 
-export async function updateUserRole(id, role) {
-  const response = await api.patch(`/users/${id}/role`, { role });
+export async function createUser(user) {
+  const response = await api.post('/users', user);
+  return response.data;
+}
+
+export async function updateUserRole(id, role, department) {
+  const response = await api.patch(`/users/${id}/role`, { role, department });
   return response.data;
 }

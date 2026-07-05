@@ -55,6 +55,10 @@ export default function LoginPage() {
             <button type="button" onClick={() => { setEmail('admin@example.com'); setPassword('password123'); }}>
               admin@example.com / password123
             </button>
+            <p>Department head can manage only the Engineering team.</p>
+            <button type="button" onClick={() => { setEmail('head@example.com'); setPassword('password123'); }}>
+              head@example.com / password123
+            </button>
             <p>Staff user has normal role access for comparison.</p>
             <button type="button" onClick={() => { setEmail('user@example.com'); setPassword('password123'); }}>
               user@example.com / password123

@@ -1,17 +1,21 @@
 import { ArrowLeft, Download, FileSpreadsheet, Upload } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 import { bulkCreateEmployees } from '../services/employeeService.js';
 import { getSampleCsv, parseEmployeeCsv } from '../utils/csvImport.js';
 
 export default function ImportEmployeesPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [fileName, setFileName] = useState('');
   const [validRows, setValidRows] = useState([]);
   const [rowErrors, setRowErrors] = useState([]);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const canManage = ['admin', 'department_head'].includes(user?.role);
+  const isDepartmentHead = user?.role === 'department_head';
 
   async function readCsvFile(event) {
     const file = event.target.files?.[0];
@@ -31,9 +35,28 @@ export default function ImportEmployeesPage() {
 
     const text = await file.text();
     const result = parseEmployeeCsv(text);
+    let employees = result.employees;
+    const errors = [...result.errors];
+
+    if (isDepartmentHead) {
+      employees = [];
+      result.employees.forEach((employee, index) => {
+        if (employee.department !== user.department) {
+          errors.push({
+            row: index + 2,
+            email: employee.email,
+            errors: [`Department must be ${user.department}`]
+          });
+          return;
+        }
+
+        employees.push(employee);
+      });
+    }
+
     setFileName(file.name);
-    setValidRows(result.employees);
-    setRowErrors(result.errors);
+    setValidRows(employees);
+    setRowErrors(errors);
   }
 
   async function importEmployees() {
@@ -87,6 +110,12 @@ export default function ImportEmployeesPage() {
         </div>
       </div>
 
+      {!canManage && <p className="error-message">Only admins and department heads can import employees.</p>}
+      {isDepartmentHead && (
+        <p className="permission-note">CSV rows must belong to {user.department}. Other departments will be rejected.</p>
+      )}
+
+      {canManage && (
       <section className="import-panel">
         <div className="upload-box">
           <FileSpreadsheet size={34} />
@@ -118,8 +147,9 @@ export default function ImportEmployeesPage() {
           <Upload size={17} /> {busy ? 'Importing...' : 'Import Valid Rows'}
         </button>
       </section>
+      )}
 
-      {!!validRows.length && (
+      {canManage && !!validRows.length && (
         <section className="list-panel">
           <div className="section-heading">
             <h3>Valid Preview</h3>
@@ -151,7 +181,7 @@ export default function ImportEmployeesPage() {
         </section>
       )}
 
-      {!!rowErrors.length && (
+      {canManage && !!rowErrors.length && (
         <section className="list-panel">
           <div className="section-heading">
             <h3>Validation Errors</h3>

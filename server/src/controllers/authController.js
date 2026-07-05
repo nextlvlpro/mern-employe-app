@@ -7,13 +7,14 @@ const toAuthResponse = (user) => ({
     id: user._id,
     name: user.name,
     email: user.email,
-    role: user.role
+    role: user.role,
+    department: user.department
   }
 });
 
 export const register = async (req, res, next) => {
   try {
-    const { name, email, password, adminCode } = req.body;
+    const { name, email, password, adminCode, department } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Name, email, and password are required' });
@@ -25,7 +26,13 @@ export const register = async (req, res, next) => {
     }
 
     const role = adminCode && adminCode === process.env.ADMIN_INVITE_CODE ? 'admin' : 'user';
-    const user = await User.create({ name, email, password, role });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role,
+      department: role === 'admin' ? 'Management' : (department || 'General')
+    });
 
     return res.status(201).json(toAuthResponse(user));
   } catch (error) {
@@ -57,7 +64,8 @@ export const getMe = async (req, res) => {
     id: req.user._id,
     name: req.user.name,
     email: req.user.email,
-    role: req.user.role
+    role: req.user.role,
+    department: req.user.department
   });
 };
 

@@ -1,12 +1,32 @@
 import { Employee } from '../models/Employee.js';
 import { logActivity } from '../utils/activityLogger.js';
 
-const ownedEmployeeQuery = (req, extra = {}) => {
+const scopedEmployeeQuery = (req, extra = {}) => {
   if (req.user.role === 'admin') {
     return extra;
   }
 
-  return { ...extra, createdBy: req.user._id };
+  return { ...extra, department: req.user.department || '__none__' };
+};
+
+const canManageEmployees = (user) => {
+  return ['admin', 'department_head'].includes(user.role);
+};
+
+const enforceEmployeeWriteAccess = (req, employeeInput) => {
+  if (!canManageEmployees(req.user)) {
+    return 'Only admins and department heads can manage employees';
+  }
+
+  if (req.user.role === 'department_head') {
+    if (employeeInput.department && employeeInput.department !== req.user.department) {
+      return 'Department heads can manage only their own department';
+    }
+
+    employeeInput.department = req.user.department;
+  }
+
+  return '';
 };
 
 const getSortQuery = (sort = 'newest') => {
@@ -97,7 +117,7 @@ export const getEmployees = async (req, res, next) => {
       filters.department = department;
     }
 
-    const employeeQuery = ownedEmployeeQuery(req, filters);
+    const employeeQuery = scopedEmployeeQuery(req, filters);
     const shouldPaginate = page || limit;
 
     if (!shouldPaginate) {
@@ -133,7 +153,7 @@ export const getEmployees = async (req, res, next) => {
 
 export const getEmployeeById = async (req, res, next) => {
   try {
-    const employee = await Employee.findOne(ownedEmployeeQuery(req, { _id: req.params.id }));
+    const employee = await Employee.findOne(scopedEmployeeQuery(req, { _id: req.params.id }));
 
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found' });
@@ -148,6 +168,11 @@ export const getEmployeeById = async (req, res, next) => {
 export const createEmployee = async (req, res, next) => {
   try {
     const employeeInput = cleanEmployeeInput(req.body);
+    const accessError = enforceEmployeeWriteAccess(req, employeeInput);
+    if (accessError) {
+      return res.status(403).json({ message: accessError });
+    }
+
     const errors = validateEmployeeInput(employeeInput);
 
     if (errors.length) {
@@ -185,7 +210,11 @@ export const bulkCreateEmployees = async (req, res, next) => {
       return res.status(400).json({ message: 'You can import up to 200 employees at a time' });
     }
 
-    const existingEmployees = await Employee.find(ownedEmployeeQuery(req)).select('email');
+    if (!canManageEmployees(req.user)) {
+      return res.status(403).json({ message: 'Only admins and department heads can import employees' });
+    }
+
+    const existingEmployees = await Employee.find(scopedEmployeeQuery(req)).select('email');
     const existingEmails = new Set(existingEmployees.map((employee) => employee.email.toLowerCase()));
     const fileEmails = new Set();
     const validEmployees = [];
@@ -194,7 +223,12 @@ export const bulkCreateEmployees = async (req, res, next) => {
     employees.forEach((employee, index) => {
       const rowNumber = index + 2;
       const cleanedEmployee = cleanEmployeeInput(employee);
+      const accessError = enforceEmployeeWriteAccess(req, cleanedEmployee);
       const errors = validateEmployeeInput(cleanedEmployee);
+
+      if (accessError) {
+        errors.push(accessError);
+      }
 
       if (fileEmails.has(cleanedEmployee.email)) {
         errors.push('Duplicate email in CSV');
@@ -244,7 +278,11 @@ export const bulkCreateEmployees = async (req, res, next) => {
 
 export const updateEmployee = async (req, res, next) => {
   try {
-    const employee = await Employee.findOne(ownedEmployeeQuery(req, { _id: req.params.id }));
+    if (!canManageEmployees(req.user)) {
+      return res.status(403).json({ message: 'Only admins and department heads can update employees' });
+    }
+
+    const employee = await Employee.findOne(scopedEmployeeQuery(req, { _id: req.params.id }));
 
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found' });
@@ -256,6 +294,10 @@ export const updateEmployee = async (req, res, next) => {
         employee[field] = req.body[field];
       }
     });
+
+    if (req.user.role === 'department_head' && employee.department !== req.user.department) {
+      return res.status(403).json({ message: 'Department heads cannot move employees to another department' });
+    }
 
     const updatedEmployee = await employee.save();
     await logActivity({
@@ -274,7 +316,11 @@ export const updateEmployee = async (req, res, next) => {
 
 export const deleteEmployee = async (req, res, next) => {
   try {
-    const employee = await Employee.findOne(ownedEmployeeQuery(req, { _id: req.params.id }));
+    if (!canManageEmployees(req.user)) {
+      return res.status(403).json({ message: 'Only admins and department heads can delete employees' });
+    }
+
+    const employee = await Employee.findOne(scopedEmployeeQuery(req, { _id: req.params.id }));
 
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found' });

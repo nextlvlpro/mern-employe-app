@@ -10,13 +10,22 @@ const demoUsers = [
     name: 'Bhanu Sharma',
     email: 'admin@example.com',
     password: 'password123',
-    role: 'admin'
+    role: 'admin',
+    department: 'Management'
+  },
+  {
+    name: 'Engineering Head',
+    email: 'head@example.com',
+    password: 'password123',
+    role: 'department_head',
+    department: 'Engineering'
   },
   {
     name: 'Demo Staff',
     email: 'user@example.com',
     password: 'password123',
-    role: 'user'
+    role: 'user',
+    department: 'Support'
   }
 ];
 
@@ -70,6 +79,9 @@ export async function seedDefaultData({ once = true } = {}) {
     if (!user) {
       user = await User.create(demoUser);
       usersCreated += 1;
+    } else if (!user.department || user.department === 'General') {
+      user.department = demoUser.department;
+      await user.save();
     }
 
     usersByEmail[demoUser.email] = user;

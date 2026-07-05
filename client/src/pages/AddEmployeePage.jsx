@@ -1,10 +1,14 @@
 import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import EmployeeForm from '../components/EmployeeForm.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import { createEmployee } from '../services/employeeService.js';
 
 export default function AddEmployeePage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const canManage = ['admin', 'department_head'].includes(user?.role);
+  const lockedDepartment = user?.role === 'department_head' ? user.department : '';
 
   async function addEmployee(employee) {
     await createEmployee(employee);
@@ -23,7 +27,14 @@ export default function AddEmployeePage() {
         </Link>
       </div>
 
-      <EmployeeForm onSubmit={addEmployee} submitLabel="Save Employee" />
+      {!canManage && <p className="error-message">Only admins and department heads can add employees.</p>}
+      {canManage && (
+        <EmployeeForm
+          lockedDepartment={lockedDepartment}
+          onSubmit={addEmployee}
+          submitLabel="Save Employee"
+        />
+      )}
     </section>
   );
 }

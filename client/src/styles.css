@@ -192,6 +192,13 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(23, 107, 124, 0.12);
 }
 
+input:disabled,
+select:disabled {
+  background: #eef3f6;
+  color: #536170;
+  cursor: not-allowed;
+}
+
 .layout {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -483,6 +490,10 @@ select:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.user-form-grid {
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+}
+
 .filter-bar {
   align-items: end;
   display: grid;
@@ -576,6 +587,13 @@ td span {
 .row-actions {
   display: flex;
   gap: 8px;
+}
+
+.inline-access-form {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 160px 170px 40px;
 }
 
 .pagination-bar {
@@ -967,6 +985,16 @@ td span {
   text-align: center;
 }
 
+.permission-note {
+  background: #fff8e8;
+  border: 1px solid #ead59c;
+  border-radius: 7px;
+  color: #6b5312;
+  font-size: 14px;
+  margin: 0;
+  padding: 11px 12px;
+}
+
 .loading-state {
   align-items: center;
   color: #667483;
@@ -1019,6 +1047,7 @@ td span {
   .stats-grid,
   .dashboard-grid,
   .department-grid,
+  .user-form-grid,
   .upload-box,
   .import-summary,
   .details-grid,
@@ -1066,6 +1095,11 @@ td span {
   .page-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .inline-access-form {
+    grid-template-columns: 1fr;
+    min-width: 220px;
   }
 }
 

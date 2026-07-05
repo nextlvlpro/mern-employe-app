@@ -42,6 +42,7 @@ export default function ProfilePage() {
           <div>
             <h3>{user?.name}</h3>
             <span>{user?.email}</span>
+            <span>{user?.department || 'General'} department</span>
             <span className="role-label">{user?.role}</span>
           </div>
         </div>

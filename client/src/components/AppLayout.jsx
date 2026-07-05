@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 export default function AppLayout() {
   const { user, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
+  const canManageEmployees = ['admin', 'department_head'].includes(user?.role);
 
   return (
     <div className={collapsed ? 'layout sidebar-collapsed' : 'layout'}>
@@ -38,23 +39,25 @@ export default function AppLayout() {
           <NavLink to="/departments" title="Departments">
             <Network size={18} /> <span>Departments</span>
           </NavLink>
-          <NavLink to="/employees/new" title="Add Employee">
-            <UserPlus size={18} /> <span>Add Employee</span>
-          </NavLink>
-          <NavLink to="/employees/import" title="Import CSV">
-            <FileSpreadsheet size={18} /> <span>Import CSV</span>
-          </NavLink>
+          {canManageEmployees && (
+            <>
+              <NavLink to="/employees/new" title="Add Employee">
+                <UserPlus size={18} /> <span>Add Employee</span>
+              </NavLink>
+              <NavLink to="/employees/import" title="Import CSV">
+                <FileSpreadsheet size={18} /> <span>Import CSV</span>
+              </NavLink>
+            </>
+          )}
           <NavLink to="/profile" title="Profile">
             <User size={18} /> <span>Profile</span>
           </NavLink>
           <NavLink to="/activity" title="Activity">
             <Activity size={18} /> <span>Activity</span>
           </NavLink>
-          {user?.role === 'admin' && (
-            <NavLink to="/users" title="Users">
-              <Users size={18} /> <span>Users</span>
-            </NavLink>
-          )}
+          <NavLink to="/users" title="Users">
+            <Users size={18} /> <span>Users</span>
+          </NavLink>
         </nav>
       </aside>
 

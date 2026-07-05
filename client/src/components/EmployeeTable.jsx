@@ -1,7 +1,7 @@
 import { Edit3, Eye, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function EmployeeTable({ employees, onDelete }) {
+export default function EmployeeTable({ employees, onDelete, canManage = false }) {
   return (
     <div className="table-wrap">
       <table>
@@ -37,12 +37,16 @@ export default function EmployeeTable({ employees, onDelete }) {
                   <Link className="icon-button" to={`/employees/${employee._id}`} title="View employee">
                     <Eye size={16} />
                   </Link>
-                  <Link className="icon-button" to={`/employees/${employee._id}/edit`} title="Edit employee">
-                    <Edit3 size={16} />
-                  </Link>
-                  <button className="icon-button danger" onClick={() => onDelete(employee)} title="Delete employee" type="button">
-                    <Trash2 size={16} />
-                  </button>
+                  {canManage && (
+                    <>
+                      <Link className="icon-button" to={`/employees/${employee._id}/edit`} title="Edit employee">
+                        <Edit3 size={16} />
+                      </Link>
+                      <button className="icon-button danger" onClick={() => onDelete(employee)} title="Delete employee" type="button">
+                        <Trash2 size={16} />
+                      </button>
+                    </>
+                  )}
                 </div>
               </td>
             </tr>
