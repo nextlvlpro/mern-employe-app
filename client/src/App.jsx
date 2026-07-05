@@ -11,6 +11,7 @@ import EmployeesPage from './pages/EmployeesPage.jsx';
 import ImportEmployeesPage from './pages/ImportEmployeesPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 
 function ProtectedRoute({ children }) {
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="/employees/:id" element={<EmployeeDetailsPage />} />
           <Route path="/employees/:id/edit" element={<EditEmployeePage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

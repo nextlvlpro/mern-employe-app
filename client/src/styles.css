@@ -588,6 +588,14 @@ td span {
   padding: 22px;
 }
 
+.profile-card {
+  background: white;
+  border: 1px solid #dce3e8;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(28, 42, 54, 0.06);
+  padding: 22px;
+}
+
 .profile-head {
   align-items: center;
   border-bottom: 1px solid #e5eaee;
@@ -597,9 +605,26 @@ td span {
   padding-bottom: 20px;
 }
 
+.compact-profile {
+  margin-bottom: 18px;
+}
+
 .profile-head h3 {
   font-size: 23px;
   margin: 0 0 8px;
+}
+
+.profile-head span {
+  color: #667483;
+  display: block;
+}
+
+.role-label {
+  color: #176b7c;
+  font-size: 13px;
+  font-weight: 900;
+  margin-top: 4px;
+  text-transform: uppercase;
 }
 
 .avatar-circle {

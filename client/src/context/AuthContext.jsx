@@ -52,13 +52,23 @@ export const AuthProvider = ({ children }) => {
     setUser(response.data.user);
   };
 
+  const updateProfile = async ({ name, password }) => {
+    const response = await api.put('/auth/me', { name, password });
+    localStorage.setItem('ems_token', response.data.token);
+    localStorage.setItem('ems_user', JSON.stringify(response.data.user));
+    setUser(response.data.user);
+  };
+
   const logout = () => {
     localStorage.removeItem('ems_token');
     localStorage.removeItem('ems_user');
     setUser(null);
   };
 
-  const value = useMemo(() => ({ user, loading, login, register, logout }), [user, loading]);
+  const value = useMemo(
+    () => ({ user, loading, login, register, updateProfile, logout }),
+    [user, loading]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

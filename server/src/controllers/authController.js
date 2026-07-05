@@ -60,3 +60,38 @@ export const getMe = async (req, res) => {
     role: req.user.role
   });
 };
+
+export const updateProfile = async (req, res, next) => {
+  try {
+    const { name, password } = req.body;
+    const user = await User.findById(req.user._id).select('+password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (name !== undefined) {
+      const cleanName = String(name).trim();
+
+      if (!cleanName) {
+        return res.status(400).json({ message: 'Name is required' });
+      }
+
+      user.name = cleanName;
+    }
+
+    if (password) {
+      if (String(password).length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters' });
+      }
+
+      user.password = password;
+    }
+
+    await user.save();
+
+    return res.json(toAuthResponse(user));
+  } catch (error) {
+    return next(error);
+  }
+};
